@@ -3,18 +3,26 @@ import NavBar from './components/nav-bar/NavBar';
 function App() {
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col backdrop-blur-md">
       <NavBar/>
-      <main className="flex flex-col sm:flex-row grow mb-40 justify-center items-center h-full gap-20">    
-        <button className="font-bold shadow-lg w-50 h-30 bg-blue-300 rounded-full hover:bg-blue-400 cursor-pointer">
-          Show Shopping Lists
-        </button>  
-        <button className="font-bold shadow-lg w-50 h-30 bg-blue-300 rounded-full hover:bg-blue-400 cursor-pointer">
-          Generate Shopping List
-        </button>
-        <button className="font-bold shadow-lg w-50 h-30 bg-blue-300 rounded-full hover:bg-blue-400 cursor-pointer">
-          Add New Dish
-        </button>
+      <main className='flex flex-col items-start justify-center p-20 pr-40 pl-40'>
+        <div>
+          <h1 className='text-6xl'>Plan <span className='text-blue-900 text-7xl'>Dishes</span> &</h1>    
+          <h1 className='text-6xl'>Get Your <span className='text-blue-900 text-7xl'>Shopping List</span></h1>    
+          <div className='h-5 mt-5 mb-5 bg-blue-950 rounded-full'></div>
+          <span className='text-xl'>Create your perfect shopping list by selecting dishes from the catalog or adding your own. Each dish includes its ingredients, and once selected, a categorized shopping list is generated automatically. Easily manage, save, or copy your list — shopping made simple.</span>
+        </div>
+        <div className='flex flex-col sm:flex-row w-full justify-center items-center gap-20 mt-10'>
+          <button className="font-bold shadow-lg w-50 h-30 bg-blue-300 rounded-full hover:bg-blue-400 border-3 border-blue-950 cursor-pointer">
+            Show Shopping Lists
+          </button>  
+          <button className="font-bold shadow-lg w-60 h-36 bg-blue-300 rounded-full hover:bg-blue-400 border-3 border-blue-950 cursor-pointer">
+            Generate Shopping List
+          </button>
+          <button className="font-bold shadow-lg w-50 h-30 bg-blue-300 rounded-full hover:bg-blue-400 border-3 border-blue-950 cursor-pointer">
+            Add New Dish
+          </button>
+        </div>
       </main>
     </div>
   )
