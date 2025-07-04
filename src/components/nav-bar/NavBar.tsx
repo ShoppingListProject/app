@@ -1,5 +1,5 @@
 import { ClipboardDocumentListIcon, Cog6ToothIcon, HomeIcon, PencilSquareIcon, PlusCircleIcon, SunIcon } from '@heroicons/react/16/solid';
-import logoBlack from '../assets/logo-black-2.png';
+import logoBlack from '../../assets/logo-black-2.png';
 import NavButtonSmall from './utils/NavButtonSmall';
 import NavButton from './utils/NavButton';
 
