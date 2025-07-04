@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+.custom-background-layout {
+    background-image: linear-gradient(to right, #bedbff, #cefafe, #bedbff), url('/shopping_lists_horizontal.png');
+    background-blend-mode: multiply;
+    background-size: cover; 
+}
