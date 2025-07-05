@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
+/* Custom style for background layout */
 .custom-background-layout {
     background-image: linear-gradient(to right, #bedbff, #cefafe, #bedbff), url('/shopping_lists_horizontal.png');
     background-blend-mode: multiply;
     background-size: cover; 
+}
+
+/* Custom style for active NavLinks from React Router library */
+.active {
+    border: 2px solid #000000;
 }

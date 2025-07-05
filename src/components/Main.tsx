@@ -1,6 +1,8 @@
+import { Link } from "react-router";
+
 function Main() {
   return (
-      <main className='flex flex-col items-start justify-center p-5 sm:p-20 lg:pr-40 lg:pl-40'>
+      <main className='flex flex-col items-start justify-center p-5 sm:p-20 lg:pr-40 lg:pl-40 backdrop-blur-sm grow'>
         <div>
           <h1 className='text-4xl md:text-6xl'>Plan <span className='text-blue-900 text-5xl md:text-7xl'>Dishes</span> &</h1>    
           <h1 className='text-4xl md:text-6xl'>Get Your <span className='text-blue-900 text-5xl md:text-7xl'>Shopping List</span></h1>    
@@ -8,9 +10,9 @@ function Main() {
           <span className='text-xl'>Create your perfect shopping list by selecting dishes from the catalog or adding your own. Each dish includes its ingredients, and once selected, a categorized shopping list is generated automatically. Easily manage, save, or copy your list — shopping made simple.</span>
         </div>
         <div className='mt-10 block flex justify-center items-center w-full md:block'>
-          <button className="font-bold shadow-lg w-40 h-20 md:w-60 md:h-30 bg-blue-300 rounded-lg hover:bg-blue-400 border-3 border-blue-950 cursor-pointer">
+          <Link to="create-shopping-list" className="font-bold shadow-lg w-40 h-20 md:w-60 md:h-30 bg-blue-300 rounded-lg hover:bg-blue-400 border-3 border-blue-950 cursor-pointer flex items-center justify-center">
             Create Shopping List
-          </button>
+          </Link>
         </div>
       </main>
   );
