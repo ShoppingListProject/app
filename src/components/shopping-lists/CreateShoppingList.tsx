@@ -1,6 +1,10 @@
+import PageContent from "../shared/PageContent";
+
 function CreateShoppingList() {
   return (
-    <>Create Shopping List</>
+    <PageContent title="Create Shopping List">
+      <div></div>
+    </PageContent>
   )
 }
 

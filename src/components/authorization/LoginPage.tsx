@@ -1,6 +1,10 @@
+import PageContent from "../shared/PageContent";
+
 function LoginPage() {
   return (
-    <>Login Page</>
+    <PageContent title="Login">
+      <div/>
+    </PageContent>
   );
 }
 

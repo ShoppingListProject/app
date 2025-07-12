@@ -1,6 +1,10 @@
+import PageContent from "../shared/PageContent";
+
 function Profile() {
   return (
-    <>Profile</>
+    <PageContent title="Profile">
+      <div></div>
+    </PageContent>
   );
 }
 
