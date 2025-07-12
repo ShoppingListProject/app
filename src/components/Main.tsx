@@ -10,7 +10,7 @@ function Main() {
           <span className='text-xl'>Create your perfect shopping list by selecting dishes from the catalog or adding your own. Each dish includes its ingredients, and once selected, a categorized shopping list is generated automatically. Easily manage, save, or copy your list — shopping made simple.</span>
         </div>
         <div className='mt-10 block flex justify-center items-center w-full md:block'>
-          <Link to="create-shopping-list" className="font-bold shadow-lg w-40 h-20 md:w-60 md:h-30 bg-blue-300 rounded-lg hover:bg-blue-400 border-3 border-blue-950 cursor-pointer flex items-center justify-center">
+          <Link to="create-shopping-list" className="md:font-bold shadow-lg w-40 h-20 md:w-60 md:h-30 bg-blue-300 rounded-lg hover:bg-blue-400 border-3 border-blue-950 cursor-pointer flex items-center justify-center">
             Create Shopping List
           </Link>
         </div>

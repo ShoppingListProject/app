@@ -7,7 +7,7 @@ import { Link, NavLink } from 'react-router';
 function NavBar() {
 
   return (
-    <nav className="flex justify-between bg-blue-100 shadow-lg border-b-2 p-2 sticky">
+    <nav className="flex justify-between bg-blue-100 shadow-lg border-b-2 p-2 sticky top-0 z-10">
       <div className=' hidden sm:flex cursor-pointer'>
         <Link to="/" className='w-35 md:w-40 block'>
           <img src={logoBlack} alt="shopping-list-logo" className='object-contain'></img>
