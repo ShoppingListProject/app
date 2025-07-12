@@ -17,14 +17,14 @@ function NavBar() {
         <NavButtonSmall to="/" ><HomeIcon /></NavButtonSmall>
         <NavButtonSmall to="/shopping-lists" ><ClipboardDocumentListIcon /></NavButtonSmall>
         <NavButtonSmall to="/create-shopping-list" ><PencilSquareIcon /></NavButtonSmall>
-        <NavButtonSmall to="/add-dish" ><PlusCircleIcon /></NavButtonSmall>
+        <NavButtonSmall to="/recipes" ><PlusCircleIcon /></NavButtonSmall>
         <NavButtonSmall to='/profile' ><UserIcon /></NavButtonSmall>
       </div>
       <div className='gap-5 items-center hidden lg:flex w-full justify-center'>
         <NavButton to="/" >Home</NavButton>
         <NavButton to="/shopping-lists" >Show Lists</NavButton>
         <NavButton to="/create-shopping-list" >Create List</NavButton>
-        <NavButton to="/add-dish" >Add Dish</NavButton>
+        <NavButton to="/recipes" >Add Dish</NavButton>
         <NavButton to='/profile' >Profile</NavButton>
       </div>
       <div className='hidden items-center sm:flex'>

@@ -7,7 +7,7 @@ import Profile from './components/profile/Porfile';
 import LoginPage from './components/authorization/LoginPage';
 import NotFound from './components/other/NotFound';
 import RegistrationPage from './components/authorization/RegistrationPage';
-import AddDish from './components/dishes/AddDish';
+import Recipes from './components/recipes/Recipes';
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
           <Route path="/home" element={<Main />} />
           <Route path="/shopping-lists" element={<ShoppingLists />} />
           <Route path="/create-shopping-list" element={<CreateShoppingList />} />
-          <Route path="/add-dish" element={<AddDish />} />
+          <Route path="/recipes" element={<Recipes />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
