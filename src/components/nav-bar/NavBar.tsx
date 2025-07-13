@@ -35,9 +35,10 @@ function NavBar() {
           <button className='h-9 w-16 bg-blue-300 m-5 rounded-full cursor-pointer shadow-lg hover:bg-blue-400 flex justify-start items-center'>
             <SunIcon className='h-6 w-6 m-3 text-yellow-300'></SunIcon>
           </button>
-          <button className='h-8 w-12 bg-blue-300 rounded cursor-pointer shadow-lg hover:bg-blue-400 flex justify-center items-center'>
-            en
-          </button>
+          <select className='appearance-none h-8 w-12 bg-blue-300 rounded cursor-pointer shadow-lg hover:bg-blue-400 focus:bg-blue-300 flex justify-center items-center text-center'>
+            <option value="en">en</option>
+            <option value="pl">pl</option>
+          </select>
         </div>
       </div>
     </nav>

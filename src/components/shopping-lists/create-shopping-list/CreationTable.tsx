@@ -16,11 +16,11 @@ function CreationTable() {
           </td>
           <td className="p-2 text-center align-middle">
             <div className="flex justify-center items-center gap-2">
-              <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer">
+              <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg">
                   <PlusIcon className="h-5 w-5" />
               </button>
               <span>0</span>
-              <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer">
+              <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer shadow-lg">
                   <MinusIcon className="h-5 w-5" />
               </button>
             </div>

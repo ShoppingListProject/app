@@ -22,14 +22,14 @@ function Table({ headerName }: TableProps) {
           <td className="p-2 text-center">2023-10-01</td>
           <td className="p-2 text-center align-middle">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-              <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer">
-                  <span className="hidden sm:inline">Show</span>
-                  <EyeIcon className="h-5 w-5 sm:hidden" />
-              </button>
-              <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer">
-                  <span className="hidden sm:inline" >Delete</span>
-                  <TrashIcon className="h-5 w-5 sm:hidden" />
-              </button>
+                <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg flex-1">
+                    <span className="hidden sm:inline">Show</span>
+                    <EyeIcon className="h-5 w-5 sm:hidden" />
+                </button>
+                <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer shadow-lg flex-1">
+                    <span className="hidden sm:inline" >Delete</span>
+                    <TrashIcon className="h-5 w-5 sm:hidden" />
+                </button>
               </div>
           </td>
           </tr>
