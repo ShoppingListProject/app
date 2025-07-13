@@ -1,6 +1,7 @@
 import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
+import CreationButtons from "./create-shopping-list/CreationButtons";
 import CreationTable from "./create-shopping-list/CreationTable";
 
 function CreateShoppingList() {
@@ -9,6 +10,7 @@ function CreateShoppingList() {
       <SearchInput placeholder="Spaghetti"/>
       <CreationTable/>
       <Pagination />
+      <CreationButtons />
     </PageContent>
   )
 }
