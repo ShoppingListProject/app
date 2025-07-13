@@ -1,11 +1,15 @@
 import { EyeIcon, TrashIcon } from "@heroicons/react/16/solid";
 
-function Table() {
+interface TableProps {
+  headerName: string;
+}
+
+function Table({ headerName }: TableProps) {
   return (
     <table>
       <thead>
           <tr className="bg-blue-200 border-b-2">
-          <th className="p-2 w-1/2">List Name</th>
+          <th className="p-2 w-1/2">{headerName}</th>
           <th className="p-2 w-4/9 sm:w-1/4">Created On</th>
           <th className="p-2 w-1/18 sm:w-1/4">Actions</th>
           </tr>

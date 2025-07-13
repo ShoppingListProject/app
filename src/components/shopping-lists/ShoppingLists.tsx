@@ -7,8 +7,8 @@ function ShoppingLists() {
   return (
     <PageContent title="Shopping Lists">
 
-      <SearchInput />
-      <Table />
+      <SearchInput placeholder="Weekend Shopping List" />
+      <Table headerName="List Name" />
       <Pagination/>
 
     </PageContent>

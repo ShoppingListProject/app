@@ -7,8 +7,8 @@ function Recipes() {
   return (
     <PageContent title="Recipes">
 
-      <SearchInput />
-      <Table />
+      <SearchInput placeholder="Spaghetti" />
+      <Table headerName="Recipe Name" />
       <Pagination/>
 
     </PageContent>

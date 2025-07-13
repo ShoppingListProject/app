@@ -1,6 +1,10 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
-function SearchInput() {
+interface SearchInputProps {
+  placeholder: string;
+}
+
+function SearchInput({ placeholder }: SearchInputProps) {
   return (
      <div className="shadow-lg rounded-lg grow border">
           <div>
@@ -8,7 +12,7 @@ function SearchInput() {
               <div className="pr-2 border-r-2" >
                 <MagnifyingGlassIcon className="h-10" />
               </div>
-              <input className="w-full p-2" name="listSearch" placeholder="shopping list for weekend" />
+              <input className="w-full p-2" name="listSearch" placeholder={placeholder} />
             </label>
           </div>
     </div>
