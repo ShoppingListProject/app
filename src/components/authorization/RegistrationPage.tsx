@@ -30,7 +30,7 @@ function RegistrationPage() {
           <input type="text" name="activationCode" className="border rounded p-2" />
         </label>
         <label className="flex flex-col">
-          Name:
+          First Name:
           <input type="text" name="name" className="border rounded p-2" />
         </label>
         <label className="flex flex-col">
