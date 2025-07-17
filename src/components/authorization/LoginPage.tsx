@@ -20,7 +20,7 @@ function LoginPage() {
           Password:
           <input type="password" name="password" required className="border rounded p-2" />
         </label>
-        <button type="submit" className="bg-blue-300 rounded p-2 hover:bg-blue-400">
+        <button type="submit" className="bg-blue-300 rounded p-2 hover:bg-blue-400 cursor-pointer shadow-lg">
           Login
         </button>
       </form>
