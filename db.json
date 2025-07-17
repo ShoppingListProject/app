@@ -1,0 +1,234 @@
+{
+  "shoppingLists": [
+    {
+      "updatedAt": "2025-07-17T12:00:00Z", 
+      "name": "My First Shopping List",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Bread",
+          "quantity": 1,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Bread"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 10,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Dairy & Eggs"
+        },
+        {
+          "name": "Orange juice",
+          "quantity": 1,
+          "unit": "litre",
+          "purchased": false,
+          "category": "Beverages"
+        },
+        {
+          "name": "Rice",
+          "quantity": 400,
+          "unit": "g",
+          "purchased": false,
+          "category": "Pantry / Dry Goods"
+        },
+        {
+          "name": "Shampoo",
+          "quantity": 1,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Personal Care"
+        },
+        {
+          "name": "Dish soap",
+          "quantity": 1,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Cleaning"
+        },
+        {
+          "name": "T-shirt",
+          "quantity": 1,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Other"
+        }
+      ]
+    },
+    {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Weekend Shopping List",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Orange",
+          "quantity": 2,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Rice",
+          "quantity": 400,
+          "unit": "g",
+          "purchased": false,
+          "category": "Pantry / Dry Goods"
+        },
+        {
+          "name": "Pasta",
+          "quantity": 400,
+          "unit": "g",
+          "purchased": false,
+          "category": "Pantry / Dry Goods"
+        }
+      ]
+    },
+    {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Cakes",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Orange",
+          "quantity": 2,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Apple",
+          "quantity": 5,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Peach",
+          "quantity": 3,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        }
+      ]
+    },
+    {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Sunday",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        }
+      ]
+    },
+    {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Friday",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        }
+      ]
+    },
+    {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Holiday Shopping",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        }
+      ]
+    },
+     {
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Friday 2",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        }
+      ]
+    }
+  ],
+
+  "recipes": {
+    "updatedAt": "2024-05-17T17:44:23Z", 
+    "name": "Spaghetti",
+    "items": [
+      {
+        "name": "Cucumber",
+        "quantity": 2,
+        "unit": "kg",
+        "purchased": false,
+        "category": "Vegetables & Fruits"
+      },
+      {
+        "name": "Apple",
+        "quantity": 5,
+        "unit": "piece",
+        "purchased": false,
+        "category": "Vegetables & Fruits"
+      },
+      {
+        "name": "Bread",
+        "quantity": 1,
+        "unit": "unit",
+        "purchased": false,
+        "category": "Bread"
+      }
+    ]
+  },
+  
+  "units": [
+    { "id": 1, "name": "g" },
+    { "id": 2, "name": "kg" },
+    { "id": 3, "name": "ml" },
+    { "id": 4, "name": "l" },
+    { "id": 5, "name": "piece" }
+  ],
+
+  "categories": [
+    { "id": 1, "name": "Vegetables & Fruits" },
+    { "id": 2, "name": "Bread" },
+    { "id": 3, "name": "Dairy & Eggs" },
+    { "id": 4, "name": "Beverages" },
+    { "id": 5, "name": "Pantry / Dry Goods" },
+    { "id": 6, "name": "Personal Care" },
+    { "id": 7, "name": "Cleaning" },
+    { "id": 8, "name": "Snacks" },
+    { "id": 9, "name": "Other" }
+  ]
+}

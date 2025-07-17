@@ -6,20 +6,24 @@ export interface ShoppingListItem {
   category: string;
 }
 
-export interface Recipe {
-  id: string;
-  name: string;
-  items: ShoppingListItem[]
-}
-
-export interface ShoppingListCreateRequest {
+export interface RecipeCreate {
   name: string;
   items: ShoppingListItem[];
 }
 
-export interface ShoppingList extends ShoppingListCreateRequest{
+export interface Recipe extends RecipeCreate{
   id: string;
   createdAt: Date;
   updatedAt: Date;
-  ownerId: string;
+}
+
+export interface ShoppingListCreate {
+  name: string;
+  items: ShoppingListItem[];
+}
+
+export interface ShoppingList extends ShoppingListCreate{
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

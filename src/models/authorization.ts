@@ -10,3 +10,11 @@ export interface RegistrationUser extends LoginUser{
   surname: string;
   dataOfBirth: string;
 }
+
+export interface User {
+  email: string,
+  firstName: string,
+  surname: string,
+  dateOfBirth: string,
+  joined: string
+}
