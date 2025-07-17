@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import PageContent from "../shared/PageContent";
 import GoogleLogo from '../../assets/google-icon.png';
+import AuthInput from "./utils/AuthInput";
 
 function RegistrationPage() {
  return (
@@ -13,37 +14,22 @@ function RegistrationPage() {
       </button>
       
       <form className="flex flex-col gap-4 w-full md:w-1/2 mx-auto">
-        <label className="flex flex-col">
-          *Email:
-          <input type="email" name="email" required className="border rounded p-2" />
-        </label>
-        <label className="flex flex-col">
-          *Password:
-          <input type="password" name="password" required className="border rounded p-2" />
-        </label>
-        <label className="flex flex-col">
-          *Repeat Password:
-          <input type="password" name="password" required className="border rounded p-2" />
-        </label>
-        <label className="flex flex-col">
-          *Activation Code:
-          <input type="text" name="activationCode" className="border rounded p-2" />
-        </label>
-        <label className="flex flex-col">
-          First Name:
-          <input type="text" name="name" className="border rounded p-2" />
-        </label>
-        <label className="flex flex-col">
-          Surname:
-          <input type="text" name="surname" className="border rounded p-2" />  
-        </label>
+
+        <AuthInput label="Email" />
+        <AuthInput label="Password" />
+        <AuthInput label="Repeat Password" />
+        <AuthInput label="First Name" />
+        <AuthInput label="Surname" />
+       
         <label className="flex flex-col">
           Date of Birth:
           <input type="date" name="dateOfBirth" className="border rounded p-2" />
         </label>
+
         <button type="submit" className="bg-blue-300 rounded p-2 hover:bg-blue-400">
           Sign up
         </button>
+        
       </form>
 
       <div className="flex flex-col sm:flex-row gap-2 justify-center items-center" >
