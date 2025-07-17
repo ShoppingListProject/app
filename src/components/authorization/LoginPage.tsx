@@ -14,8 +14,8 @@ function LoginPage() {
 
       <form className="flex flex-col gap-4 w-full md:w-1/2 mx-auto">
 
-        <AuthInput label="Email" />
-        <AuthInput label="Password" />
+        <AuthInput label="Email" type="email" name="email" />
+        <AuthInput label="Password" type="password" name="password" />
 
         <button type="submit" className="bg-blue-300 rounded p-2 hover:bg-blue-400 cursor-pointer shadow-lg">
           Log in

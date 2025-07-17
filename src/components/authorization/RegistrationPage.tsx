@@ -15,11 +15,12 @@ function RegistrationPage() {
       
       <form className="flex flex-col gap-4 w-full md:w-1/2 mx-auto">
 
-        <AuthInput label="Email" />
-        <AuthInput label="Password" />
-        <AuthInput label="Repeat Password" />
-        <AuthInput label="First Name" />
-        <AuthInput label="Surname" />
+        <AuthInput label="Email" type="email" name="email" />
+        <AuthInput label="Password" type="password" name="password" />
+        <AuthInput label="Repeat Password" type="password" name="password" />
+        <AuthInput label="Activation Code" type="text" name="activation-code" />
+        <AuthInput label="First Name" type="text" name="first-name" />
+        <AuthInput label="Surname" type="text" name="surname" />
        
         <label className="flex flex-col">
           Date of Birth:
@@ -29,7 +30,7 @@ function RegistrationPage() {
         <button type="submit" className="bg-blue-300 rounded p-2 hover:bg-blue-400">
           Sign up
         </button>
-        
+
       </form>
 
       <div className="flex flex-col sm:flex-row gap-2 justify-center items-center" >
