@@ -10,7 +10,6 @@ import type { TableRow } from "../../models/tableModels";
 function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
-  console.log(shoppingLists);
 
   useEffect( () => {
     getShoppingLists()
@@ -22,10 +21,12 @@ function ShoppingLists() {
     
     return shoppingLists.map( (shoppingList) => {
 
+      const creationDate = new Date(shoppingList.createdAt).toLocaleDateString();
+
       return {
         id: shoppingList.id,
         name: shoppingList.name,
-        createdAt: shoppingList.createdAt,
+        createdAt: creationDate
       }
 
     })

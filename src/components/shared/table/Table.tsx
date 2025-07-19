@@ -20,8 +20,8 @@ function Table({ headerName, rows }: TableProps) {
       </thead>
       <tbody>
           {rows.map( (row) =>
-            <React.Fragment key={row.id} >
-              <tr key={`${row.id}-content`}>
+            <React.Fragment key={row.name} >
+              <tr>
                 <td className="p-2 text-center">
                     <button className="cursor-pointer p-2" >{row.name}</button>
                 </td>
@@ -39,7 +39,7 @@ function Table({ headerName, rows }: TableProps) {
                     </div>
                 </td>
               </tr>
-              <tr className="border-b-2" key={`${row.id}-separator`} ></tr>
+              <tr className="border-b-2"></tr>
             </React.Fragment>
           )}
       </tbody>
