@@ -5,7 +5,7 @@ import AuthInput from "./utils/AuthInput";
 
 function LoginPage() {
   return (
-    <PageContent title="Login">
+    <PageContent title="Log in">
 
       <button type="button" className="flex justify-center items-center shadow-lg bg-blue-300 hover:bg-blue-400 rounded p-2 hover w-full md:w-1/2 mx-auto my-4 cursor-pointer">
         <img src={GoogleLogo} alt="Google Logo" className="h-10" />

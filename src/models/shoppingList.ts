@@ -13,8 +13,8 @@ export interface RecipeCreate {
 
 export interface Recipe extends RecipeCreate{
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ShoppingListCreate {
@@ -24,6 +24,6 @@ export interface ShoppingListCreate {
 
 export interface ShoppingList extends ShoppingListCreate{
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -5,7 +5,7 @@ interface FetchWrapperParams {
 
 export const host = "http://localhost:3000/";
 
-export async function fetchWrapper<T>({url, options = {}}: FetchWrapperParams) {
+export async function fetchWrapper<T>({url, options = {}}: FetchWrapperParams): Promise<T> {
   
   const response = await fetch(url, {
     headers: {
@@ -20,5 +20,5 @@ export async function fetchWrapper<T>({url, options = {}}: FetchWrapperParams) {
     throw new Error(errorData.message || 'Request failed');
   }
 
-  return response.json() as Promise<T>;
+  return response.json();
 }

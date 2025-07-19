@@ -8,7 +8,7 @@ function Recipes() {
     <PageContent title="Recipes">
 
       <SearchInput placeholder="Spaghetti" />
-      <Table headerName="Recipe Name" />
+      <Table headerName="Recipe Name" rows={[]} />
       <Pagination/>
 
     </PageContent>
