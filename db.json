@@ -191,34 +191,36 @@
     }
   ],
 
-  "recipes": {
-    "createdAt": "2024-05-17T17:44:23Z", 
-    "updatedAt": "2024-05-17T17:44:23Z", 
-    "name": "Spaghetti",
-    "items": [
-      {
-        "name": "Cucumber",
-        "quantity": 2,
-        "unit": "kg",
-        "purchased": false,
-        "category": "Vegetables & Fruits"
-      },
-      {
-        "name": "Apple",
-        "quantity": 5,
-        "unit": "piece",
-        "purchased": false,
-        "category": "Vegetables & Fruits"
-      },
-      {
-        "name": "Bread",
-        "quantity": 1,
-        "unit": "unit",
-        "purchased": false,
-        "category": "Bread"
-      }
-    ]
-  },
+  "recipes": [
+    {
+      "createdAt": "2024-05-17T17:44:23Z", 
+      "updatedAt": "2024-05-17T17:44:23Z", 
+      "name": "Spaghetti",
+      "items": [
+        {
+          "name": "Cucumber",
+          "quantity": 2,
+          "unit": "kg",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Apple",
+          "quantity": 5,
+          "unit": "piece",
+          "purchased": false,
+          "category": "Vegetables & Fruits"
+        },
+        {
+          "name": "Bread",
+          "quantity": 1,
+          "unit": "unit",
+          "purchased": false,
+          "category": "Bread"
+        }
+      ]
+    }
+  ],
   
   "units": [
     { "id": 1, "name": "g" },
