@@ -19,10 +19,6 @@ function Recipes() {
   }, [])
 
  function convertRecipesToTableRows(recipes: Recipe[]): TableRow[] {
-
-  console.log("recipes input:", recipes);
-  console.log("Type of recipes:", typeof recipes);
-  console.log("Is array?", Array.isArray(recipes));
     
     return recipes.map( (recipe) => {
 
