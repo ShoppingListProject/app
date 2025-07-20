@@ -12,6 +12,8 @@ import ShoppingListModal from "./shopping-list/shoppingListModal";
 function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
+  const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
+
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
   useEffect( () => {
@@ -27,7 +29,6 @@ function ShoppingLists() {
       const creationDate = new Date(shoppingList.createdAt).toLocaleDateString();
 
       return {
-        id: shoppingList.name,
         name: shoppingList.name,
         createdAt: creationDate
       }
@@ -35,8 +36,13 @@ function ShoppingLists() {
     })
   }
 
-  function handleOnClickItem(id: string) {
+  function handleOnClickItem(name: string) {
+    setCurrentOpenListName(name);
     modalRef.current?.open();
+  }
+
+  function findItemsOfSelctedList(name: string) {
+    return shoppingLists.find(list => list.name === name)!.items;
   }
 
   return (
@@ -44,10 +50,15 @@ function ShoppingLists() {
 
       <SearchInput placeholder="Weekend Shopping List" />
       <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickItem}/>
-      <Modal ref={modalRef} >
-        <ShoppingListModal/>
-      </Modal>
       <Pagination/>
+
+      <Modal
+        ref={modalRef} 
+        title={currentOpenListName} 
+      >
+        {currentOpenListName != null && <ShoppingListModal key={currentOpenListName} items={findItemsOfSelctedList(currentOpenListName)} />}
+      </Modal>
+      
 
     </PageContent>
   )

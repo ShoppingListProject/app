@@ -5,7 +5,7 @@ import React from "react";
 interface TableProps {
   headerName: string;
   rows: TableRow[];
-  onClickItem: (id: string) => void;
+  onClickItem: (name: string) => void;
 }
 
 function Table({ headerName, rows, onClickItem }: TableProps) {
@@ -21,16 +21,16 @@ function Table({ headerName, rows, onClickItem }: TableProps) {
       </thead>
       <tbody>
           {rows.map( (row) =>
-            <React.Fragment key={row.id} >
+            <React.Fragment key={row.name} >
               <tr>
                 <td className="p-2 text-center">
-                    <button className="cursor-pointer p-2 focus:outline-none" onClick={() => onClickItem(row.id)}>{row.name}</button>
+                    <button className="cursor-pointer p-2 focus:outline-none" onClick={() => onClickItem(row.name)}>{row.name}</button>
                 </td>
                 <td className="p-2 text-center">{row.createdAt}</td>
                 <td className="p-2 text-center align-middle">
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
                       <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg flex-1">
-                          <span className="hidden sm:inline focus:outline-none" onClick={() => onClickItem(row.id)}>Show</span>
+                          <span className="hidden sm:inline focus:outline-none" onClick={() => onClickItem(row.name)}>Show</span>
                           <EyeIcon className="h-5 w-5 sm:hidden" />
                       </button>
                       <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer shadow-lg flex-1">

@@ -23,7 +23,6 @@ function CreateShoppingList() {
       
       return recipes.map( (recipe) => {
         return {
-          id: recipe.name,
           name: recipe.name,
         }
       })

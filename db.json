@@ -15,14 +15,14 @@
         {
           "name": "Bread",
           "quantity": 1,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Bread"
         },
         {
           "name": "Eggs",
           "quantity": 10,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Dairy & Eggs"
         },
@@ -43,21 +43,21 @@
         {
           "name": "Shampoo",
           "quantity": 1,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Personal Care"
         },
         {
           "name": "Dish soap",
           "quantity": 1,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Cleaning"
         },
         {
           "name": "T-shirt",
           "quantity": 1,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Other"
         }
@@ -78,7 +78,7 @@
         {
           "name": "Orange",
           "quantity": 2,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Vegetables & Fruits"
         },
@@ -113,21 +113,21 @@
         {
           "name": "Orange",
           "quantity": 2,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Vegetables & Fruits"
         },
         {
           "name": "Apple",
           "quantity": 5,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Vegetables & Fruits"
         },
         {
           "name": "Peach",
           "quantity": 3,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Vegetables & Fruits"
         }
@@ -207,7 +207,7 @@
         {
           "name": "Apple",
           "quantity": 5,
-          "unit": "piece",
+          "unit": "pieces",
           "purchased": false,
           "category": "Vegetables & Fruits"
         },
@@ -227,7 +227,7 @@
     { "id": 2, "name": "kg" },
     { "id": 3, "name": "ml" },
     { "id": 4, "name": "l" },
-    { "id": 5, "name": "piece" }
+    { "id": 5, "name": "pieces" }
   ],
 
   "categories": [

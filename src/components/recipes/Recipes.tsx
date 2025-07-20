@@ -25,7 +25,6 @@ function Recipes() {
       const creationDate = new Date(recipe.createdAt).toLocaleDateString();
 
       return {
-        id: recipe.name,
         name: recipe.name,
         createdAt: creationDate
       }
@@ -37,7 +36,7 @@ function Recipes() {
     <PageContent title="Recipes">
 
       <SearchInput placeholder="Spaghetti" />
-      <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} />
+      <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={() => console.log("click")} />
       <Pagination/>
 
     </PageContent>
