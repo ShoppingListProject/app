@@ -11,19 +11,21 @@ export interface RecipeCreate {
   items: ShoppingListItem[];
 }
 
-export interface Recipe extends RecipeCreate{
-  id: string;
+export interface Recipe extends RecipeCreate {
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ShoppingListCreate {
+export interface ShoppingCategoryMap {
+  [category: string]: ShoppingListItem[]
+}
+
+export interface ShoppingList {
+  createdAt: string;
+  updatedAt: string;
   name: string;
-  items: ShoppingListItem[];
+  itemsPerCategory: ShoppingCategoryMap;
 }
 
-export interface ShoppingList extends ShoppingListCreate{
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
+

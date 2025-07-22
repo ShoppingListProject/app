@@ -4,7 +4,7 @@ import Table from "../shared/table/Table";
 import Pagination from "../shared/table/Pagination";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { getShoppingLists } from "../../api/shoppingList";
-import type { ShoppingList } from "../../models/shoppingList";
+import type { ShoppingCategoryMap, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
 import ShoppingListModal from "./shopping-list/shoppingListModal";
@@ -13,6 +13,8 @@ function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
+
+  console.log(shoppingLists);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -32,7 +34,6 @@ function ShoppingLists() {
         name: shoppingList.name,
         createdAt: creationDate
       }
-
     })
   }
 
@@ -41,8 +42,8 @@ function ShoppingLists() {
     modalRef.current?.open();
   }
 
-  function findItemsOfSelctedList(name: string) {
-    return shoppingLists.find(list => list.name === name)!.items;
+  function findItemsOfSelctedList(name: string): ShoppingCategoryMap {
+    return shoppingLists.find(list => list.name === name)!.itemsPerCategory;
   }
 
   return (
@@ -56,7 +57,7 @@ function ShoppingLists() {
         ref={modalRef} 
         title={currentOpenListName} 
       >
-        {currentOpenListName != null && <ShoppingListModal key={currentOpenListName} items={findItemsOfSelctedList(currentOpenListName)} />}
+        {currentOpenListName != null && <ShoppingListModal key={currentOpenListName} itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} />}
       </Modal>
       
 
