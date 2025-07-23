@@ -1,95 +1,140 @@
 import { useState } from "react";
-import type { ShoppingCategoryMap } from "../../../models/shoppingList";
+import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 
 interface ShoppingListModalProps {
-  itemsPerCategory: ShoppingCategoryMap
+  itemsPerCategory: CategorizedItems[]
 }
 
 function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
 
-  const [editedItems, setEditedItems] = useState<ShoppingCategoryMap>(itemsPerCategory);
+  const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
 
-  function handleOnChangeName(category: string, idx: number, newName: string) {
-    setEditedItems( (prevCategoryItems) => {
-      const updatedCategoryItems = [...prevCategoryItems[category]];
+  function handleOnChangeName(categoryIdx: number, itemIdx: number, newName: string) {
+    setEditeditemsPerCategory( (prevItemsPerCategory) => {
 
-      updatedCategoryItems[idx] = {
-        ...updatedCategoryItems[idx],
-        name: newName,
-      };
-      
-      return {
-        ...prevCategoryItems,
-        [category]: updatedCategoryItems 
-      };
-    })
-  }
+      return prevItemsPerCategory.map( (categorizedItems, cIdx) => {
+        
+        if(categoryIdx != cIdx)
+          return categorizedItems;
 
-  function handleOnChangeQuantity(category: string, idx: number, newQuantity: string) {
-    setEditedItems( (prevCategoryItems) => {
-      const updatedCategoryItems = [...prevCategoryItems[category]];
+        const newItems = categorizedItems.items.map((item, iIdx) => {
+          if(itemIdx != iIdx)
+            return item;
 
-      updatedCategoryItems[idx] = {
-        ...updatedCategoryItems[idx],
-        quantity: parseFloat(newQuantity),
-      };
-      
-      return {
-        ...prevCategoryItems,
-        [category]: updatedCategoryItems 
-      };
-    })
-  }
-
-    function handleOnChangeUnit(category: string, idx: number, newUnit: string) {
-      setEditedItems( (prevCategoryItems) => {
-        const updatedCategoryItems = [...prevCategoryItems[category]];
-
-        updatedCategoryItems[idx] = {
-          ...updatedCategoryItems[idx],
-          unit: newUnit,
-        };
+          return {
+            ...item,
+            name: newName
+          }
+        })
         
         return {
-          ...prevCategoryItems,
-          [category]: updatedCategoryItems 
-        };
+          ...categorizedItems,
+          items: newItems
+        }
+      })
+     
+    })
+  }
+
+  function handleOnChangeQuantity(categoryIdx: number, itemIdx: number, newQuantity: string) {
+    setEditeditemsPerCategory( (prevItemsPerCategory) => {
+
+      return prevItemsPerCategory.map( (categorizedItems, cIdx) => {
+        
+        if(categoryIdx != cIdx)
+          return categorizedItems;
+
+        const newItems = categorizedItems.items.map((item, iIdx) => {
+          if(itemIdx != iIdx)
+            return item;
+
+          return {
+            ...item,
+            quantity: parseFloat(newQuantity)
+          }
+        })
+        
+        return {
+          ...categorizedItems,
+          items: newItems
+        }
+      })
+
+    })
+  }
+
+    function handleOnChangeUnit(categoryIdx: number, itemIdx: number, newUnit: string) {
+      setEditeditemsPerCategory( (prevCategoryItems) => {
+       
+        return prevCategoryItems.map( (categorizedItems, cIdx) => {
+        
+          if(categoryIdx != cIdx)
+            return categorizedItems;
+
+          const newItems = categorizedItems.items.map((item, iIdx) => {
+            if(itemIdx != iIdx)
+              return item;
+
+            return {
+              ...item,
+              unit: newUnit
+            }
+          })
+          
+          return {
+            ...categorizedItems,
+            items: newItems
+          }
+        })
+
       })
   }
 
-  function markItem(category: string, idx: number) {
-      setEditedItems( (prevCategoryItems) => {
-        const updatedCategoryItems = [...prevCategoryItems[category]];
-
-        updatedCategoryItems[idx] = {
-          ...updatedCategoryItems[idx],
-          purchased: !updatedCategoryItems[idx].purchased,
-        };
+  function markItem(categoryIdx: number, itemIdx: number) {
+      setEditeditemsPerCategory( (prevCategoryItems) => {
+      
+           return prevCategoryItems.map( (categorizedItems, cIdx) => {
         
-        return {
-          ...prevCategoryItems,
-          [category]: updatedCategoryItems 
-        };
+          if(categoryIdx != cIdx)
+            return categorizedItems;
+
+          const newItems = categorizedItems.items.map((item, iIdx) => {
+            if(itemIdx != iIdx)
+              return item;
+
+            return {
+              ...item,
+              purchased: !item.purchased
+            }
+          })
+          
+          return {
+            ...categorizedItems,
+            items: newItems
+          }
+        })
+
+
       })
   }
 
   return (
     <div className="bg-blue-200 p-4">
       <ul>
-        {Object.keys(editedItems).map( (category: string) =>
-          <li>
+        {editedItemsPerCategory.map( ({category, items}: CategorizedItems, categoryIdx) =>
+          <li key={categoryIdx}>
             <h1 className="text-sm text-center p-1">{category}</h1>
             <ul className="p-1 rounded border-2">
-              {editedItems[category].map( (item, idx) => 
-                <li key={idx} className="flex p-2 rounded items-center justify-between gap-2">
+              {items.map( (item: ShoppingListItem, itemIdx) => 
+                <li key={itemIdx} className="flex p-2 rounded items-center justify-between gap-2">
                   <div>
-                    <span>{`${idx + 1}.`}</span>
-                    <input className="ml-1" type="text" value={item.name} onChange={e => handleOnChangeName(category, idx, e.target.value)} ></input>
+                    <span>{`${itemIdx + 1}.`}</span>
+                    <input className="ml-1" type="text" value={item.name} onChange={e => handleOnChangeName(categoryIdx, itemIdx, e.target.value)} ></input>
                   </div>
                   <div>
-                    <input className="w-15" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(category, idx, e.target.value)} ></input>
-                    <select value={item.unit} onChange={e => handleOnChangeUnit(category, idx, e.target.value)}>
+                    <input className="w-15" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(categoryIdx, itemIdx, e.target.value)} ></input>
+                    <select value={item.unit} onChange={e => handleOnChangeUnit(categoryIdx, itemIdx, e.target.value)}>
                       <option value="kg">kg</option>
                       <option value="g">g</option>
                       <option value="l">l</option>
@@ -97,7 +142,7 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
                       <option value="pieces">pieces</option>
                     </select>
                   </div>
-                  <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer " onClick={() => markItem(category, idx)}>
+                  <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer " onClick={() => markItem(categoryIdx, itemIdx)}>
                     {item.purchased && <XMarkIcon />}
                   </button>
                 </li>

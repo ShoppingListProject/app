@@ -4,7 +4,7 @@ import Table from "../shared/table/Table";
 import Pagination from "../shared/table/Pagination";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { getShoppingLists } from "../../api/shoppingList";
-import type { ShoppingCategoryMap, ShoppingList } from "../../models/shoppingList";
+import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
 import ShoppingListModal from "./shopping-list/shoppingListModal";
@@ -42,7 +42,7 @@ function ShoppingLists() {
     modalRef.current?.open();
   }
 
-  function findItemsOfSelctedList(name: string): ShoppingCategoryMap {
+  function findItemsOfSelctedList(name: string): CategorizedItems[] {
     return shoppingLists.find(list => list.name === name)!.itemsPerCategory;
   }
 

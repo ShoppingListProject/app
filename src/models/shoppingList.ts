@@ -3,7 +3,6 @@ export interface ShoppingListItem {
   quantity: number;
   unit: string;
   purchased: boolean;
-  category: string;
 }
 
 export interface RecipeCreate {
@@ -16,15 +15,16 @@ export interface Recipe extends RecipeCreate {
   updatedAt: string;
 }
 
-export interface ShoppingCategoryMap {
-  [category: string]: ShoppingListItem[]
+export interface CategorizedItems {
+  category: string,
+  items: ShoppingListItem[]
 }
 
 export interface ShoppingList {
   createdAt: string;
   updatedAt: string;
   name: string;
-  itemsPerCategory: ShoppingCategoryMap;
+  itemsPerCategory: CategorizedItems[];
 }
 
 
