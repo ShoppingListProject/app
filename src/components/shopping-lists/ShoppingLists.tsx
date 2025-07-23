@@ -14,8 +14,6 @@ function ShoppingLists() {
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
 
-  console.log(shoppingLists);
-
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
   useEffect( () => {

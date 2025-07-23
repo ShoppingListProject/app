@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
-import { XMarkIcon } from "@heroicons/react/16/solid";
+import ShoppingListItemRow from "./ShoppingListItemRow";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[]
@@ -119,6 +119,13 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
       })
   }
 
+  const handlers = {
+    handleOnChangeName,
+    handleOnChangeQuantity, 
+    handleOnChangeUnit, 
+    markItem
+  };
+
   return (
     <div className="bg-blue-200 p-4">
       <ul>
@@ -127,25 +134,7 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
             <h1 className="text-sm text-center p-1">{category}</h1>
             <ul className="p-1 rounded border-2">
               {items.map( (item: ShoppingListItem, itemIdx) => 
-                <li key={itemIdx} className="flex p-2 rounded items-center justify-between gap-2">
-                  <div className="flex w-40 sm:w-auto">
-                    <span>{`${itemIdx + 1}.`}</span>
-                    <input className="ml-1 w-full" type="text" value={item.name} onChange={e => handleOnChangeName(categoryIdx, itemIdx, e.target.value)} ></input>
-                  </div>
-                  <div className="flex flex-col sm:flex-row">
-                    <input className="p-1 w-12" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(categoryIdx, itemIdx, e.target.value)} ></input>
-                    <select value={item.unit} onChange={e => handleOnChangeUnit(categoryIdx, itemIdx, e.target.value)}>
-                      <option value="kg">kg</option>
-                      <option value="g">g</option>
-                      <option value="l">l</option>
-                      <option value="ml">ml</option>
-                      <option value="pieces">pieces</option>
-                    </select>
-                  </div>
-                  <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer " onClick={() => markItem(categoryIdx, itemIdx)}>
-                    {item.purchased && <XMarkIcon />}
-                  </button>
-                </li>
+                <ShoppingListItemRow key={itemIdx} {...handlers} categoryIdx={categoryIdx} itemIdx={itemIdx} item={item} />
              )}
             </ul>
           </li>
