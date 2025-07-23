@@ -128,12 +128,12 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
             <ul className="p-1 rounded border-2">
               {items.map( (item: ShoppingListItem, itemIdx) => 
                 <li key={itemIdx} className="flex p-2 rounded items-center justify-between gap-2">
-                  <div>
+                  <div className="flex w-40 sm:w-auto">
                     <span>{`${itemIdx + 1}.`}</span>
-                    <input className="ml-1" type="text" value={item.name} onChange={e => handleOnChangeName(categoryIdx, itemIdx, e.target.value)} ></input>
+                    <input className="ml-1 w-full" type="text" value={item.name} onChange={e => handleOnChangeName(categoryIdx, itemIdx, e.target.value)} ></input>
                   </div>
-                  <div>
-                    <input className="w-15" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(categoryIdx, itemIdx, e.target.value)} ></input>
+                  <div className="flex flex-col sm:flex-row">
+                    <input className="p-1 w-12" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(categoryIdx, itemIdx, e.target.value)} ></input>
                     <select value={item.unit} onChange={e => handleOnChangeUnit(categoryIdx, itemIdx, e.target.value)}>
                       <option value="kg">kg</option>
                       <option value="g">g</option>
