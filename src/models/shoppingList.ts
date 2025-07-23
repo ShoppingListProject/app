@@ -5,9 +5,16 @@ export interface ShoppingListItem {
   purchased: boolean;
 }
 
+export interface RecipeItem {
+  name: string;
+  quantity: number;
+  unit: string;
+  category: string;
+}
+
 export interface RecipeCreate {
   name: string;
-  items: ShoppingListItem[];
+  items: RecipeItem[];
 }
 
 export interface Recipe extends RecipeCreate {
