@@ -3,10 +3,11 @@ import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppin
 import ShoppingListItemRow from "./ShoppingListItemRow";
 
 interface ShoppingListModalProps {
-  itemsPerCategory: CategorizedItems[]
+  itemsPerCategory: CategorizedItems[],
+  onCancel: () => void
 }
 
-function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
+function ShoppingListModal({itemsPerCategory, onCancel}: ShoppingListModalProps) {
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
 
@@ -119,6 +120,15 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
       })
   }
 
+  function countItemNumber(categoryIdx: number, itemIdx: number): number {
+    let itemNumberInList = 0;
+    for(let i = 0; i < categoryIdx; i++) {
+      itemNumberInList += editedItemsPerCategory[i].items.length;
+    }
+    itemNumberInList += itemIdx;
+    return itemNumberInList;
+  }
+
   const handlers = {
     handleOnChangeName,
     handleOnChangeQuantity, 
@@ -133,8 +143,16 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
           <li key={categoryIdx}>
             <h1 className="text-sm text-center p-1">{category}</h1>
             <ul className="p-1 rounded border-2">
-              {items.map( (item: ShoppingListItem, itemIdx) => 
-                <ShoppingListItemRow key={itemIdx} {...handlers} categoryIdx={categoryIdx} itemIdx={itemIdx} item={item} />
+              { items.map( (item: ShoppingListItem, itemIdx) =>     
+
+                  <ShoppingListItemRow
+                    key={itemIdx} 
+                    {...handlers} 
+                    categoryIdx={categoryIdx} 
+                    itemIdxInCategory={itemIdx}
+                    itemNumber={countItemNumber(categoryIdx, itemIdx)} 
+                    item={item} 
+                  />
              )}
             </ul>
           </li>
@@ -144,7 +162,7 @@ function ShoppingListModal({itemsPerCategory}: ShoppingListModalProps) {
       <div className="mt-3 flex justify-center w-full">
         <div className="flex justify-center w-1/2 gap-2">
           <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
-          <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer">Cancel</button>
+          <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancel}>Cancel</button>
         </div>
       </div>
 

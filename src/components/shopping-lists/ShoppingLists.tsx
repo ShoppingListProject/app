@@ -55,7 +55,12 @@ function ShoppingLists() {
         ref={modalRef} 
         title={currentOpenListName} 
       >
-        {currentOpenListName != null && <ShoppingListModal key={currentOpenListName} itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} />}
+        {currentOpenListName != null && 
+          <ShoppingListModal 
+            key={currentOpenListName} 
+            itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
+            onCancel={() => modalRef.current?.close()}
+          />}
       </Modal>
       
 
