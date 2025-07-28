@@ -13,19 +13,35 @@ function RecipeModal({items, categories, units, onCancel}: RecipeModalProps) {
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
 
   function handleOnChangeName(itemIdx: number, newName: string) {
-    
+    setEditedItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems[itemIdx] = {...updatedItems[itemIdx], name: newName};
+      return updatedItems;
+    });
   }
 
   function handleOnChangeQuantity(itemIdx: number, newQuantity: string) {
-
+    setEditedItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems[itemIdx] = {...updatedItems[itemIdx], quantity: parseFloat(newQuantity)};
+      return updatedItems;
+    })
   }
 
   function handleOnChangeUnit(itemIdx: number, newUnit: string) {
-
+    setEditedItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems[itemIdx] = {...updatedItems[itemIdx], unit: newUnit};
+      return updatedItems;
+    })
   }
 
   function handleOnChangeCategory(itemIdx: number, newCategory: string) {
-
+    setEditedItems(prevItems => {
+      const updatedItems = [...prevItems];
+      updatedItems[itemIdx] = {...updatedItems[itemIdx], category: newCategory};
+      return updatedItems;
+    })
   }
 
   return (
@@ -39,7 +55,7 @@ function RecipeModal({items, categories, units, onCancel}: RecipeModalProps) {
               <input className="ml-1 w-full" type="text" value={item.name} onChange={e => handleOnChangeName(itemIdx, e.target.value)} ></input>
             </div>
             <div className="flex flex-col sm:flex-row">
-              <input className="p-1 w-12" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(itemIdx, e.target.value)} ></input>
+              <input className="p-1 w-14" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(itemIdx, e.target.value)} ></input>
               <select value={item.unit} onChange={e => handleOnChangeUnit(itemIdx, e.target.value)}>
                 {
                   // TODO - Remove name property from unit object
