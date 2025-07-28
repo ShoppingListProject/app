@@ -3,9 +3,12 @@ import type { RecipeItem } from "../../../models/shoppingList";
 
 interface RecipeModalProps {
   items: RecipeItem[];
+  categories: string[];
+  units: string[];
+  onCancel: () => void;
 }
 
-function RecipeModal({items}: RecipeModalProps) {
+function RecipeModal({items, categories, units, onCancel}: RecipeModalProps) {
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
 
@@ -38,25 +41,22 @@ function RecipeModal({items}: RecipeModalProps) {
             <div className="flex flex-col sm:flex-row">
               <input className="p-1 w-12" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(itemIdx, e.target.value)} ></input>
               <select value={item.unit} onChange={e => handleOnChangeUnit(itemIdx, e.target.value)}>
-                <option value="kg">kg</option>
-                <option value="g">g</option>
-                <option value="l">l</option>
-                <option value="ml">ml</option>
-                <option value="pieces">pieces</option>
+                {
+                  // TODO - Remove name property from unit object
+                  units.map(unit => 
+                    <option key={unit.name} value={unit.name}>{unit.name}</option>
+                  )}
               </select>
             </div>
             
             <span className="ml-5">Category: </span>
 
             <select value={item.category} onChange={e => handleOnChangeCategory(itemIdx, e.target.value)}>
-              <option value="Vegetables & Fruits">Vegetables & Fruits</option>
-              <option value="Bread">Bread</option>
-              <option value="Dairy & Eggs">Dairy & Eggs</option>
-              <option value="Pantry / Dry Goods">Pantry / Dry Goods</option>
-              <option value="Personal Care">Personal Care</option>
-              <option value="Cleaning">Cleaning</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Other">Other</option>
+              {
+                // TODO - Remove name property from category object
+                categories.map(category =>
+                  <option key={category.name} value={category.name}>{category.name}</option>
+                )}
             </select>
             
         </li>     
@@ -66,7 +66,7 @@ function RecipeModal({items}: RecipeModalProps) {
       <div className="mt-3 flex justify-center w-full">
         <div className="flex justify-center w-1/2 gap-2">
           <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
-          <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer">Cancel</button>
+          <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancel}>Cancel</button>
         </div>
       </div>
 

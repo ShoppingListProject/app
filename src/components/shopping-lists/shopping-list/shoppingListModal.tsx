@@ -4,10 +4,11 @@ import ShoppingListItemRow from "./ShoppingListItemRow";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
+  units: string[],
   onCancel: () => void
 }
 
-function ShoppingListModal({itemsPerCategory, onCancel}: ShoppingListModalProps) {
+function ShoppingListModal({itemsPerCategory, units, onCancel}: ShoppingListModalProps) {
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
 
@@ -150,7 +151,8 @@ function ShoppingListModal({itemsPerCategory, onCancel}: ShoppingListModalProps)
                     {...handlers} 
                     categoryIdx={categoryIdx} 
                     itemIdxInCategory={itemIdx}
-                    itemNumber={countItemNumber(categoryIdx, itemIdx)} 
+                    itemNumber={countItemNumber(categoryIdx, itemIdx)}
+                    units={units}
                     item={item} 
                   />
              )}

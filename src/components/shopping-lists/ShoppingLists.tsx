@@ -4,6 +4,7 @@ import Table from "../shared/table/Table";
 import Pagination from "../shared/table/Pagination";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { getShoppingLists } from "../../api/shoppingList";
+import { getUnits } from "../../api/units";
 import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
@@ -13,13 +14,20 @@ function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
+  const [units, setUnits] = useState<string[]>([]);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
   useEffect( () => {
+
     getShoppingLists()
       .then(setShoppingLists)
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
+
+    getUnits()
+      .then(setUnits)
+      .catch((err) => console.error(err));
+
   }, []);
 
   function convertShoppingListsToTableRows(shoppingLists: ShoppingList[]): TableRow[] {
@@ -60,6 +68,7 @@ function ShoppingLists() {
             key={currentOpenListName} 
             itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
             onCancel={() => modalRef.current?.close()}
+            units={units}
           />}
       </Modal>
       

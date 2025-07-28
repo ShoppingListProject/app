@@ -15,7 +15,7 @@ function CreateShoppingList() {
     useEffect( () => {
       getRecipes()
         .then(setRecipes)
-        .catch( err => console.log(err) )
+        .catch( err => console.error(err) )
   
     }, [])
   
