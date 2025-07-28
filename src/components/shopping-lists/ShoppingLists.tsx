@@ -7,7 +7,7 @@ import { getShoppingLists } from "../../api/shoppingList";
 import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
-import ShoppingListModal from "./shopping-list/shoppingListModal";
+import ShoppingListModal from "./shopping-list/ShoppingListModal";
 
 function ShoppingLists() {
 
