@@ -1,4 +1,4 @@
-import { ClipboardDocumentListIcon, HomeIcon, PencilSquareIcon, PlusCircleIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid';
+import { CakeIcon, ClipboardDocumentListIcon, HomeIcon, PencilSquareIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid';
 import logoBlack from '../../assets/logo-black-2.png';
 import NavButtonSmall from './buttons/NavButtonSmall';
 import NavButton from './buttons/NavButton';
@@ -17,7 +17,7 @@ function NavBar() {
         <NavButtonSmall to="/" ><HomeIcon /></NavButtonSmall>
         <NavButtonSmall to="/shopping-lists" ><ClipboardDocumentListIcon /></NavButtonSmall>
         <NavButtonSmall to="/create-shopping-list" ><PencilSquareIcon /></NavButtonSmall>
-        <NavButtonSmall to="/recipes" ><PlusCircleIcon /></NavButtonSmall>
+        <NavButtonSmall to="/recipes" ><CakeIcon /></NavButtonSmall>
         <NavButtonSmall to='/profile' ><UserIcon /></NavButtonSmall>
       </div>
       <div className='gap-5 items-center hidden lg:flex w-full justify-center'>

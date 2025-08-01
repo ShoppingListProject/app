@@ -45,7 +45,7 @@ function RecipeModal({items, categories, units, onCancel}: RecipeModalProps) {
   }
 
   return (
-    <div className="bg-blue-200 p-4">
+    <div className="bg-blue-200 p-4 text-sm sm:text-base">
       <ul>
         {editedItems.map( (item: RecipeItem, itemIdx) =>
           <li key={itemIdx} className="flex p-2 rounded items-center justify-between gap-2">
@@ -65,7 +65,7 @@ function RecipeModal({items, categories, units, onCancel}: RecipeModalProps) {
               </select>
             </div>
             
-            <span className="ml-5">Category: </span>
+            <span className="ml-5 hidden sm:block">Category: </span>
 
             <select value={item.category} onChange={e => handleOnChangeCategory(itemIdx, e.target.value)}>
               {
