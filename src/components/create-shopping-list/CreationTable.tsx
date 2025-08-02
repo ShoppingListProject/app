@@ -1,6 +1,6 @@
 import {MinusIcon, PlusIcon } from "@heroicons/react/16/solid";
 import React from "react";
-import type { CreationTableRow } from "../../../models/tableModels";
+import type { CreationTableRow } from "../../models/tableModels";
 
 interface CreationTableProps {
   rows: CreationTableRow[];
