@@ -68,6 +68,11 @@ function Recipes() {
     setIsEditMode(true);
   }
 
+  function handleOnClose() {
+    setIsEditMode(false);
+    modalRef.current?.close();
+  }
+
   return (
     <PageContent title="Recipes">
 
@@ -78,6 +83,7 @@ function Recipes() {
       <Modal
         ref={modalRef} 
         title={currentOpenRecipeName} 
+        onClose={handleOnClose}
       >
         {currentOpenRecipeName != null && 
           <RecipeModal 

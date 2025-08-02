@@ -61,6 +61,11 @@ function ShoppingLists() {
     setIsEditMode(false);
   }
 
+  function handleOnClose() {
+    setIsEditMode(false);
+    modalRef.current?.close();
+  }
+
   return (
     <PageContent title="Shopping Lists">
 
@@ -71,6 +76,7 @@ function ShoppingLists() {
       <Modal
         ref={modalRef} 
         title={currentOpenListName} 
+        onClose={handleOnClose}
       >
         {currentOpenListName != null && 
           <ShoppingListModal 
