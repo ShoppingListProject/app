@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
 import ShoppingListEditRow from "./ShoppingListEditRow";
 import ShoppingListRow from "./ShoppingListRow";
+import { PlusIcon } from "@heroicons/react/16/solid";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
@@ -136,8 +137,7 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
   const handlers = {
     handleOnChangeName,
     handleOnChangeQuantity, 
-    handleOnChangeUnit, 
-    markItem
+    handleOnChangeUnit
   };
 
   return (
@@ -172,23 +172,42 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
 
                 }
              )}
+
+              {
+                isEditMode && 
+                  <li className="pl-1 pb-1">
+                    <div className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow">
+                      <PlusIcon />
+                    </div>
+                  </li>
+              }
+
             </ul>
           </li>
         )}
       </ul>
+
+      {
+        isEditMode && 
+          <div className="flex justify-center">
+            <button className="bg-green-300 rounded hover:bg-green-400 cursor-pointer px-2 py-1 mt-2 shadow">
+              Add New Category
+            </button>
+          </div>
+      }
 
       <div className="mt-3 flex justify-center w-full">
         <div className="flex justify-center w-1/2 gap-2">
           {
             isEditMode ?
               <>
-                <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
-                <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancel}>Cancel</button>
+                <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow">Save</button>
+                <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onCancel}>Cancel</button>
               </> :
-             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer" onClick={onEdit}>Edit</button>
+             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onEdit}>Edit</button>
           }
         </div>
-      </div>
+      </div>      
 
     </div>
   )

@@ -27,7 +27,7 @@ function ShoppingListRow(props: ShoppingListRowProps) {
       <div>
         <span>{`${item.quantity} ${item.unit}`}</span>
       </div>
-      <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer " onClick={() => markItem(categoryIdx, itemIdxInCategory)}>
+      <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer shadow" onClick={() => markItem(categoryIdx, itemIdxInCategory)}>
         {item.purchased && <XMarkIcon />}
       </button>
     </li>     
