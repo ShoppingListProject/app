@@ -1,7 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import type { ShoppingListItem } from "../../../models/shoppingList"
 
-interface ShoppingListItemProps {
+interface ShoppingListEditRowProps {
   itemNumber: number
   itemIdxInCategory: number,
   categoryIdx: number,
@@ -13,7 +13,7 @@ interface ShoppingListItemProps {
   markItem: (categoryIdx: number, itemIdx: number) => void
 }
 
-function ShoppingListItemRow(props: ShoppingListItemProps) {
+function ShoppingListEditRow(props: ShoppingListEditRowProps) {
 
   const {
     itemNumber,
@@ -50,4 +50,4 @@ function ShoppingListItemRow(props: ShoppingListItemProps) {
   )
 }
 
-export default ShoppingListItemRow;
+export default ShoppingListEditRow;

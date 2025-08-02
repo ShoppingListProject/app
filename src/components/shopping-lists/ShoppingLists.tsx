@@ -8,13 +8,14 @@ import { getUnits } from "../../api/units";
 import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
-import ShoppingListModal from "./shopping-list/ShoppingListModal";
+import ShoppingListModal from "./shopping-list-modal/ShoppingListModal";
 
 function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
   const [units, setUnits] = useState<string[]>([]);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -52,6 +53,14 @@ function ShoppingLists() {
     return shoppingLists.find(list => list.name === name)!.itemsPerCategory;
   }
 
+  function handleOnEdit() {
+    setIsEditMode(true);
+  }
+
+  function handleOnCancel() {
+    setIsEditMode(false);
+  }
+
   return (
     <PageContent title="Shopping Lists">
 
@@ -67,7 +76,9 @@ function ShoppingLists() {
           <ShoppingListModal 
             key={currentOpenListName} 
             itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
-            onCancel={() => modalRef.current?.close()}
+            onCancel={handleOnCancel}
+            isEditMode={isEditMode}
+            onEdit={handleOnEdit}
             units={units}
           />}
       </Modal>
