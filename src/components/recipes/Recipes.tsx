@@ -9,7 +9,7 @@ import { getCategories } from "../../api/categories";
 import { getUnits } from "../../api/units";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
-import RecipeModal from "./recipe/RecipeModal";
+import RecipeModal from "./recipe-modal/RecipeModal";
 
 function Recipes() {
 
@@ -17,6 +17,7 @@ function Recipes() {
   const [currentOpenRecipeName, setCurrentOpenRecipeName] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [units, setUnits] = useState<string[]>([]);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -59,8 +60,12 @@ function Recipes() {
     return recipes.find( recipe => recipe.name === currentOpenRecipeName)!.items;
   }
 
-  function onCancel() {
-    modalRef.current?.close()
+  function handleOnCancel() {
+    setIsEditMode(false);
+  }
+
+  function handleOnEdit() {
+    setIsEditMode(true);
   }
 
   return (
@@ -78,9 +83,11 @@ function Recipes() {
           <RecipeModal 
             key={currentOpenRecipeName} 
             items={findItemsOfSelctedRecipe(currentOpenRecipeName)} 
-            onCancel={onCancel}
+            onCancel={handleOnCancel}
             units={units}
             categories={categories}
+            isEditMode={isEditMode}
+            onEdit={handleOnEdit}
         />}
       </Modal>
 

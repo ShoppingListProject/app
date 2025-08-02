@@ -24,7 +24,7 @@ function ShoppingListRow(props: ShoppingListRowProps) {
       <div className="flex w-40">
         <span>{`${itemNumber + 1}. ${item.name}`}</span>
       </div>
-      <div className="flex flex-col sm:flex-row">
+      <div>
         <span>{`${item.quantity} ${item.unit}`}</span>
       </div>
       <button className="w-5 h-5 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer " onClick={() => markItem(categoryIdx, itemIdxInCategory)}>
