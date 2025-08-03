@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
+import type { CategorizedItems, ShoppingList, ShoppingListItem } from "../../../models/shoppingList";
 import ShoppingListEditRow from "./ShoppingListEditRow";
 import ShoppingListRow from "./ShoppingListRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
@@ -24,7 +24,7 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
         if(categoryIdx != cIdx)
           return categorizedItems;
 
-        const newItems = categorizedItems.items.map((item, iIdx) => {
+        const newItems: ShoppingListItem[] = categorizedItems.items.map((item, iIdx) => {
           if(itemIdx != iIdx)
             return item;
 
@@ -51,7 +51,7 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
         if(categoryIdx != cIdx)
           return categorizedItems;
 
-        const newItems = categorizedItems.items.map((item, iIdx) => {
+        const newItems: ShoppingListItem[] = categorizedItems.items.map((item, iIdx) => {
           if(itemIdx != iIdx)
             return item;
 
@@ -71,14 +71,14 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
   }
 
     function handleOnChangeUnit(categoryIdx: number, itemIdx: number, newUnit: string) {
-      setEditeditemsPerCategory( (prevCategoryItems) => {
+      setEditeditemsPerCategory( (prevItemsPerCategory) => {
        
-        return prevCategoryItems.map( (categorizedItems, cIdx) => {
+        return prevItemsPerCategory.map( (categorizedItems, cIdx) => {
         
           if(categoryIdx != cIdx)
             return categorizedItems;
 
-          const newItems = categorizedItems.items.map((item, iIdx) => {
+          const newItems: ShoppingListItem[] = categorizedItems.items.map((item, iIdx) => {
             if(itemIdx != iIdx)
               return item;
 
@@ -98,14 +98,14 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
   }
 
   function markItem(categoryIdx: number, itemIdx: number) {
-      setEditeditemsPerCategory( (prevCategoryItems) => {
+      setEditeditemsPerCategory( (prevItemsPerCategory) => {
       
-           return prevCategoryItems.map( (categorizedItems, cIdx) => {
+          return prevItemsPerCategory.map( (categorizedItems, cIdx) => {
         
           if(categoryIdx != cIdx)
             return categorizedItems;
 
-          const newItems = categorizedItems.items.map((item, iIdx) => {
+          const newItems: ShoppingListItem[] = categorizedItems.items.map((item, iIdx) => {
             if(itemIdx != iIdx)
               return item;
 
@@ -125,6 +125,66 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
       })
   }
 
+  function handleOnRemoveItem(categoryIdx: number, itemIdx: number) {
+    setEditeditemsPerCategory( (prevItemsPerCategory) => {
+
+      // Remove the whole category if there is no elements there
+      if(prevItemsPerCategory[categoryIdx].items.length === 1) {
+
+        const newCategoryItems: CategorizedItems[] = [...prevItemsPerCategory];
+        newCategoryItems.splice(categoryIdx, 1);
+
+        return newCategoryItems;
+      }
+      
+      return prevItemsPerCategory.map( (categorizedItem, cIdx) => {
+        
+        if(categoryIdx != cIdx)
+          return categorizedItem;
+
+        const newItems: ShoppingListItem[] = [...categorizedItem.items];
+        newItems[itemIdx] = {...newItems[itemIdx]};
+        newItems.splice(itemIdx, 1);
+
+        return {
+          category: categorizedItem.category,
+          items: newItems
+        }
+
+      })
+    })
+  }
+
+  function handleOnAddItem(categoryName: string) {
+
+    setEditeditemsPerCategory( prevItemsPerCategory => {
+
+      const newItemsPerCategory = [...prevItemsPerCategory];
+
+      return newItemsPerCategory.map( catagorizedItems => {
+        
+        if(catagorizedItems.category !== categoryName)
+          return catagorizedItems;
+
+        const newItem: ShoppingListItem = {
+          name: "New Item",
+          quantity: 1,
+          unit: "pieces",
+          purchased: false
+        }
+
+        const newItems: ShoppingListItem[] = [...catagorizedItems.items];
+        newItems.push(newItem);
+        
+        return {
+          category: catagorizedItems.category,
+          items: newItems,
+        }
+
+      })
+    })
+  }
+
   function countItemNumber(categoryIdx: number, itemIdx: number): number {
     let itemNumberInList = 0;
     for(let i = 0; i < categoryIdx; i++) {
@@ -135,9 +195,10 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
   }
 
   const handlers = {
-    handleOnChangeName,
-    handleOnChangeQuantity, 
-    handleOnChangeUnit
+    onChangeName: handleOnChangeName,
+    onChangeQuantity: handleOnChangeQuantity, 
+    onChangeUnit: handleOnChangeUnit,
+    onRemoveItem: handleOnRemoveItem,
   };
 
   return (
@@ -176,7 +237,9 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
               {
                 isEditMode && 
                   <li className="pl-1 pb-1">
-                    <div className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow">
+                    <div 
+                      className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow"
+                      onClick={() => handleOnAddItem(category)}>
                       <PlusIcon />
                     </div>
                   </li>
