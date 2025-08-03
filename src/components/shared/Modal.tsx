@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/16/solid";
-import { useImperativeHandle, useRef, type RefObject } from "react";
+import { useEffect, useImperativeHandle, useRef, type RefObject } from "react";
 import ReactDOM from "react-dom";
 
 interface ModalProps {
@@ -22,6 +22,25 @@ function Modal({children, ref, title, onClose}: ModalProps) {
     open: () => dialogRef.current?.showModal(),
     close: () => dialogRef.current?.close(),
   }))
+
+    useEffect(() => {
+      const dialog = dialogRef.current;
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') 
+          onClose();
+      };
+
+      if (dialog) {
+        dialog.addEventListener('keydown', handleKeyDown);
+      }
+
+      return () => {
+        if (dialog) {
+          dialog.removeEventListener('keydown', handleKeyDown);
+        }
+      };
+  }, []);
 
   return ReactDOM.createPortal(
     <dialog ref={dialogRef} className="rounded-xl mx-auto my-auto bg-blue-100">

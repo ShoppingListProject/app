@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CategorizedItems, ShoppingList, ShoppingListItem } from "../../../models/shoppingList";
+import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
 import ShoppingListEditRow from "./ShoppingListEditRow";
 import ShoppingListRow from "./ShoppingListRow";
 import { PlusIcon } from "@heroicons/react/16/solid";

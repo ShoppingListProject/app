@@ -62,8 +62,8 @@ function ShoppingLists() {
   }
 
   function handleOnClose() {
-    setIsEditMode(false);
     modalRef.current?.close();
+    setIsEditMode(false);
   }
 
   return (
