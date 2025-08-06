@@ -7,14 +7,43 @@ import { PlusIcon } from "@heroicons/react/16/solid";
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
   units: string[],
+  categoris: string[],
   isEditMode: boolean,
   onEdit: () => void,
-  onCancel: () => void,
+  onCancel: () => void
 }
 
-function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCancel}: ShoppingListModalProps) {
+function ShoppingListModal(props: ShoppingListModalProps) {
+
+  const {
+    itemsPerCategory, 
+    units, 
+    categoris,
+    isEditMode, 
+    onEdit,
+    onCancel
+  } = props;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
+  const [isAddCategoryClicked, setIsAddCategoryClicked] = useState<boolean>(false);
+
+  const usedCategoris: string[] = editedItemsPerCategory.map( 
+    (catagorizedItems: CategorizedItems) => catagorizedItems.category
+  )
+
+  console.log("used: ", usedCategoris);
+
+  const unusedCateogris = categoris.filter(category => {
+
+    // TODO - remove name property
+
+    if(usedCategoris.includes(category.name))
+      return false;
+
+    return true;
+  })
+
+  console.log("unused: ", unusedCateogris);
 
   function handleOnChangeName(categoryIdx: number, itemIdx: number, newName: string) {
     setEditeditemsPerCategory( (prevItemsPerCategory) => {
@@ -185,6 +214,20 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
     })
   }
 
+  function onAddNewCategory(newCategory: string) {
+    setEditeditemsPerCategory( prevItemsPerCategory => {
+
+        const newItemsPerCategory = [...prevItemsPerCategory];
+
+        newItemsPerCategory.push({
+          category: newCategory,
+          items: []
+        })
+
+        return newItemsPerCategory;
+    })
+  }
+
   function countItemNumber(categoryIdx: number, itemIdx: number): number {
     let itemNumberInList = 0;
     for(let i = 0; i < categoryIdx; i++) {
@@ -253,8 +296,27 @@ function ShoppingListModal({itemsPerCategory, units, isEditMode, onEdit, onCance
       {
         isEditMode && 
           <div className="flex justify-center">
-            <button className="bg-green-300 rounded hover:bg-green-400 cursor-pointer px-2 py-1 mt-2 shadow">
-              Add New Category
+            <button 
+              className="bg-green-300 rounded hover:bg-green-400 cursor-pointer px-2 py-1 mt-2 shadow relative"
+              onClick={() => setIsAddCategoryClicked( prevIsAddCategoryClicked => !prevIsAddCategoryClicked )}
+              >
+              <span>Add New Category</span>
+              {
+                isAddCategoryClicked && 
+                <ul className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 shadow rounded min-w-full bg-blue-200 border">
+                  
+                  {/* TODO - remove the name property from category later */}
+
+                  {unusedCateogris.map(category => 
+                    <li 
+                      className="p-1 hover:bg-blue-300" 
+                      onClick={() => onAddNewCategory(category.name)}
+                      key={category.name} >
+                        {category.name}
+                  </li>
+                  )}
+                </ul> 
+              }
             </button>
           </div>
       }

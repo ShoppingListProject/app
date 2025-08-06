@@ -9,12 +9,14 @@ import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/Modal";
 import ShoppingListModal from "./shopping-list-modal/ShoppingListModal";
+import { getCategories } from "../../api/categories";
 
 function ShoppingLists() {
 
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
   const [units, setUnits] = useState<string[]>([]);
+  const [categoris, setCategoris] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -27,6 +29,10 @@ function ShoppingLists() {
 
     getUnits()
       .then(setUnits)
+      .catch((err) => console.error(err));
+
+    getCategories()
+      .then(setCategoris)
       .catch((err) => console.error(err));
 
   }, []);
@@ -86,6 +92,7 @@ function ShoppingLists() {
             isEditMode={isEditMode}
             onEdit={handleOnEdit}
             units={units}
+            categoris={categoris}
           />}
       </Modal>
       
