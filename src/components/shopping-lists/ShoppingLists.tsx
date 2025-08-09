@@ -18,6 +18,7 @@ function ShoppingLists() {
   const [units, setUnits] = useState<string[]>([]);
   const [categoris, setCategoris] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -70,6 +71,13 @@ function ShoppingLists() {
   function handleOnClose() {
     modalRef.current?.close();
     setIsEditMode(false);
+
+    // workaround to cancel all changes in ShoppingList component
+    refreshModal();
+  }
+
+  function refreshModal() {
+    setModalKey(prevModalKey => prevModalKey + 1);
   }
 
   return (
@@ -80,6 +88,7 @@ function ShoppingLists() {
       <Pagination/>
 
       <Modal
+        key={modalKey}
         ref={modalRef} 
         title={currentOpenListName} 
         onClose={handleOnClose}

@@ -230,6 +230,11 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     })
   }
 
+  function onCancelChanges() {
+    setEditeditemsPerCategory([...itemsPerCategory]);
+    onCancel()
+  }
+
   function countItemNumber(categoryIdx: number, itemIdx: number): number {
     let itemNumberInList = 0;
     for(let i = 0; i < categoryIdx; i++) {
@@ -313,7 +318,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
 
                         {unusedCateogris.map(category => 
                           <li 
-                            className="p-5 hover:bg-blue-300 border-b-2" 
+                            className="py-5 px-20 hover:bg-blue-300 border-b-2" 
                             onClick={() => onAddNewCategory(category.name)}
                             key={category.name} >
                               {category.name}
@@ -332,7 +337,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
             isEditMode ?
               <>
                 <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow">Save</button>
-                <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onCancel}>Cancel</button>
+                <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onCancelChanges}>Cancel</button>
               </> :
              <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onEdit}>Edit</button>
           }
