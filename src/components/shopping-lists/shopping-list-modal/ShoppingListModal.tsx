@@ -307,7 +307,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
                 isAddCategoryClicked && 
                     <>
                       <div className="fixed inset-0 cursor-default bg-black/50"></div>
-                      <ul className="fixed mb-2 bottom-30 max:h-1/2 left-1/2 -translate-x-1/2 shadow rounded-lg bg-blue-200 overflow-x-auto border text-xl max-h-100">
+                      <ul className="fixed mb-2 bottom-30 max:h-1/2 left-1/2 -translate-x-1/2 shadow rounded-lg bg-blue-200 overflow-x-auto border text-xl max-h-100 overscroll-contain">
                         
                         {/* TODO - remove the name property from category later */}
 
