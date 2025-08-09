@@ -3,11 +3,12 @@ import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppin
 import ShoppingListEditRow from "./ShoppingListEditRow";
 import ShoppingListRow from "./ShoppingListRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
+import CategoriesModal from "./CategoriesModal";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
   units: string[],
-  categoris: string[],
+  categories: string[],
 }
 
 function ShoppingListModal(props: ShoppingListModalProps) {
@@ -15,26 +16,11 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   const {
     itemsPerCategory, 
     units, 
-    categoris,
+    categories,
   } = props;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
-  const [isAddCategoryClicked, setIsAddCategoryClicked] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-
-  const usedCategoris: string[] = editedItemsPerCategory.map( 
-    (catagorizedItems: CategorizedItems) => catagorizedItems.category
-  )
-
-  const unusedCateogris = categoris.filter(category => {
-
-    // TODO - remove name property
-
-    if(usedCategoris.includes(category.name))
-      return false;
-
-    return true;
-  })
 
   function handleOnChangeName(categoryIdx: number, itemIdx: number, newName: string) {
     setEditeditemsPerCategory( (prevItemsPerCategory) => {
@@ -205,7 +191,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     })
   }
 
-  function onAddNewCategory(newCategory: string) {
+  function handleOnAddNewCategory(newCategory: string) {
     setEditeditemsPerCategory( prevItemsPerCategory => {
 
         const newItemsPerCategory = [...prevItemsPerCategory];
@@ -298,33 +284,11 @@ function ShoppingListModal(props: ShoppingListModalProps) {
 
       {
         isEditMode && 
-          <div className="flex justify-center">
-            <button 
-              className="bg-green-300 rounded hover:bg-green-400 cursor-pointer px-2 py-1 mt-2 shadow relative"
-              onClick={() => setIsAddCategoryClicked( prevIsAddCategoryClicked => !prevIsAddCategoryClicked )}
-              >
-              <span>Add New Category</span>
-              {
-                isAddCategoryClicked && 
-                    <>
-                      <div className="fixed inset-0 cursor-default bg-black/50"></div>
-                      <ul className="fixed mb-2 bottom-30 max:h-1/2 left-1/2 -translate-x-1/2 shadow rounded-lg bg-blue-200 overflow-x-auto border text-xl max-h-100 overscroll-contain">
-                        
-                        {/* TODO - remove the name property from category later */}
-
-                        {unusedCateogris.map(category => 
-                          <li 
-                            className="py-5 px-20 hover:bg-blue-300 border-b-2" 
-                            onClick={() => onAddNewCategory(category.name)}
-                            key={category.name} >
-                              {category.name}
-                          </li>
-                        )}
-                      </ul>
-                    </>
-              }
-            </button>
-          </div>
+        <CategoriesModal
+          categories={categories} 
+          editedItemsPerCategory={editedItemsPerCategory}
+          onAddNewCategory={handleOnAddNewCategory}
+        />
       }
 
       <div className="mt-3 flex justify-center w-full">

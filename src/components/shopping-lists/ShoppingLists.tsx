@@ -16,7 +16,7 @@ function ShoppingLists() {
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
   const [units, setUnits] = useState<string[]>([]);
-  const [categoris, setCategoris] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -32,7 +32,7 @@ function ShoppingLists() {
       .catch((err) => console.error(err));
 
     getCategories()
-      .then(setCategoris)
+      .then(setCategories)
       .catch((err) => console.error(err));
 
   }, []);
@@ -88,11 +88,9 @@ function ShoppingLists() {
             key={currentOpenListName} 
             itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
             units={units}
-            categoris={categoris}
+            categories={categories}
           />}
       </Modal>
-      
-
     </PageContent>
   )
 }
