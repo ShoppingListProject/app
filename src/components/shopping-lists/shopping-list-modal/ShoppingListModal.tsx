@@ -1,10 +1,8 @@
 import { useState } from "react";
 import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
-import ShoppingListEditRow from "./ShoppingListEditRow";
-import ShoppingListRow from "./ShoppingListRow";
-import { PlusIcon } from "@heroicons/react/16/solid";
 import CategoriesModal from "./CategoriesModal";
 import ShoppingListButtons from "./ShoppingListButtons";
+import CategorizedItemsPanel from "./CategorizedItemsPanel";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
@@ -238,48 +236,18 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     <div className="bg-blue-200 p-4">
       <ul>
         {editedItemsPerCategory.map( ({category, items}: CategorizedItems, categoryIdx) =>
-          <li key={categoryIdx}>
-            <h1 className="text-sm text-center p-1">{category}</h1>
-            <ul className="p-1 rounded border-2">
-              { 
-                items.map( (item: ShoppingListItem, itemIdx) => {
-
-                  if(isEditMode)
-                    return <ShoppingListEditRow
-                      key={itemIdx} 
-                      {...handlers} 
-                      categoryIdx={categoryIdx} 
-                      itemIdxInCategory={itemIdx}
-                      itemNumber={countItemNumber(categoryIdx, itemIdx)}
-                      units={units}
-                      item={item} 
-                    />
-                  else
-                    return <ShoppingListRow
-                      key={itemIdx} 
-                      markItem={markItem}
-                      categoryIdx={categoryIdx} 
-                      itemIdxInCategory={itemIdx}
-                      itemNumber={countItemNumber(categoryIdx, itemIdx)}
-                      item={item} 
-                    />
-
-                }
-             )}
-
-              {
-                isEditMode && 
-                  <li className="pl-1 pb-1">
-                    <div 
-                      className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow"
-                      onClick={() => handleOnAddItem(category)}>
-                      <PlusIcon />
-                    </div>
-                  </li>
-              }
-
-            </ul>
-          </li>
+          <CategorizedItemsPanel
+            key={categoryIdx} 
+            categoryIdx={categoryIdx} 
+            category={category} 
+            isEditMode={isEditMode} 
+            items={items} 
+            units={units} 
+            countItemNumber={countItemNumber}
+            handleOnAddItem={handleOnAddItem} 
+            markItem={markItem} 
+            handlers={handlers} 
+          />
         )}
       </ul>
 
