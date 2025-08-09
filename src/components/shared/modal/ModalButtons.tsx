@@ -1,10 +1,10 @@
-interface ShoppingListButtons {
+interface ModalButtonsProps {
   isEditMode: boolean
   onCancelChanges: () => void
   turnOnEditMode: () => void
 }
 
-function ShoppingListButtons({isEditMode, onCancelChanges, turnOnEditMode}: ShoppingListButtons) {
+function ModalButtons({isEditMode, onCancelChanges, turnOnEditMode}: ModalButtonsProps) {
   return (
     <div className="mt-3 flex justify-center w-full">
       <div className="flex justify-center w-1/2 gap-2">
@@ -21,4 +21,4 @@ function ShoppingListButtons({isEditMode, onCancelChanges, turnOnEditMode}: Shop
   )
 }
 
-export default ShoppingListButtons
+export default ModalButtons

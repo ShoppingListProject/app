@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { CategorizedItems, ShoppingListItem } from "../../models/shoppingList";
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
-import ShoppingListButtons from "./shopping-list-modal/ShoppingListButtons";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
+import ModalButtons from "../shared/modal/ModalButtons";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
@@ -260,7 +260,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
         />
       }
 
-      <ShoppingListButtons 
+      <ModalButtons 
         isEditMode={isEditMode}
         onCancelChanges={handleOnCancelChanges}
         turnOnEditMode={() => setIsEditMode(true)}

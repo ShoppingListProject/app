@@ -8,7 +8,7 @@ import { getRecipes } from "../../api/receipes";
 import { getCategories } from "../../api/categories";
 import { getUnits } from "../../api/units";
 import type { TableRow } from "../../models/tableModels";
-import Modal, { type ModalRef } from "../shared/Modal";
+import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
 
 function Recipes() {

@@ -3,6 +3,7 @@ import type { RecipeItem } from "../../../models/shoppingList";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
+import ModalButtons from "../../shared/modal/ModalButtons";
 
 interface RecipeModalProps {
   items: RecipeItem[];
@@ -64,7 +65,7 @@ function RecipeModal({items, categories, units}: RecipeModalProps) {
     })
   }
 
-  function onCancelChanges() {
+  function handleOnCancelChanges() {
     // Restore initial items
     setEditedItems([...items]);
     setIsEditMode(false);
@@ -110,18 +111,11 @@ function RecipeModal({items, categories, units}: RecipeModalProps) {
         }
       </ul>
 
-      <div className="mt-3 flex justify-center w-full">
-        <div className="flex justify-center w-1/2 gap-2">
-          {
-            isEditMode ?
-            <>
-              <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
-              <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancelChanges}>Cancel</button>
-            </> :
-            <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer" onClick={() => setIsEditMode(true)}>Edit</button>
-          }
-        </div>
-      </div>
+      <ModalButtons 
+        isEditMode={isEditMode}
+        onCancelChanges={handleOnCancelChanges} 
+        turnOnEditMode={() => setIsEditMode(true)}
+      />
 
     </div>
   )
