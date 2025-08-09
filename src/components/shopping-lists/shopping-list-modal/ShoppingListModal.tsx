@@ -214,10 +214,16 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     setEditeditemsPerCategory( prevItemsPerCategory => {
 
         const newItemsPerCategory = [...prevItemsPerCategory];
+        const newItem: ShoppingListItem = {
+          name: "New Item",
+          quantity: 1,
+          unit: "pieces",
+          purchased: false
+        }
 
         newItemsPerCategory.push({
           category: newCategory,
-          items: []
+          items: [newItem]
         })
 
         return newItemsPerCategory;
@@ -299,22 +305,22 @@ function ShoppingListModal(props: ShoppingListModalProps) {
               <span>Add New Category</span>
               {
                 isAddCategoryClicked && 
-                  <>
-                    <div className="fixed inset-0 cursor-default bg-black/50"></div>
-                    <ul className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 shadow rounded min-w-full bg-blue-200 border">
-                      
-                      {/* TODO - remove the name property from category later */}
+                    <>
+                      <div className="fixed inset-0 cursor-default bg-black/50"></div>
+                      <ul className="fixed mb-2 bottom-30 max:h-1/2 left-1/2 -translate-x-1/2 shadow rounded-lg bg-blue-200 overflow-x-auto border text-xl max-h-100">
+                        
+                        {/* TODO - remove the name property from category later */}
 
-                      {unusedCateogris.map(category => 
-                        <li 
-                          className="p-1 hover:bg-blue-300" 
-                          onClick={() => onAddNewCategory(category.name)}
-                          key={category.name} >
-                            {category.name}
-                      </li>
-                      )}
-                    </ul> 
-                  </>
+                        {unusedCateogris.map(category => 
+                          <li 
+                            className="p-5 hover:bg-blue-300 border-b-2" 
+                            onClick={() => onAddNewCategory(category.name)}
+                            key={category.name} >
+                              {category.name}
+                          </li>
+                        )}
+                      </ul>
+                    </>
               }
             </button>
           </div>
