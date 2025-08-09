@@ -18,6 +18,7 @@ function Recipes() {
   const [categories, setCategories] = useState<string[]>([]);
   const [units, setUnits] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -69,8 +70,14 @@ function Recipes() {
   }
 
   function handleOnClose() {
-    setIsEditMode(false);
     modalRef.current?.close();
+    setIsEditMode(false);
+
+    refreshModal();
+  }
+
+  function refreshModal() {
+    setModalKey(prevKey => prevKey + 1)
   }
 
   return (
@@ -81,6 +88,7 @@ function Recipes() {
       <Pagination/>
 
       <Modal
+        key={modalKey}
         ref={modalRef} 
         title={currentOpenRecipeName} 
         onClose={handleOnClose}

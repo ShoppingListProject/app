@@ -231,6 +231,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   }
 
   function onCancelChanges() {
+    // Restore initial items
     setEditeditemsPerCategory([...itemsPerCategory]);
     onCancel()
   }

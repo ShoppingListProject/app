@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { RecipeItem } from "../../../models/shoppingList";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
+import { PlusIcon } from "@heroicons/react/16/solid";
 
 interface RecipeModalProps {
   items: RecipeItem[];
@@ -48,6 +49,29 @@ function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: R
     })
   }
 
+  function handleOnAddItem() {
+    setEditedItems(prevItems => {
+
+      const newItem: RecipeItem = {
+        name: "New Item",
+        quantity: 1,
+        unit: "pieces",
+        category: "Other",
+      }
+
+      const newItems = [...prevItems];
+      newItems.push(newItem);
+
+      return newItems;
+    })
+  }
+
+  function onCancelChanges() {
+    // Restore initial items
+    setEditedItems([...items]);
+    onCancel()    
+  }
+
   const handlers = {
     handleOnChangeName,
     handleOnChangeQuantity,
@@ -76,6 +100,16 @@ function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: R
           />
           
         )}
+        {
+          isEditMode && 
+          <li className="pl-1 pb-1">
+            <div 
+              className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow"
+              onClick={handleOnAddItem}>
+              <PlusIcon />
+            </div>
+          </li>
+        }
       </ul>
 
       <div className="mt-3 flex justify-center w-full">
@@ -84,7 +118,7 @@ function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: R
             isEditMode ?
             <>
               <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
-              <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancel}>Cancel</button>
+              <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancelChanges}>Cancel</button>
             </> :
             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer" onClick={onEdit}>Edit</button>
           }
