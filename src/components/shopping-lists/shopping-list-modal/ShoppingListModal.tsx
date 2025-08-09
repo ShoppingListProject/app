@@ -4,6 +4,7 @@ import ShoppingListEditRow from "./ShoppingListEditRow";
 import ShoppingListRow from "./ShoppingListRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
 import CategoriesModal from "./CategoriesModal";
+import ShoppingListButtons from "./ShoppingListButtons";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
@@ -211,9 +212,9 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     })
   }
 
-  function onCancelChanges() {
+  function handleOnCancelChanges() {
     // Restore initial items
-    setEditeditemsPerCategory([...itemsPerCategory]);
+    setEditeditemsPerCategory(itemsPerCategory);
     setIsEditMode(false);
   }
 
@@ -291,18 +292,11 @@ function ShoppingListModal(props: ShoppingListModalProps) {
         />
       }
 
-      <div className="mt-3 flex justify-center w-full">
-        <div className="flex justify-center w-1/2 gap-2">
-          {
-            isEditMode ?
-              <>
-                <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow">Save</button>
-                <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onCancelChanges}>Cancel</button>
-              </> :
-             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={() => setIsEditMode(true)}>Edit</button>
-          }
-        </div>
-      </div>      
+      <ShoppingListButtons 
+        isEditMode={isEditMode}
+        onCancelChanges={handleOnCancelChanges}
+        turnOnEditMode={() => setIsEditMode(true)}
+      />
 
     </div>
   )
