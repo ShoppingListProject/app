@@ -1,7 +1,7 @@
 import { PlusIcon } from "@heroicons/react/16/solid";
 import type { ShoppingListItem } from "../../../models/shoppingList"
-import ShoppingListEditRow from "./ShoppingListEditRow"
-import ShoppingListRow from "./ShoppingListRow"
+import ShoppingListEditRow from "./shopping-list-rows/ShoppingListEditRow"
+import ShoppingListRow from "./shopping-list-rows/ShoppingListRow"
 
 interface CategorizedItemsPanelProps {
   categoryIdx: number,

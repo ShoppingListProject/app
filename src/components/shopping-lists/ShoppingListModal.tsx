@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { CategorizedItems, ShoppingListItem } from "../../../models/shoppingList";
-import CategoriesModal from "./CategoriesModal";
-import ShoppingListButtons from "./ShoppingListButtons";
-import CategorizedItemsPanel from "./CategorizedItemsPanel";
+import type { CategorizedItems, ShoppingListItem } from "../../models/shoppingList";
+import CategoriesModal from "./shopping-list-modal/CategoriesModal";
+import ShoppingListButtons from "./shopping-list-modal/ShoppingListButtons";
+import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],

@@ -1,5 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/16/solid";
-import type { ShoppingListItem } from "../../../models/shoppingList";
+import type { ShoppingListItem } from "../../../../models/shoppingList";
 
 interface ShoppingListRowProps {
   itemNumber: number
