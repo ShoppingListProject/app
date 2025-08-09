@@ -8,14 +8,12 @@ interface RecipeModalProps {
   items: RecipeItem[];
   categories: string[];
   units: string[];
-  isEditMode: boolean;
-  onCancel: () => void;
-  onEdit: () => void;
 }
 
-function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: RecipeModalProps) {
+function RecipeModal({items, categories, units}: RecipeModalProps) {
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   function handleOnChangeName(itemIdx: number, newName: string) {
     setEditedItems(prevItems => {
@@ -69,7 +67,7 @@ function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: R
   function onCancelChanges() {
     // Restore initial items
     setEditedItems([...items]);
-    onCancel()    
+    setIsEditMode(false);
   }
 
   const handlers = {
@@ -120,7 +118,7 @@ function RecipeModal({items, categories, units, isEditMode, onCancel, onEdit}: R
               <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer">Save</button>
               <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer" onClick={onCancelChanges}>Cancel</button>
             </> :
-            <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer" onClick={onEdit}>Edit</button>
+            <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer" onClick={() => setIsEditMode(true)}>Edit</button>
           }
         </div>
       </div>

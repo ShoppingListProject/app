@@ -17,7 +17,6 @@ function ShoppingLists() {
   const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
   const [units, setUnits] = useState<string[]>([]);
   const [categoris, setCategoris] = useState<string[]>([]);
-  const [isEditMode, setIsEditMode] = useState(false);
   const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -60,17 +59,8 @@ function ShoppingLists() {
     return shoppingLists.find(list => list.name === name)!.itemsPerCategory;
   }
 
-  function handleOnEdit() {
-    setIsEditMode(true);
-  }
-
-  function handleOnCancel() {
-    setIsEditMode(false);
-  }
-
   function handleOnClose() {
     modalRef.current?.close();
-    setIsEditMode(false);
 
     // workaround to cancel all changes in ShoppingList component
     refreshModal();
@@ -97,9 +87,6 @@ function ShoppingLists() {
           <ShoppingListModal 
             key={currentOpenListName} 
             itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
-            onCancel={handleOnCancel}
-            isEditMode={isEditMode}
-            onEdit={handleOnEdit}
             units={units}
             categoris={categoris}
           />}

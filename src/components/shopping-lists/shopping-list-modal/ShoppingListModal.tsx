@@ -8,9 +8,6 @@ interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
   units: string[],
   categoris: string[],
-  isEditMode: boolean,
-  onEdit: () => void,
-  onCancel: () => void
 }
 
 function ShoppingListModal(props: ShoppingListModalProps) {
@@ -19,13 +16,11 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     itemsPerCategory, 
     units, 
     categoris,
-    isEditMode, 
-    onEdit,
-    onCancel
   } = props;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
-  const [isAddCategoryClicked, setIsAddCategoryClicked] = useState<boolean>(false);
+  const [isAddCategoryClicked, setIsAddCategoryClicked] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const usedCategoris: string[] = editedItemsPerCategory.map( 
     (catagorizedItems: CategorizedItems) => catagorizedItems.category
@@ -233,7 +228,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   function onCancelChanges() {
     // Restore initial items
     setEditeditemsPerCategory([...itemsPerCategory]);
-    onCancel()
+    setIsEditMode(false);
   }
 
   function countItemNumber(categoryIdx: number, itemIdx: number): number {
@@ -340,7 +335,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
                 <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow">Save</button>
                 <button className="bg-red-300 hover:bg-red-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onCancelChanges}>Cancel</button>
               </> :
-             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={onEdit}>Edit</button>
+             <button className="bg-green-300 hover:bg-green-400 rounded p-2 flex-1 cursor-pointer shadow" onClick={() => setIsEditMode(true)}>Edit</button>
           }
         </div>
       </div>      

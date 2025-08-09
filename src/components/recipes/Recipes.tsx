@@ -17,7 +17,6 @@ function Recipes() {
   const [currentOpenRecipeName, setCurrentOpenRecipeName] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [units, setUnits] = useState<string[]>([]);
-  const [isEditMode, setIsEditMode] = useState(false);
   const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -61,17 +60,8 @@ function Recipes() {
     return recipes.find( recipe => recipe.name === currentOpenRecipeName)!.items;
   }
 
-  function handleOnCancel() {
-    setIsEditMode(false);
-  }
-
-  function handleOnEdit() {
-    setIsEditMode(true);
-  }
-
   function handleOnClose() {
     modalRef.current?.close();
-    setIsEditMode(false);
 
     refreshModal();
   }
@@ -97,11 +87,8 @@ function Recipes() {
           <RecipeModal 
             key={currentOpenRecipeName} 
             items={findItemsOfSelctedRecipe(currentOpenRecipeName)} 
-            onCancel={handleOnCancel}
             units={units}
             categories={categories}
-            isEditMode={isEditMode}
-            onEdit={handleOnEdit}
         />}
       </Modal>
 
