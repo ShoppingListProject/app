@@ -1,13 +1,10 @@
 import PageContent from "../shared/PageContent";
 import DisabledInput from "./DisabledInput";
-import ProfileImage from "./ProfileImage";
 import Selector from "./Selector";
 
 function Profile() {
   return (
     <PageContent title="Profile">
-
-      <ProfileImage />
 
       <ul className="flex flex-col gap-2 items-start mx-auto w-full md:w-1/2">
         <DisabledInput label="Email" />
