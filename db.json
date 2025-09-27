@@ -267,6 +267,8 @@
     { "id": 6, "name": "Personal Care" },
     { "id": 7, "name": "Cleaning" },
     { "id": 8, "name": "Snacks" },
-    { "id": 9, "name": "Other" }
+    { "id": 9, "name": "Other" },
+    { "id": 10, "name": "Spices"},
+    { "id": 11, "name": "Meat"}
   ]
 }
