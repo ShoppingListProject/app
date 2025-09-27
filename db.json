@@ -263,7 +263,7 @@
   "categories": [
     { "id": 1, "name": "Vegetables & Fruits" },
     { "id": 2, "name": "Bread" },
-    { "id": 3, "name": "Dairy" },
+    { "id": 3, "name": "Dairy & Eggs" },
     { "id": 4, "name": "Beverages" },
     { "id": 5, "name": "Pantry / Dry Goods" },
     { "id": 6, "name": "Personal Care" },
