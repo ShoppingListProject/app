@@ -1,8 +1,9 @@
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
-const path = "categories/";
-const url = host + path;
-
 export async function getCategories(): Promise<string[]> {
+
+  const path = "constants/categories";
+  const url = host + path;
+
   return fetchWrapper<string[]>({url})
 } 

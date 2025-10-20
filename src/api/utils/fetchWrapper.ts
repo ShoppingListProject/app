@@ -3,7 +3,7 @@ interface FetchWrapperParams {
   options?: RequestInit
 }
 
-export const host = "http://localhost:3000/";
+export const host = "http://localhost:8080/api/v1/";
 
 export async function fetchWrapper<T>({url, options = {}}: FetchWrapperParams): Promise<T> {
   

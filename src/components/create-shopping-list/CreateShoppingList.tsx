@@ -5,7 +5,7 @@ import SearchInput from "../shared/table/SearchInput";
 import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
 import type { Recipe } from "../../models/shoppingList";
-import { getRecipes } from "../../api/receipes";
+import { getPublicRecipes } from "../../api/receipes";
 import type { CreationTableRow } from "../../models/tableModels";
 
 function CreateShoppingList() {
@@ -13,7 +13,7 @@ function CreateShoppingList() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
   
     useEffect( () => {
-      getRecipes()
+      getPublicRecipes()
         .then(setRecipes)
         .catch( err => console.error(err) )
   

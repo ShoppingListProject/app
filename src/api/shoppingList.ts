@@ -1,9 +1,11 @@
+import mocks from "../mocks/mocks";
 import type { ShoppingList } from "../models/shoppingList";
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
 const path = "shoppingLists/";
-const url = host + path;
 
 export async function getShoppingLists(): Promise<ShoppingList[]> {
+  
+  const url = host + path + mocks.userId;
   return fetchWrapper<ShoppingList[]>({url})
 }

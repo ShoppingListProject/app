@@ -1,8 +1,9 @@
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
-const path = "units/";
-const url = host + path;
-
 export async function getUnits(): Promise<string[]> {
+
+  const path = "constants/units";
+  const url = host + path;
+
   return fetchWrapper<string[]>({url})
 } 

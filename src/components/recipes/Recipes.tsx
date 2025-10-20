@@ -4,7 +4,7 @@ import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
 import type { Recipe, RecipeItem } from "../../models/shoppingList";
-import { getRecipes } from "../../api/receipes";
+import { getPublicRecipes } from "../../api/receipes";
 import { getCategories } from "../../api/categories";
 import { getUnits } from "../../api/units";
 import type { TableRow } from "../../models/tableModels";
@@ -23,7 +23,7 @@ function Recipes() {
 
   useEffect( () => {
 
-    getRecipes()
+    getPublicRecipes()
       .then(setRecipes)
       .catch( err => console.error(err) )
 
