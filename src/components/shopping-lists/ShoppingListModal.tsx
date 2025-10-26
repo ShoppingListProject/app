@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CategorizedItems, ShoppingListItem } from "../../models/shoppingList";
+import type { ShoppingListItem, CategorizedItems } from "@shopping-list-project/sl-api-models";
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 import ModalButtons from "../shared/modal/ModalButtons";

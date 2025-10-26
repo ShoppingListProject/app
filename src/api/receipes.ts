@@ -1,4 +1,4 @@
-import type { Recipe } from "../models/shoppingList";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 import mocks from "../mocks/mocks";
 

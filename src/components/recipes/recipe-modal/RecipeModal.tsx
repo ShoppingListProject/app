@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RecipeItem } from "../../../models/shoppingList";
+import type { RecipeItem } from "@shopping-list-project/sl-api-models";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";

@@ -1,5 +1,5 @@
 import { PlusIcon } from "@heroicons/react/16/solid";
-import type { ShoppingListItem } from "../../../models/shoppingList"
+import type { ShoppingListItem } from "@shopping-list-project/sl-api-models"
 import ShoppingListEditRow from "./shopping-list-rows/ShoppingListEditRow"
 import ShoppingListRow from "./shopping-list-rows/ShoppingListRow"
 

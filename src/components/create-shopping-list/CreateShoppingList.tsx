@@ -4,7 +4,7 @@ import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
-import type { Recipe } from "../../models/shoppingList";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 import { getPublicRecipes } from "../../api/receipes";
 import type { CreationTableRow } from "../../models/tableModels";
 

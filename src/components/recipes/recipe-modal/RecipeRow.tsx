@@ -1,4 +1,4 @@
-import type { RecipeItem } from "../../../models/shoppingList";
+import type { RecipeItem } from "@shopping-list-project/sl-api-models";
 
 interface RecipeRowProps {
   itemIdx: number

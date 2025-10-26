@@ -1,5 +1,5 @@
 import { MinusIcon } from "@heroicons/react/16/solid";
-import type { ShoppingListItem } from "../../../../models/shoppingList"
+import type { ShoppingListItem } from "@shopping-list-project/sl-api-models"
 
 interface ShoppingListEditRowProps {
   itemNumber: number
@@ -44,9 +44,8 @@ function ShoppingListEditRow(props: ShoppingListEditRowProps) {
         <input className="p-1 w-14" value={item.quantity} type="number" onChange={e => onChangeQuantity(categoryIdx, itemIdxInCategory, e.target.value)} ></input>
         <select value={item.unit} onChange={e => onChangeUnit(categoryIdx, itemIdxInCategory, e.target.value)}>
           {
-            // TODO - remove the name property from the unit model
             units.map((unit, idx) => 
-              <option key={idx} value={unit.name}>{unit.name}</option>)
+              <option key={idx} value={unit}>{unit}</option>)
           }
         </select>
       </div>

@@ -1,5 +1,5 @@
 import mocks from "../mocks/mocks";
-import type { ShoppingList } from "../models/shoppingList";
+import type { ShoppingList } from "@shopping-list-project/sl-api-models";
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
 const path = "shoppingLists/";

@@ -1,4 +1,4 @@
-import type { RecipeItem } from "../../../models/shoppingList";
+import type { RecipeItem } from "@shopping-list-project/sl-api-models";
 
 interface RecipeEditRowProps {
     itemIdx: number
@@ -35,9 +35,8 @@ function RecipeEditRow(props: RecipeEditRowProps) {
         <input className="p-1 w-14" value={item.quantity} type="number" onChange={e => handleOnChangeQuantity(itemIdx, e.target.value)} ></input>
         <select value={item.unit} onChange={e => handleOnChangeUnit(itemIdx, e.target.value)}>
           {
-            // TODO - Remove name property from unit object
             units.map(unit => 
-              <option key={unit.name} value={unit.name}>{unit.name}</option>
+              <option key={unit} value={unit}>{unit}</option>
             )}
         </select>
       </div>
@@ -46,9 +45,8 @@ function RecipeEditRow(props: RecipeEditRowProps) {
 
       <select value={item.category} onChange={e => handleOnChangeCategory(itemIdx, e.target.value)}>
         {
-          // TODO - Remove name property from category object
           categories.map(category =>
-            <option key={category.name} value={category.name}>{category.name}</option>
+            <option key={category} value={category}>{category}</option>
           )}
       </select>
       

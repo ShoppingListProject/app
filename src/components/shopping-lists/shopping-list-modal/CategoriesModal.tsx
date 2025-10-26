@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CategorizedItems } from "../../../models/shoppingList";
+import type { CategorizedItems } from "@shopping-list-project/sl-api-models";
 
 interface CategoriesModalProps {
   editedItemsPerCategory: CategorizedItems[]
@@ -17,9 +17,7 @@ function CategoriesModal({editedItemsPerCategory, categories, onAddNewCategory}:
   
     const unusedCateogries = categories.filter(category => {
   
-      // TODO - remove name property
-  
-      if(usedCategories.includes(category.name))
+      if(usedCategories.includes(category))
         return false;
   
       return true;
@@ -37,15 +35,13 @@ function CategoriesModal({editedItemsPerCategory, categories, onAddNewCategory}:
               <>
                 <div className="fixed inset-0 cursor-default bg-black/50"></div>
                 <ul className="fixed mb-2 bottom-30 max:h-1/2 left-1/2 -translate-x-1/2 shadow rounded-lg bg-blue-200 overflow-x-auto border text-xl max-h-100 overscroll-contain">
-                  
-                  {/* TODO - remove the name property from category later */}
 
                   {unusedCateogries.map(category => 
                     <li 
                       className="py-5 px-20 hover:bg-blue-300 border-b-2" 
-                      onClick={() => onAddNewCategory(category.name)}
-                      key={category.name} >
-                        {category.name}
+                      onClick={() => onAddNewCategory(category)}
+                      key={category} >
+                        {category}
                     </li>
                   )}
                 </ul>

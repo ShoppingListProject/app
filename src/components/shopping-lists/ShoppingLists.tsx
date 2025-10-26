@@ -5,7 +5,7 @@ import Pagination from "../shared/table/Pagination";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { getShoppingLists } from "../../api/shoppingList";
 import { getUnits } from "../../api/units";
-import type { CategorizedItems, ShoppingList } from "../../models/shoppingList";
+import type { CategorizedItems, ShoppingList } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
