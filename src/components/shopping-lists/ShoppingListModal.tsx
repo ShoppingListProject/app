@@ -3,19 +3,24 @@ import type { ShoppingListItem, CategorizedItems } from "@shopping-list-project/
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 import ModalButtons from "../shared/modal/ModalButtons";
+import ModalHeader from "../shared/modal/ModalHeader";
 
 interface ShoppingListModalProps {
   itemsPerCategory: CategorizedItems[],
+  shoppingListName: string,
   units: string[],
   categories: string[],
+  onClose: () => void,
 }
 
 function ShoppingListModal(props: ShoppingListModalProps) {
 
   const {
     itemsPerCategory, 
+    shoppingListName,
     units, 
     categories,
+    onClose
   } = props;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
@@ -233,40 +238,44 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   };
 
   return (
-    <div className="bg-blue-200 p-4">
-      <ul>
-        {editedItemsPerCategory.map( ({category, items}: CategorizedItems, categoryIdx) =>
-          <CategorizedItemsPanel
-            key={categoryIdx} 
-            categoryIdx={categoryIdx} 
-            category={category} 
-            isEditMode={isEditMode} 
-            items={items} 
-            units={units} 
-            countItemNumber={countItemNumber}
-            handleOnAddItem={handleOnAddItem} 
-            markItem={markItem} 
-            handlers={handlers} 
+    <>
+      <ModalHeader title={shoppingListName} onClose={onClose}/>
+
+      <div className="bg-blue-200 p-4">
+        <ul>
+          {editedItemsPerCategory.map( ({category, items}: CategorizedItems, categoryIdx) =>
+            <CategorizedItemsPanel
+              key={categoryIdx} 
+              categoryIdx={categoryIdx} 
+              category={category} 
+              isEditMode={isEditMode} 
+              items={items} 
+              units={units} 
+              countItemNumber={countItemNumber}
+              handleOnAddItem={handleOnAddItem} 
+              markItem={markItem} 
+              handlers={handlers} 
+            />
+          )}
+        </ul>
+
+        {
+          isEditMode && 
+          <CategoriesModal
+            categories={categories} 
+            editedItemsPerCategory={editedItemsPerCategory}
+            onAddNewCategory={handleOnAddNewCategory}
           />
-        )}
-      </ul>
+        }
 
-      {
-        isEditMode && 
-        <CategoriesModal
-          categories={categories} 
-          editedItemsPerCategory={editedItemsPerCategory}
-          onAddNewCategory={handleOnAddNewCategory}
+        <ModalButtons 
+          isEditMode={isEditMode}
+          onCancelChanges={handleOnCancelChanges}
+          turnOnEditMode={() => setIsEditMode(true)}
         />
-      }
 
-      <ModalButtons 
-        isEditMode={isEditMode}
-        onCancelChanges={handleOnCancelChanges}
-        turnOnEditMode={() => setIsEditMode(true)}
-      />
-
-    </div>
+      </div>
+    </>
   )
 }
 

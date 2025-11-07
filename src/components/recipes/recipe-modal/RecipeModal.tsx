@@ -4,14 +4,25 @@ import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
 import ModalButtons from "../../shared/modal/ModalButtons";
+import ModalHeader from "../../shared/modal/ModalHeader";
 
 interface RecipeModalProps {
-  items: RecipeItem[];
-  categories: string[];
-  units: string[];
+  recipeName: string,
+  items: RecipeItem[],
+  categories: string[],
+  units: string[],
+  onClose: () => void,
 }
 
-function RecipeModal({items, categories, units}: RecipeModalProps) {
+function RecipeModal(props: RecipeModalProps) {
+
+  const {
+    recipeName, 
+    items,
+    categories, 
+    units,
+    onClose,
+  } = props;
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -79,45 +90,48 @@ function RecipeModal({items, categories, units}: RecipeModalProps) {
   }
 
   return (
-    <div className="bg-blue-200 p-4 text-sm sm:text-base">
-      <ul>
-        {editedItems.map( (item: RecipeItem, itemIdx) =>
+    <>
+      <ModalHeader title={recipeName} onClose={onClose}/>
 
-        isEditMode ? 
-          <RecipeEditRow
-            key={itemIdx}
-            {...handlers}
-            itemIdx={itemIdx}
-            units={units}
-            categories={categories}
-            item={item}
-          /> :
-          <RecipeRow
-            key={itemIdx}
-            itemIdx={itemIdx}
-            item={item}
-          />
-          
-        )}
-        {
-          isEditMode && 
-          <li className="pl-1 pb-1">
-            <div 
-              className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow"
-              onClick={handleOnAddItem}>
-              <PlusIcon />
-            </div>
-          </li>
-        }
-      </ul>
+      <div className="bg-blue-200 p-4 text-sm sm:text-base">
+        <ul>
+          {editedItems.map( (item: RecipeItem, itemIdx) =>
 
-      <ModalButtons 
-        isEditMode={isEditMode}
-        onCancelChanges={handleOnCancelChanges} 
-        turnOnEditMode={() => setIsEditMode(true)}
-      />
+          isEditMode ? 
+            <RecipeEditRow
+              key={itemIdx}
+              {...handlers}
+              itemIdx={itemIdx}
+              units={units}
+              categories={categories}
+              item={item}
+            /> :
+            <RecipeRow
+              key={itemIdx}
+              itemIdx={itemIdx}
+              item={item}
+            />
+            
+          )}
+          {
+            isEditMode && 
+            <li className="pl-1 pb-1">
+              <div 
+                className="w-7 bg-green-300 rounded hover:bg-green-400 cursor-pointer shadow"
+                onClick={handleOnAddItem}>
+                <PlusIcon />
+              </div>
+            </li>
+          }
+        </ul>
 
-    </div>
+        <ModalButtons 
+          isEditMode={isEditMode}
+          onCancelChanges={handleOnCancelChanges} 
+          turnOnEditMode={() => setIsEditMode(true)}
+        />
+     </div>
+    </>
   )
 }
 

@@ -80,15 +80,16 @@ function Recipes() {
       <Modal
         key={modalKey}
         ref={modalRef} 
-        title={currentOpenRecipeName} 
         onClose={handleOnClose}
       >
         {currentOpenRecipeName != null && 
           <RecipeModal 
             key={currentOpenRecipeName} 
+            recipeName={currentOpenRecipeName}
             items={findItemsOfSelctedRecipe(currentOpenRecipeName)} 
             units={units}
             categories={categories}
+            onClose={handleOnClose}
         />}
       </Modal>
 

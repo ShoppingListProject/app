@@ -80,13 +80,14 @@ function ShoppingLists() {
       <Modal
         key={modalKey}
         ref={modalRef} 
-        title={currentOpenListName} 
         onClose={handleOnClose}
       >
         {currentOpenListName != null && 
           <ShoppingListModal 
             key={currentOpenListName} 
+            onClose={handleOnClose}
             itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
+            shoppingListName={currentOpenListName}
             units={units}
             categories={categories}
           />}
