@@ -21,15 +21,15 @@ function Table({ headerName, rows, onClickItem }: TableProps) {
       </thead>
       <tbody>
           {rows.map( (row) =>
-            <React.Fragment key={row.name} >
+            <React.Fragment key={row.id} >
               <tr>
                 <td className="p-2 text-center">
-                    <button className="cursor-pointer p-2 focus:outline-none" onClick={() => onClickItem(row.name)}>{row.name}</button>
+                    <button className="cursor-pointer p-2 focus:outline-none" onClick={() => onClickItem(row.id)}>{row.name}</button>
                 </td>
                 <td className="p-2 text-center">{row.createdAt}</td>
                 <td className="p-2 text-center align-middle">
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-                      <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg flex-1" onClick={() => onClickItem(row.name)}>
+                      <button className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg flex-1" onClick={() => onClickItem(row.id)}>
                           <span className="hidden sm:inline focus:outline-none">Show</span>
                           <EyeIcon className="h-5 w-5 sm:hidden" />
                       </button>

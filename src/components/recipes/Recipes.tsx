@@ -3,7 +3,7 @@ import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
-import type { Recipe, RecipeItem } from "@shopping-list-project/sl-api-models";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 import { getPublicRecipes } from "../../api/receipes";
 import { getCategories } from "../../api/categories";
 import { getUnits } from "../../api/units";
@@ -15,7 +15,7 @@ import CreationButton from "../shared/CreationButton";
 function Recipes() {
 
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [currentOpenRecipeName, setCurrentOpenRecipeName] = useState<string | null>(null);
+  const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [units, setUnits] = useState<string[]>([]);
   const [modalKey, setModalKey] = useState(0);
@@ -45,6 +45,7 @@ function Recipes() {
       const creationDate = new Date(recipe.createdAt).toLocaleDateString();
 
       return {
+        id: recipe.recipeId,
         name: recipe.name,
         createdAt: creationDate
       }
@@ -52,14 +53,11 @@ function Recipes() {
     })
   }
 
-  function handleOnClickRecipe(name: string) {
-    setCurrentOpenRecipeName(name);
+  function handleOnClickRecipe(recipeId: string) {
+    const currentOpenRecipe: Recipe = recipes.find( recipe => recipe.recipeId === recipeId)!;
+    setCurrentOpenRecipe(currentOpenRecipe);
+    
     modalRef.current?.open();
-  }
-
-  // TODO: Seach items by IDs 
-  function findItemsOfSelctedRecipe(currentOpenRecipeName: string): RecipeItem[] {
-    return recipes.find( recipe => recipe.name === currentOpenRecipeName)!.items;
   }
 
   function handleOnClose() {
@@ -70,11 +68,6 @@ function Recipes() {
 
   function refreshModal() {
     setModalKey(prevKey => prevKey + 1)
-  }
-
-  function createNewEmptyRecipe() {
-    setCurrentOpenRecipeName("My New Recipe");
-    modalRef.current?.open();
   }
 
   return (
@@ -90,11 +83,10 @@ function Recipes() {
         ref={modalRef} 
         onClose={handleOnClose}
       >
-        {currentOpenRecipeName != null && 
+        {currentOpenRecipe != null && 
           <RecipeModal 
-            key={currentOpenRecipeName} 
-            recipeName={currentOpenRecipeName}
-            items={findItemsOfSelctedRecipe(currentOpenRecipeName)} 
+            key={currentOpenRecipe.recipeId} 
+            recipe={currentOpenRecipe}
             units={units}
             categories={categories}
             onClose={handleOnClose}

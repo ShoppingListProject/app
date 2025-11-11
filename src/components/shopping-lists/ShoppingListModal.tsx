@@ -1,13 +1,12 @@
 import { useState } from "react";
-import type { ShoppingListItem, CategorizedItems } from "@shopping-list-project/sl-api-models";
+import type { ShoppingListItem, CategorizedItems, ShoppingList } from "@shopping-list-project/sl-api-models";
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 import ModalButtons from "../shared/modal/ModalButtons";
 import ModalHeader from "../shared/modal/ModalHeader";
 
 interface ShoppingListModalProps {
-  itemsPerCategory: CategorizedItems[],
-  shoppingListName: string,
+  shoppingList: ShoppingList,
   units: string[],
   categories: string[],
   onClose: () => void,
@@ -16,12 +15,16 @@ interface ShoppingListModalProps {
 function ShoppingListModal(props: ShoppingListModalProps) {
 
   const {
-    itemsPerCategory, 
-    shoppingListName,
+    shoppingList,
     units, 
     categories,
     onClose
   } = props;
+
+  const {
+    itemsPerCategory, 
+    name: shoppingListName,
+  } = shoppingList;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
   const [editedListName, setEditedListName] = useState(shoppingListName);

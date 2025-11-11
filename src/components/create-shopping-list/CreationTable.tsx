@@ -17,7 +17,7 @@ function CreationTable({rows}: CreationTableProps) {
       </thead>
       <tbody>
         {rows.map( (row) => 
-          <React.Fragment key={row.name}>
+          <React.Fragment key={row.id}>
             <tr>
               <td className="p-2 text-center">
                   <button className="cursor-pointer p-2" >{row.name}</button>

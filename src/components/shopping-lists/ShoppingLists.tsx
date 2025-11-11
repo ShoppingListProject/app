@@ -14,8 +14,8 @@ import CreationButton from "../shared/CreationButton";
 
 function ShoppingLists() {
 
-  const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
-  const [currentOpenListName, setCurrentOpenListName] = useState<string | null>(null); 
+  const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);; 
+  const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
   const [units, setUnits] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [modalKey, setModalKey] = useState(0);
@@ -45,14 +45,17 @@ function ShoppingLists() {
       const creationDate = new Date(shoppingList.createdAt).toLocaleDateString();
 
       return {
+        id: shoppingList.shoppingListId,
         name: shoppingList.name,
         createdAt: creationDate
       }
     })
   }
 
-  function handleOnClickShoppingList(name: string) {
-    setCurrentOpenListName(name);
+  function handleOnClickShoppingList(shoppingListId: string) {
+    const currentOpenList = shoppingLists.find(list => list.shoppingListId === shoppingListId)!;
+    setCurrentOpenList(currentOpenList);
+
     modalRef.current?.open();
   }
 
@@ -84,12 +87,11 @@ function ShoppingLists() {
         ref={modalRef} 
         onClose={handleOnClose}
       >
-        {currentOpenListName != null && 
+        {currentOpenList != null && 
           <ShoppingListModal 
-            key={currentOpenListName} 
+            key={currentOpenList.shoppingListId} 
+            shoppingList={currentOpenList}
             onClose={handleOnClose}
-            itemsPerCategory={findItemsOfSelctedList(currentOpenListName)} 
-            shoppingListName={currentOpenListName}
             units={units}
             categories={categories}
           />}

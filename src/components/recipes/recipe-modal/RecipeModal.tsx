@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RecipeItem } from "@shopping-list-project/sl-api-models";
+import type { Recipe, RecipeItem } from "@shopping-list-project/sl-api-models";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
@@ -7,8 +7,7 @@ import ModalButtons from "../../shared/modal/ModalButtons";
 import ModalHeader from "../../shared/modal/ModalHeader";
 
 interface RecipeModalProps {
-  recipeName: string,
-  items: RecipeItem[],
+  recipe: Recipe
   categories: string[],
   units: string[],
   onClose: () => void,
@@ -17,12 +16,16 @@ interface RecipeModalProps {
 function RecipeModal(props: RecipeModalProps) {
 
   const {
-    recipeName, 
-    items,
     categories, 
     units,
     onClose,
+    recipe
   } = props;
+
+  const {
+    name: recipeName, 
+    items,
+  } = recipe
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
   const [editedRecipeName, setEditedRecipeName] = useState(recipeName);
