@@ -25,6 +25,7 @@ function RecipeModal(props: RecipeModalProps) {
   } = props;
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
+  const [editedRecipeName, setEditedRecipeName] = useState(recipeName);
   const [isEditMode, setIsEditMode] = useState(false);
 
   function handleOnChangeName(itemIdx: number, newName: string) {
@@ -79,6 +80,7 @@ function RecipeModal(props: RecipeModalProps) {
   function handleOnCancelChanges() {
     // Restore initial items
     setEditedItems([...items]);
+    setEditedRecipeName(recipeName);
     setIsEditMode(false);
   }
 
@@ -91,7 +93,7 @@ function RecipeModal(props: RecipeModalProps) {
 
   return (
     <>
-      <ModalHeader title={recipeName} onClose={onClose}/>
+      <ModalHeader title={editedRecipeName} onClose={onClose} onChangeTitle={setEditedRecipeName} isEditMode={isEditMode}/>
 
       <div className="bg-blue-200 p-4 text-sm sm:text-base">
         <ul>

@@ -24,6 +24,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   } = props;
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
+  const [editedListName, setEditedListName] = useState(shoppingListName);
   const [isEditMode, setIsEditMode] = useState(false);
 
   function handleOnChangeName(categoryIdx: number, itemIdx: number, newName: string) {
@@ -218,6 +219,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   function handleOnCancelChanges() {
     // Restore initial items
     setEditeditemsPerCategory(itemsPerCategory);
+    setEditedListName(shoppingListName);
     setIsEditMode(false);
   }
 
@@ -239,7 +241,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
 
   return (
     <>
-      <ModalHeader title={shoppingListName} onClose={onClose}/>
+      <ModalHeader title={editedListName} onClose={onClose} onChangeTitle={setEditedListName} isEditMode={isEditMode}/>
 
       <div className="bg-blue-200 p-4">
         <ul>
