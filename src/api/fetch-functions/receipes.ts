@@ -1,6 +1,6 @@
 import type { Recipe, RecipeBase } from "@shopping-list-project/sl-api-models";
-import { fetchWrapper, host } from "./utils/fetchWrapper";
-import mocks from "../mocks/mocks";
+import { fetchWrapper, host } from "../utils/fetchWrapper";
+import mocks from "../../mocks/mocks";
 
 const path = "recipes/";
 

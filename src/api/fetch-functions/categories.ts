@@ -1,4 +1,4 @@
-import { fetchWrapper, host } from "./utils/fetchWrapper";
+import { fetchWrapper, host } from "../utils/fetchWrapper";
 
 export async function getCategories(): Promise<string[]> {
 

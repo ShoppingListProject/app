@@ -1,42 +1,25 @@
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useRef, useState, type RefObject } from "react";
 import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
-import { getPublicRecipes } from "../../api/receipes";
-import { getCategories } from "../../api/categories";
-import { getUnits } from "../../api/units";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
 import CreationButton from "../shared/CreationButton";
+import { useFetchConstants } from "../../api/useFetchConstants";
+import { useFetchRecipes } from "../../api/useFetchRecipes";
 
 function Recipes() {
 
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const { categories, units} = useFetchConstants();
+  const { recipes } = useFetchRecipes();
+
   const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [units, setUnits] = useState<string[]>([]);
   const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
-
-  useEffect( () => {
-
-    getPublicRecipes()
-      .then(setRecipes)
-      .catch( err => console.error(err) )
-
-    getCategories()
-      .then(setCategories)
-      .catch( err => console.error(err) )
-
-    getUnits()
-      .then(setUnits)
-      .catch( err => console.error(err) )
-
-  }, [])
 
  function convertRecipesToTableRows(recipes: Recipe[]): TableRow[] {
     

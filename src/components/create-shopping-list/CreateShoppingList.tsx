@@ -5,7 +5,7 @@ import SearchInput from "../shared/table/SearchInput";
 import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
-import { getPublicRecipes } from "../../api/receipes";
+import { getPublicRecipes } from "../../api/fetch-functions/receipes";
 import type { CreationTableRow } from "../../models/tableModels";
 
 function CreateShoppingList() {

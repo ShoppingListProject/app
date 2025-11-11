@@ -3,13 +3,13 @@ import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
 import Pagination from "../shared/table/Pagination";
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { getShoppingLists } from "../../api/shoppingList";
-import { getUnits } from "../../api/units";
+import { getShoppingLists } from "../../api/fetch-functions/shoppingList";
+import { getUnits } from "../../api/fetch-functions/units";
 import type { CategorizedItems, ShoppingList } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
-import { getCategories } from "../../api/categories";
+import { getCategories } from "../../api/fetch-functions/categories";
 import CreationButton from "../shared/CreationButton";
 
 function ShoppingLists() {
