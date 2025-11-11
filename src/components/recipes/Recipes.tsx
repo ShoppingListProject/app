@@ -10,6 +10,7 @@ import { getUnits } from "../../api/units";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
+import CreationButton from "../shared/CreationButton";
 
 function Recipes() {
 
@@ -51,11 +52,12 @@ function Recipes() {
     })
   }
 
-  function handleOnClickItem(name: string) {
+  function handleOnClickRecipe(name: string) {
     setCurrentOpenRecipeName(name);
     modalRef.current?.open();
   }
 
+  // TODO: Seach items by IDs 
   function findItemsOfSelctedRecipe(currentOpenRecipeName: string): RecipeItem[] {
     return recipes.find( recipe => recipe.name === currentOpenRecipeName)!.items;
   }
@@ -70,12 +72,18 @@ function Recipes() {
     setModalKey(prevKey => prevKey + 1)
   }
 
+  function createNewEmptyRecipe() {
+    setCurrentOpenRecipeName("My New Recipe");
+    modalRef.current?.open();
+  }
+
   return (
     <PageContent title="Recipes">
 
       <SearchInput placeholder="Spaghetti" />
-      <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={handleOnClickItem} />
+      <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={handleOnClickRecipe} />
       <Pagination/>
+      <CreationButton text="Create Empty Recipe"/> 
 
       <Modal
         key={modalKey}

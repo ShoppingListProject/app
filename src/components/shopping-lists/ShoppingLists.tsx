@@ -10,6 +10,7 @@ import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
 import { getCategories } from "../../api/categories";
+import CreationButton from "../shared/CreationButton";
 
 function ShoppingLists() {
 
@@ -50,7 +51,7 @@ function ShoppingLists() {
     })
   }
 
-  function handleOnClickItem(name: string) {
+  function handleOnClickShoppingList(name: string) {
     setCurrentOpenListName(name);
     modalRef.current?.open();
   }
@@ -74,8 +75,9 @@ function ShoppingLists() {
     <PageContent title="Shopping Lists">
 
       <SearchInput placeholder="Weekend Shopping List" />
-      <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickItem}/>
+      <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickShoppingList}/>
       <Pagination/>
+      <CreationButton text="Create Empty Shopping List"/> 
 
       <Modal
         key={modalKey}
