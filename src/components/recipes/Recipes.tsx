@@ -44,13 +44,27 @@ function Recipes() {
   }
 
   function handleOnClose() {
-    modalRef.current?.close();
 
+    function refreshModal() {
+      setModalKey(prevKey => prevKey + 1)
+    }
+
+    modalRef.current?.close();
     refreshModal();
   }
 
-  function refreshModal() {
-    setModalKey(prevKey => prevKey + 1)
+  function createEmptyRecipe() {
+
+    const newEmptyRecipe: Recipe = {
+      name: "My New Recipe",
+      items: [],
+      recipeId: crypto.randomUUID(),
+      updatedAt: new Date(),
+      createdAt: new Date(),
+    }
+
+    setCurrentOpenRecipe(newEmptyRecipe);
+    modalRef.current?.open();
   }
 
   return (
@@ -59,7 +73,7 @@ function Recipes() {
       <SearchInput placeholder="Spaghetti" />
       <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={handleOnClickRecipe} />
       <Pagination/>
-      <CreationButton text="Create Empty Recipe"/> 
+      <CreationButton text="Create Empty Recipe" onClick={createEmptyRecipe}/> 
 
       <Modal
         key={modalKey}

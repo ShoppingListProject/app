@@ -14,7 +14,7 @@ import { useFetchConstants } from "../../api/useFetchConstants";
 function ShoppingLists() {
 
   const { categories, units} = useFetchConstants();
-  const {shoppingLists} = useFetchShoppingLists();
+  const { shoppingLists } = useFetchShoppingLists();
 
   const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
   const [modalKey, setModalKey] = useState(0);
@@ -43,14 +43,27 @@ function ShoppingLists() {
   }
 
   function handleOnClose() {
-    modalRef.current?.close();
 
-    // workaround to cancel all changes in ShoppingList component
+    function refreshModal() {
+      setModalKey(prevModalKey => prevModalKey + 1);
+    }
+
+    modalRef.current?.close();
     refreshModal();
   }
 
-  function refreshModal() {
-    setModalKey(prevModalKey => prevModalKey + 1);
+  function createEmptyShoppingList() {
+
+    const newEmptyShoppingList: ShoppingList = {
+      name: "My New Shopping List",
+      itemsPerCategory: [],
+      shoppingListId: crypto.randomUUID(),
+      updatedAt: new Date(),
+      createdAt: new Date(),
+    }
+
+    setCurrentOpenList(newEmptyShoppingList);
+    modalRef.current?.open();
   }
 
   return (
@@ -59,7 +72,7 @@ function ShoppingLists() {
       <SearchInput placeholder="Weekend Shopping List" />
       <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickShoppingList}/>
       <Pagination/>
-      <CreationButton text="Create Empty Shopping List"/> 
+      <CreationButton text="Create Empty Shopping List" onClick={createEmptyShoppingList}/> 
 
       <Modal
         key={modalKey}

@@ -19,7 +19,7 @@ function RecipeModal(props: RecipeModalProps) {
     categories, 
     units,
     onClose,
-    recipe
+    recipe,
   } = props;
 
   const {
