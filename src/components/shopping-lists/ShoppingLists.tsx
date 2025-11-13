@@ -3,7 +3,7 @@ import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
 import Pagination from "../shared/table/Pagination";
 import { useRef, useState, type RefObject } from "react";
-import type { CategorizedItems, ShoppingList } from "@shopping-list-project/sl-api-models";
+import type { ShoppingList } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";

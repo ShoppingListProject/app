@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPublicRecipes } from "./fetch-functions/receipes";
+import { getPublicRecipes, getRecipesForUser } from "./fetch-functions/receipes";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
 
 export function useFetchRecipes() {
@@ -10,8 +10,14 @@ export function useFetchRecipes() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const recipesData = await getPublicRecipes();
-        setRecipes(recipesData);
+
+        const [publicRecipes, userRecipes] = await Promise.all([
+          getPublicRecipes(),
+          getRecipesForUser(),
+        ]);
+
+        const allRecipes = publicRecipes.concat(userRecipes)
+        setRecipes(allRecipes);
 
       } catch (err: any) {
         console.error(err);
