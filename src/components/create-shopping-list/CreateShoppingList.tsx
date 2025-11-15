@@ -5,11 +5,11 @@ import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
 import type { CreationTableRow } from "../../models/tableModels";
-import { useFetchRecipes } from "../../api/useFetchRecipes";
+import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 
 function CreateShoppingList() {
 
-    const {recipes} = useFetchRecipes();
+    const {recipes} = useGetRecipes();
   
    function convertRecipesToTableRows(recipes: Recipe[]): CreationTableRow[] {
       

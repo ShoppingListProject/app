@@ -8,13 +8,13 @@ import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
 import CreationButton from "../shared/CreationButton";
-import { useFetchShoppingLists } from "../../api/useFetchShoppingLists";
-import { useFetchConstants } from "../../api/useFetchConstants";
+import { useGetConstants } from "../../api-hooks/useGetConstants";
+import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
 
 function ShoppingLists() {
 
-  const { categories, units} = useFetchConstants();
-  const { shoppingLists } = useFetchShoppingLists();
+  const { categories, units} = useGetConstants();
+  const { shoppingLists } = useGetShoppingLists();
 
   const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
   const [modalKey, setModalKey] = useState(0);

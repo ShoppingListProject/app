@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import type { ShoppingList } from "@shopping-list-project/sl-api-models";
 import { getShoppingLists } from "./fetch-functions/shoppingList";
 
-export function useFetchShoppingLists() {
+export function useGetShoppingLists() {
   const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

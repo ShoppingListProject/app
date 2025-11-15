@@ -3,21 +3,23 @@ import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
-import type { Recipe } from "@shopping-list-project/sl-api-models";
+import type { Recipe, RecipeBase } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
 import CreationButton from "../shared/CreationButton";
-import { useFetchConstants } from "../../api/useFetchConstants";
-import { useFetchRecipes } from "../../api/useFetchRecipes";
+import { useGetConstants } from "../../api-hooks/useGetConstants";
+import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 
 function Recipes() {
 
-  const { categories, units} = useFetchConstants();
-  const { recipes } = useFetchRecipes();
+  const { categories, units } = useGetConstants();
+  const { recipes } = useGetRecipes();
 
   const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
   const [modalKey, setModalKey] = useState(0);
+  const [doesCurrentOpenRecipeExist, setDoesCurrentOpenRecipeExist] = useState<boolean | null>(null);
+  const [isNecessaryToRefreshData, setIsNecessaryToRefreshData] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -40,6 +42,7 @@ function Recipes() {
     const currentOpenRecipe: Recipe = recipes.find( recipe => recipe.recipeId === recipeId)!;
     setCurrentOpenRecipe(currentOpenRecipe);
     
+    setDoesCurrentOpenRecipeExist(true);
     modalRef.current?.open();
   }
 
@@ -51,9 +54,16 @@ function Recipes() {
 
     modalRef.current?.close();
     refreshModal();
+    setDoesCurrentOpenRecipeExist(null);
+    
+    if(isNecessaryToRefreshData) {
+      // TODO refresh data here
+    }
+
+    setIsNecessaryToRefreshData(false);
   }
 
-  function createEmptyRecipe() {
+  function openEmptyRecipe() {
 
     const newEmptyRecipe: Recipe = {
       name: "My New Recipe",
@@ -63,8 +73,13 @@ function Recipes() {
       createdAt: new Date(),
     }
 
+    setDoesCurrentOpenRecipeExist(false);
     setCurrentOpenRecipe(newEmptyRecipe);
     modalRef.current?.open();
+  }
+
+  function handleOnSaveChanges() {
+    setIsNecessaryToRefreshData(true);
   }
 
   return (
@@ -73,7 +88,7 @@ function Recipes() {
       <SearchInput placeholder="Spaghetti" />
       <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={handleOnClickRecipe} />
       <Pagination/>
-      <CreationButton text="Create Empty Recipe" onClick={createEmptyRecipe}/> 
+      <CreationButton text="Create Empty Recipe" onClick={openEmptyRecipe}/> 
 
       <Modal
         key={modalKey}
@@ -87,6 +102,8 @@ function Recipes() {
             units={units}
             categories={categories}
             onClose={handleOnClose}
+            onSaveChanges={handleOnSaveChanges}
+            doesRecipeExist={doesCurrentOpenRecipeExist!}
         />}
       </Modal>
 

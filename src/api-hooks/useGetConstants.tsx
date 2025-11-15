@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getCategories } from "./fetch-functions/categories";
 import { getUnits } from "./fetch-functions/units";
 
-export function useFetchConstants() {
+export function useGetConstants() {
 
   const [categories, setCategories] = useState<string[]>([]);
   const [units, setUnits] = useState<string[]>([]);

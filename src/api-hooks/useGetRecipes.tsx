@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPublicRecipes, getRecipesForUser } from "./fetch-functions/receipes";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
 
-export function useFetchRecipes() {
+export function useGetRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -1,25 +1,30 @@
 import { useState } from "react";
-import type { Recipe, RecipeItem } from "@shopping-list-project/sl-api-models";
+import type { Recipe, RecipeBase, RecipeItem } from "@shopping-list-project/sl-api-models";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
 import ModalButtons from "../../shared/modal/ModalButtons";
 import ModalHeader from "../../shared/modal/ModalHeader";
+import useSaveRecipe from "../../../api-hooks/useSaveRecipe";
 
 interface RecipeModalProps {
   recipe: Recipe
   categories: string[],
   units: string[],
   onClose: () => void,
+  onSaveChanges: (isNecessaryToRefreshData: boolean) => void,
+  doesRecipeExist: boolean,
 }
 
 function RecipeModal(props: RecipeModalProps) {
 
   const {
+    recipe,
     categories, 
     units,
     onClose,
-    recipe,
+    onSaveChanges,
+    doesRecipeExist,
   } = props;
 
   const {
@@ -27,6 +32,7 @@ function RecipeModal(props: RecipeModalProps) {
     items,
   } = recipe
 
+  const { saveExistingRecipe, saveNewRecipe } = useSaveRecipe();
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
   const [editedRecipeName, setEditedRecipeName] = useState(recipeName);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -87,6 +93,36 @@ function RecipeModal(props: RecipeModalProps) {
     setIsEditMode(false);
   }
 
+  async function handleOnSaveChanges() {
+
+    console.log("It works here");
+
+    async function updateExistingRecipe() {
+      
+    } 
+
+    async function createNewRecipe() {
+
+      const newRecipe: RecipeBase = {
+        name: editedRecipeName,
+        items: editedItems,
+      }
+
+      const recipe: Recipe | null = await saveNewRecipe(newRecipe)
+      
+      if(recipe !== null) {
+        onSaveChanges(true);
+      }
+    }
+
+    if(doesRecipeExist) {
+      updateExistingRecipe()
+    } else {
+      createNewRecipe()
+    }
+
+  }
+
   const handlers = {
     handleOnChangeName,
     handleOnChangeQuantity,
@@ -134,6 +170,7 @@ function RecipeModal(props: RecipeModalProps) {
           isEditMode={isEditMode}
           onCancelChanges={handleOnCancelChanges} 
           turnOnEditMode={() => setIsEditMode(true)}
+          onSaveChanges={handleOnSaveChanges}
         />
      </div>
     </>
