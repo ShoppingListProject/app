@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Recipe, RecipeBase, RecipeItem } from "@shopping-list-project/sl-api-models";
+import type { Recipe, RecipeCreate, RecipeItem } from "@shopping-list-project/sl-api-models";
 import RecipeEditRow from "./RecipeEditRow";
 import RecipeRow from "./RecipeRow";
 import { PlusIcon } from "@heroicons/react/16/solid";
@@ -95,15 +95,12 @@ function RecipeModal(props: RecipeModalProps) {
 
   async function handleOnSaveChanges() {
 
-    console.log("It works here");
-
     async function updateExistingRecipe() {
-      
     } 
 
     async function createNewRecipe() {
 
-      const newRecipe: RecipeBase = {
+      const newRecipe: RecipeCreate = {
         name: editedRecipeName,
         items: editedItems,
       }

@@ -1,4 +1,4 @@
-import type { Recipe, RecipeBase } from "@shopping-list-project/sl-api-models";
+import type { Recipe, RecipeCreate, RecipeUpdate } from "@shopping-list-project/sl-api-models";
 import { useState } from "react";
 import { createNewRecipe, updateExistingRecipe } from "./fetch-functions/receipes";
 
@@ -7,7 +7,7 @@ function useSaveRecipe() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function saveExistingRecipe(recipe: Recipe): Promise<Recipe | null> {
+  async function saveExistingRecipe(recipe: RecipeUpdate): Promise<Recipe | null> {
     
     try {
       setLoading(true);
@@ -27,7 +27,7 @@ function useSaveRecipe() {
     }
   }
 
-  async function saveNewRecipe(newRecipe: RecipeBase): Promise<Recipe | null> {
+  async function saveNewRecipe(newRecipe: RecipeCreate): Promise<Recipe | null> {
     
     try {
       setLoading(true);

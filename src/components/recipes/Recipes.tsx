@@ -3,7 +3,7 @@ import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
-import type { Recipe, RecipeBase } from "@shopping-list-project/sl-api-models";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
