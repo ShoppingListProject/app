@@ -7,22 +7,24 @@ export function useGetShoppingLists() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const shoppingLists = await getShoppingLists();
-        setShoppingLists(shoppingLists);
+  async function retrieveShoppingLists() {
+    try {
+      
+      const shoppingLists = await getShoppingLists();
+      setShoppingLists(shoppingLists);
 
-      } catch (err: any) {
-        console.error(err);
-        setError(err.message || "Failed to load data");
-      } finally {
-        setLoading(false);
-      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Failed to load data");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchData();
+  useEffect(() => {
+
+    retrieveShoppingLists();
   }, []);
 
-  return { shoppingLists, loading, error };
+  return { shoppingLists, retrieveShoppingLists, loading, error };
 }

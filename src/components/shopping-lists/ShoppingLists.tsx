@@ -14,11 +14,12 @@ import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
 function ShoppingLists() {
 
   const { categories, units} = useGetConstants();
-  const { shoppingLists } = useGetShoppingLists();
+  const { shoppingLists, retrieveShoppingLists } = useGetShoppingLists();
 
   const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
   const [doesCurrentOpenListExist, setDoesCurrentOpenListExist] = useState<boolean | null>(null);
   const [modalKey, setModalKey] = useState(0);
+  const [isNecessaryToRefreshData, setIsNecessaryToRefreshData] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -53,6 +54,12 @@ function ShoppingLists() {
     modalRef.current?.close();
     refreshModal();
     setDoesCurrentOpenListExist(null);
+
+    if(isNecessaryToRefreshData) {
+      retrieveShoppingLists();
+    }
+
+    setIsNecessaryToRefreshData(false);
   }
 
   function openEmptyShoppingList() {
@@ -71,7 +78,7 @@ function ShoppingLists() {
   }
 
   function handleOnSaveChanges() {
-    // TODO Refresh data after saving changes
+    setIsNecessaryToRefreshData(true);
   }
 
   return (
