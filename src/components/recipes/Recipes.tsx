@@ -87,8 +87,9 @@ function Recipes() {
 
     const recipe: Recipe | null = await removeRecipe(recipeId);
 
-    if(recipe != null)
+    if(recipe != null) {
       refreshData();
+    }
   }
 
   function refreshData() {

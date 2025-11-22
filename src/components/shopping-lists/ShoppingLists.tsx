@@ -10,11 +10,13 @@ import ShoppingListModal from "./ShoppingListModal";
 import CreationButton from "../shared/CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
+import useDeleteShoppingList from "../../api-hooks/useDeleteShoppingList";
 
 function ShoppingLists() {
 
   const { categories, units} = useGetConstants();
   const { shoppingLists, retrieveShoppingLists } = useGetShoppingLists();
+  const { removeShoppingList } = useDeleteShoppingList();
 
   const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
   const [doesCurrentOpenListExist, setDoesCurrentOpenListExist] = useState<boolean | null>(null);
@@ -56,7 +58,7 @@ function ShoppingLists() {
     setDoesCurrentOpenListExist(null);
 
     if(isNecessaryToRefreshData) {
-      retrieveShoppingLists();
+      refreshData();
     }
 
     setIsNecessaryToRefreshData(false);
@@ -81,11 +83,29 @@ function ShoppingLists() {
     setIsNecessaryToRefreshData(true);
   }
 
+  async function handleOnDelete(shoppingListId: string) {
+  
+    const shoppingList: ShoppingList | null = await removeShoppingList(shoppingListId);
+
+    if(shoppingList != null) {
+      refreshData();
+    }
+  }
+
+  function refreshData() {
+    retrieveShoppingLists();
+  }
+
   return (
     <PageContent title="Shopping Lists">
 
       <SearchInput placeholder="Weekend Shopping List" />
-      <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickShoppingList}/>
+      <Table
+        headerName="List Name" 
+        rows={convertShoppingListsToTableRows(shoppingLists)}
+        onClickItem={handleOnClickShoppingList}
+        onDeleteItem={handleOnDelete}
+      />
       <Pagination/>
       <CreationButton text="Create Empty Shopping List" onClick={openEmptyShoppingList}/> 
 

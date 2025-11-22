@@ -27,3 +27,11 @@ export async function updateExistingShoppingList(shoppingList: ShoppingListUpdat
 
   return fetchWrapper<ShoppingList>({url, method, data});
 }
+
+export async function deleteShoppingList(shoppingListId: string): Promise<ShoppingList> {
+  
+  const url = host + path + mocks.userId + "/" + shoppingListId;
+  const method = "DELETE";
+
+  return fetchWrapper<ShoppingList>({url, method});
+}
