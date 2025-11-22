@@ -1,3 +1,4 @@
+import { MinusIcon } from "@heroicons/react/16/solid";
 import type { RecipeItem } from "@shopping-list-project/sl-api-models";
 
 interface RecipeEditRowProps {
@@ -8,7 +9,8 @@ interface RecipeEditRowProps {
     handleOnChangeName: (itemIdx: number, newName: string) => void,
     handleOnChangeQuantity: (itemIdx: number, newValue: string) => void,
     handleOnChangeUnit: (itemIdx: number, newValue: string) => void,
-    handleOnChangeCategory: (itemIdx: number, newCategory: string) => void
+    handleOnChangeCategory: (itemIdx: number, newCategory: string) => void,
+    handleOnRemoveItem: (itemIdx: number) => void,
 }
 
 function RecipeEditRow(props: RecipeEditRowProps) {
@@ -21,11 +23,18 @@ function RecipeEditRow(props: RecipeEditRowProps) {
     handleOnChangeName,
     handleOnChangeQuantity,
     handleOnChangeUnit,
-    handleOnChangeCategory
+    handleOnChangeCategory,
+    handleOnRemoveItem,
   } = props;
 
   return (
     <li key={itemIdx} className="flex p-2 rounded items-center justify-between gap-2">
+
+      <button 
+        className="w-5 h-5 bg-red-300 hover:bg-red-400 rounded cursor-pointer"
+        onClick={() => handleOnRemoveItem(itemIdx)}>
+          <MinusIcon />
+      </button>
 
       <div className="flex w-40 sm:w-auto">
         <span>{`${itemIdx + 1}.`}</span>

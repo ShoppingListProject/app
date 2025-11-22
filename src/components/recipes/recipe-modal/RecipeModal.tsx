@@ -40,7 +40,7 @@ function RecipeModal(props: RecipeModalProps) {
 
   function handleOnChangeName(itemIdx: number, newName: string) {
     setEditedItems(prevItems => {
-      const updatedItems = [...prevItems];
+      const updatedItems: RecipeItem[] = [...prevItems];
       updatedItems[itemIdx] = {...updatedItems[itemIdx], name: newName};
       return updatedItems;
     });
@@ -48,7 +48,7 @@ function RecipeModal(props: RecipeModalProps) {
 
   function handleOnChangeQuantity(itemIdx: number, newQuantity: string) {
     setEditedItems(prevItems => {
-      const updatedItems = [...prevItems];
+      const updatedItems: RecipeItem[] = [...prevItems];
       updatedItems[itemIdx] = {...updatedItems[itemIdx], quantity: parseFloat(newQuantity)};
       return updatedItems;
     })
@@ -56,7 +56,7 @@ function RecipeModal(props: RecipeModalProps) {
 
   function handleOnChangeUnit(itemIdx: number, newUnit: string) {
     setEditedItems(prevItems => {
-      const updatedItems = [...prevItems];
+      const updatedItems: RecipeItem[] = [...prevItems];
       updatedItems[itemIdx] = {...updatedItems[itemIdx], unit: newUnit};
       return updatedItems;
     })
@@ -64,8 +64,16 @@ function RecipeModal(props: RecipeModalProps) {
 
   function handleOnChangeCategory(itemIdx: number, newCategory: string) {
     setEditedItems(prevItems => {
-      const updatedItems = [...prevItems];
+      const updatedItems: RecipeItem[] = [...prevItems];
       updatedItems[itemIdx] = {...updatedItems[itemIdx], category: newCategory};
+      return updatedItems;
+    })
+  }
+
+  function handleOnRemoveItem(itemIdx: number) {
+    setEditedItems(prevItems => {
+      const updatedItems: RecipeItem[] = [...prevItems];
+      updatedItems.splice(itemIdx, 1);
       return updatedItems;
     })
   }
@@ -138,7 +146,8 @@ function RecipeModal(props: RecipeModalProps) {
     handleOnChangeName,
     handleOnChangeQuantity,
     handleOnChangeCategory,
-    handleOnChangeUnit
+    handleOnChangeUnit,
+    handleOnRemoveItem,
   }
 
   return (
