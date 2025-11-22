@@ -25,7 +25,7 @@ function Recipes() {
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
- function convertRecipesToTableRows(recipes: Recipe[]): TableRow[] {
+  function convertRecipesToTableRows(recipes: Recipe[]): TableRow[] {
     
     return recipes.map( (recipe) => {
 
@@ -56,6 +56,7 @@ function Recipes() {
     modalRef.current?.close();
     refreshModal();
     setDoesCurrentOpenRecipeExist(null);
+    setCurrentOpenRecipe(null);
 
     if(isNecessaryToRefreshData) {
       refreshData();
