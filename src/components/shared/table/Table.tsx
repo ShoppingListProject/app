@@ -5,10 +5,11 @@ import React from "react";
 interface TableProps {
   headerName: string;
   rows: TableRow[];
-  onClickItem: (name: string) => void;
+  onClickItem: (id: string) => void;
+  onDeleteItem: (id: string) => void;
 }
 
-function Table({ headerName, rows, onClickItem }: TableProps) {
+function Table({ headerName, rows, onClickItem, onDeleteItem }: TableProps) {
 
   return (
     <table>
@@ -33,7 +34,7 @@ function Table({ headerName, rows, onClickItem }: TableProps) {
                           <span className="hidden md:inline focus:outline-none">Show</span>
                           <EyeIcon className="h-5 w-5 mx-2 md:m-0 md:hidden" />
                       </button>
-                      <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer shadow-lg flex-1 flex justify-center">
+                      <button className="bg-red-300 p-1 rounded hover:bg-red-400 block cursor-pointer shadow-lg flex-1 flex justify-center" onClick={() => onDeleteItem(row.id)}>
                           <span className="hidden md:inline" >Delete</span>
                           <TrashIcon className="h-5 w-5 mx-2 md:m-0 md:hidden" />
                       </button>

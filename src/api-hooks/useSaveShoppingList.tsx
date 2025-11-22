@@ -17,7 +17,7 @@ function useSaveShoppingList() {
     } catch(err: any) {
 
       console.error(err);
-      setError(err.message || "Failed to load data");
+      setError(err.message);
       
       return null;
 
@@ -37,7 +37,7 @@ function useSaveShoppingList() {
     } catch(err: any) {
 
       console.error(err);
-      setError(err.message || "Failed to load data");
+      setError(err.message);
       
       return null;
 

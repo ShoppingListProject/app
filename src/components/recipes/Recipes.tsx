@@ -10,11 +10,13 @@ import RecipeModal from "./recipe-modal/RecipeModal";
 import CreationButton from "../shared/CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
+import useDeleteRecipe from "../../api-hooks/useDeleteRecipe";
 
 function Recipes() {
 
   const { categories, units } = useGetConstants();
   const { recipes, getRecipes } = useGetRecipes();
+  const { removeRecipe } = useDeleteRecipe();
 
   const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
   const [modalKey, setModalKey] = useState(0);
@@ -56,7 +58,7 @@ function Recipes() {
     setDoesCurrentOpenRecipeExist(null);
 
     if(isNecessaryToRefreshData) {
-      getRecipes();
+      refreshData();
     }
 
     setIsNecessaryToRefreshData(false);
@@ -81,11 +83,28 @@ function Recipes() {
     setIsNecessaryToRefreshData(true);
   }
 
+  async function handleOnDelete(recipeId: string) {
+
+    const recipe: Recipe | null = await removeRecipe(recipeId);
+
+    if(recipe != null)
+      refreshData();
+  }
+
+  function refreshData() {
+    getRecipes();
+  }
+
   return (
     <PageContent title="Recipes">
 
       <SearchInput placeholder="Spaghetti" />
-      <Table headerName="Recipe Name" rows={convertRecipesToTableRows(recipes)} onClickItem={handleOnClickRecipe} />
+      <Table 
+        headerName="Recipe Name" 
+        rows={convertRecipesToTableRows(recipes)} 
+        onClickItem={handleOnClickRecipe} 
+        onDeleteItem={handleOnDelete}
+      />
       <Pagination/>
       <CreationButton text="Create Empty Recipe" onClick={openEmptyRecipe}/> 
 

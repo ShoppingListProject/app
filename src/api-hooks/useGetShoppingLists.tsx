@@ -15,7 +15,7 @@ export function useGetShoppingLists() {
 
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Failed to load data");
+      setError(err.message);
     } finally {
       setLoading(false);
     }

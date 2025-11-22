@@ -18,7 +18,7 @@ function useSaveRecipe() {
     } catch(err: any) {
 
       console.error(err);
-      setError(err.message || "Failed to load data");
+      setError(err.message);
       
       return null;
 
@@ -38,7 +38,7 @@ function useSaveRecipe() {
     } catch(err: any) {
 
       console.error(err);
-      setError(err.message || "Failed to load data");
+      setError(err.message);
       
       return null;
 

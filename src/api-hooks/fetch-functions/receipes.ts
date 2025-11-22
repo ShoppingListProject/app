@@ -31,3 +31,10 @@ export async function updateExistingRecipe(recipe: RecipeUpdate): Promise<Recipe
 
   return fetchWrapper<Recipe>({url, method, data});
 }
+
+export async function deleteRecipe(recipeId: string): Promise<Recipe> {
+  const url = host + path + mocks.userId + "/" + recipeId;
+  const method = "DELETE";
+
+  return fetchWrapper<Recipe>({url, method});
+}
