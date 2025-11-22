@@ -11,6 +11,7 @@ import CreationButton from "../shared/CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 import useDeleteRecipe from "../../api-hooks/useDeleteRecipe";
+import type { recipeState } from "../../models/states";
 
 function Recipes() {
 
@@ -18,9 +19,8 @@ function Recipes() {
   const { recipes, getRecipes } = useGetRecipes();
   const { removeRecipe } = useDeleteRecipe();
 
-  const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
+  const [recipeState, setRecipeState] = useState<recipeState>({currentOpenRecipe: null, doesCurrentOpenRecipeExist: null});
   const [modalKey, setModalKey] = useState(0);
-  const [doesCurrentOpenRecipeExist, setDoesCurrentOpenRecipeExist] = useState<boolean | null>(null);
   const [isNecessaryToRefreshData, setIsNecessaryToRefreshData] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -41,9 +41,8 @@ function Recipes() {
 
   function handleOnClickRecipe(recipeId: string) {
     const currentOpenRecipe: Recipe = recipes.find( recipe => recipe.recipeId === recipeId)!;
-    setCurrentOpenRecipe(currentOpenRecipe);
-    
-    setDoesCurrentOpenRecipeExist(true);
+    setRecipeState({currentOpenRecipe, doesCurrentOpenRecipeExist: true})
+  
     modalRef.current?.open();
   }
 
@@ -55,8 +54,7 @@ function Recipes() {
 
     modalRef.current?.close();
     refreshModal();
-    setDoesCurrentOpenRecipeExist(null);
-    setCurrentOpenRecipe(null);
+    setRecipeState({currentOpenRecipe: null, doesCurrentOpenRecipeExist: null})
 
     if(isNecessaryToRefreshData) {
       refreshData();
@@ -75,8 +73,7 @@ function Recipes() {
       createdAt: new Date(),
     }
 
-    setDoesCurrentOpenRecipeExist(false);
-    setCurrentOpenRecipe(newEmptyRecipe);
+    setRecipeState({currentOpenRecipe: newEmptyRecipe, doesCurrentOpenRecipeExist: false})
     modalRef.current?.open();
   }
 
@@ -115,15 +112,15 @@ function Recipes() {
         ref={modalRef} 
         onClose={handleOnClose}
       >
-        {currentOpenRecipe != null && 
+        {recipeState.currentOpenRecipe != null && 
           <RecipeModal 
-            key={currentOpenRecipe.recipeId} 
-            recipe={currentOpenRecipe}
+            key={recipeState.currentOpenRecipe.recipeId} 
+            recipe={recipeState.currentOpenRecipe}
             units={units}
             categories={categories}
             onClose={handleOnClose}
             onSaveChanges={handleOnSaveChanges}
-            doesRecipeExist={doesCurrentOpenRecipeExist!}
+            doesRecipeExist={recipeState.doesCurrentOpenRecipeExist!}
         />}
       </Modal>
 

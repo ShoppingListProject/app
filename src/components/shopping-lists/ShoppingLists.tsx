@@ -11,6 +11,7 @@ import CreationButton from "../shared/CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
 import useDeleteShoppingList from "../../api-hooks/useDeleteShoppingList";
+import type { shoppingListState } from "../../models/states";
 
 function ShoppingLists() {
 
@@ -18,8 +19,7 @@ function ShoppingLists() {
   const { shoppingLists, retrieveShoppingLists } = useGetShoppingLists();
   const { removeShoppingList } = useDeleteShoppingList();
 
-  const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
-  const [doesCurrentOpenListExist, setDoesCurrentOpenListExist] = useState<boolean | null>(null);
+  const [shoppingListState, setShoppingListState] = useState<shoppingListState>({currentOpenList: null, doesCurrentOpenListExist: null})
   const [modalKey, setModalKey] = useState(0);
   const [isNecessaryToRefreshData, setIsNecessaryToRefreshData] = useState(false);
 
@@ -41,9 +41,8 @@ function ShoppingLists() {
 
   function handleOnClickShoppingList(shoppingListId: string) {
     const currentOpenList = shoppingLists.find(list => list.shoppingListId === shoppingListId)!;
-    setCurrentOpenList(currentOpenList);
+    setShoppingListState({currentOpenList, doesCurrentOpenListExist: true});
 
-    setDoesCurrentOpenListExist(true);
     modalRef.current?.open();
   }
 
@@ -55,8 +54,7 @@ function ShoppingLists() {
 
     modalRef.current?.close();
     refreshModal();
-    setDoesCurrentOpenListExist(null);
-    setCurrentOpenList(null);
+    setShoppingListState({currentOpenList: null, doesCurrentOpenListExist: null})
 
     if(isNecessaryToRefreshData) {
       refreshData();
@@ -75,8 +73,7 @@ function ShoppingLists() {
       createdAt: new Date(),
     }
 
-    setDoesCurrentOpenListExist(false);
-    setCurrentOpenList(newEmptyShoppingList);
+    setShoppingListState({currentOpenList: newEmptyShoppingList, doesCurrentOpenListExist: false})
     modalRef.current?.open();
   }
 
@@ -115,15 +112,15 @@ function ShoppingLists() {
         ref={modalRef} 
         onClose={handleOnClose}
       >
-        {currentOpenList != null && 
+        {shoppingListState.currentOpenList != null && 
           <ShoppingListModal 
-            key={currentOpenList.shoppingListId} 
-            shoppingList={currentOpenList}
+            key={shoppingListState.currentOpenList.shoppingListId} 
+            shoppingList={shoppingListState.currentOpenList}
             units={units}
             categories={categories}
             onClose={handleOnClose}
             onSaveChanges={handleOnSaveChanges}
-            doesShoppingListExists={doesCurrentOpenListExist!}
+            doesShoppingListExists={shoppingListState.doesCurrentOpenListExist!}
           />}
       </Modal>
     </PageContent>
