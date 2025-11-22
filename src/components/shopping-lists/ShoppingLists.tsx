@@ -56,6 +56,7 @@ function ShoppingLists() {
     modalRef.current?.close();
     refreshModal();
     setDoesCurrentOpenListExist(null);
+    setCurrentOpenList(null);
 
     if(isNecessaryToRefreshData) {
       refreshData();

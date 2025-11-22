@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ShoppingListItem, CategorizedItems, ShoppingList, ShoppingListCreate } from "@shopping-list-project/sl-api-models";
+import type { ShoppingListItem, CategorizedItems, ShoppingList, ShoppingListCreate, ShoppingListUpdate } from "@shopping-list-project/sl-api-models";
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 import ModalButtons from "../shared/modal/ModalButtons";
@@ -245,6 +245,18 @@ function ShoppingListModal(props: ShoppingListModalProps) {
   function handleOnSaveChanges() {
 
     async function updateExistingShoppingList() {
+
+      const updatedListToSave: ShoppingListUpdate = {
+        name: editedListName,
+        itemsPerCategory: editedItemsPerCategory,
+        shoppingListId: shoppingList.shoppingListId,
+      };
+
+      const updatedShoppingList: ShoppingList | null = await saveExistingShoppingList(updatedListToSave);
+
+      if(updatedShoppingList !== null) {
+        onSaveChanges();
+      }
     } 
 
     async function createNewShoppingList() {
