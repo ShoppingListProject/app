@@ -25,8 +25,10 @@ function Modal({children, ref, onClose}: ModalProps) {
       const dialog = dialogRef.current;
 
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') 
+        if (event.key === 'Escape') {
+          event.preventDefault();
           onClose();
+        }
       };
 
       if (dialog) {
@@ -38,7 +40,7 @@ function Modal({children, ref, onClose}: ModalProps) {
           dialog.removeEventListener('keydown', handleKeyDown);
         }
       };
-  }, []);
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     <dialog ref={dialogRef} className="rounded-xl mx-auto my-auto bg-blue-100">

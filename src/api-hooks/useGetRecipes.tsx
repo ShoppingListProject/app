@@ -7,28 +7,28 @@ export function useGetRecipes() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
+  async function getRecipes() {
+    try {
 
-        const [publicRecipes, userRecipes] = await Promise.all([
-          getPublicRecipes(),
-          getRecipesForUser(),
-        ]);
+      const [publicRecipes, userRecipes] = await Promise.all([
+        getPublicRecipes(),
+        getRecipesForUser(),
+      ]);
 
-        const allRecipes = publicRecipes.concat(userRecipes)
-        setRecipes(allRecipes);
+      const allRecipes = publicRecipes.concat(userRecipes)
+      setRecipes(allRecipes);
 
-      } catch (err: any) {
-        console.error(err);
-        setError(err.message || "Failed to load data");
-      } finally {
-        setLoading(false);
-      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Failed to load data");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchData();
+  useEffect(() => {
+    getRecipes();
   }, []);
 
-  return { recipes, loading, error };
+  return { recipes, getRecipes, loading, error };
 }

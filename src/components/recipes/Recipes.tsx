@@ -14,7 +14,7 @@ import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 function Recipes() {
 
   const { categories, units } = useGetConstants();
-  const { recipes } = useGetRecipes();
+  const { recipes, getRecipes } = useGetRecipes();
 
   const [currentOpenRecipe, setCurrentOpenRecipe] = useState<Recipe | null>(null);
   const [modalKey, setModalKey] = useState(0);
@@ -34,7 +34,6 @@ function Recipes() {
         name: recipe.name,
         createdAt: creationDate
       }
-
     })
   }
 
@@ -55,9 +54,9 @@ function Recipes() {
     modalRef.current?.close();
     refreshModal();
     setDoesCurrentOpenRecipeExist(null);
-    
+
     if(isNecessaryToRefreshData) {
-      // TODO refresh data here
+      getRecipes();
     }
 
     setIsNecessaryToRefreshData(false);
