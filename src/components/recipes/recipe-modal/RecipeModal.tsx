@@ -130,7 +130,8 @@ function RecipeModal(props: RecipeModalProps) {
     } else {
       createNewRecipe()
     }
-
+    
+    setIsEditMode(false);
   }
 
   const handlers = {

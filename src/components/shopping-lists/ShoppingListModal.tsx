@@ -278,6 +278,8 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     } else {
       createNewShoppingList()
     }
+
+    setIsEditMode(false);
   }
 
   const handlers = {
