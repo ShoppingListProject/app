@@ -77,8 +77,9 @@ function ShoppingLists() {
     modalRef.current?.open();
   }
 
-  function handleOnSaveChanges() {
+  function handleOnSaveChanges(shoppingList: ShoppingList) {
     setIsNecessaryToRefreshData(true);
+    setShoppingListState({currentOpenList: shoppingList, doesCurrentOpenListExist: true});
   }
 
   async function handleOnDelete(shoppingListId: string) {

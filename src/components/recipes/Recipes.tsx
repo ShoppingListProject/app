@@ -77,8 +77,9 @@ function Recipes() {
     modalRef.current?.open();
   }
 
-  function handleOnSaveChanges() {
+  function handleOnSaveChanges(recipe: Recipe) {
     setIsNecessaryToRefreshData(true);
+    setRecipeState({currentOpenRecipe: recipe, doesCurrentOpenRecipeExist: true})
   }
 
   async function handleOnDelete(recipeId: string) {

@@ -11,7 +11,7 @@ interface ShoppingListModalProps {
   units: string[],
   categories: string[],
   onClose: () => void,
-  onSaveChanges: () => void,
+  onSaveChanges: (shoppingList: ShoppingList) => void,
   doesShoppingListExists: boolean,
 }
 
@@ -255,7 +255,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
       const updatedShoppingList: ShoppingList | null = await saveExistingShoppingList(updatedListToSave);
 
       if(updatedShoppingList !== null) {
-        onSaveChanges();
+        onSaveChanges(updatedShoppingList);
       }
     } 
 
@@ -269,7 +269,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
       const shoppingList: ShoppingList | null = await saveNewShoppingList(newShoppingList);
        
       if(shoppingList !== null) {
-        onSaveChanges();
+        onSaveChanges(shoppingList);
       }
     }
 

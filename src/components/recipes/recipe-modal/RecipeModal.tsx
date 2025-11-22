@@ -12,7 +12,7 @@ interface RecipeModalProps {
   categories: string[],
   units: string[],
   onClose: () => void,
-  onSaveChanges: () => void,
+  onSaveChanges: (recipe: Recipe) => void,
   doesRecipeExist: boolean,
 }
 
@@ -107,7 +107,7 @@ function RecipeModal(props: RecipeModalProps) {
       const updatedRecipe: Recipe | null = await saveExistingRecipe(updatedRecipeToSave);
 
       if(updatedRecipe !== null) {
-        onSaveChanges();
+        onSaveChanges(updatedRecipe);
       }
     } 
 
@@ -121,7 +121,7 @@ function RecipeModal(props: RecipeModalProps) {
       const newRecipe: Recipe | null = await saveNewRecipe(newRecipeToSave);
       
       if(newRecipe !== null) {
-        onSaveChanges();
+        onSaveChanges(newRecipe);
       }
     }
 
@@ -130,7 +130,7 @@ function RecipeModal(props: RecipeModalProps) {
     } else {
       createNewRecipe()
     }
-    
+
     setIsEditMode(false);
   }
 
