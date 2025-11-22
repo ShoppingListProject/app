@@ -12,7 +12,7 @@ interface RecipeModalProps {
   categories: string[],
   units: string[],
   onClose: () => void,
-  onSaveChanges: (isNecessaryToRefreshData: boolean) => void,
+  onSaveChanges: () => void,
   doesRecipeExist: boolean,
 }
 
@@ -33,6 +33,7 @@ function RecipeModal(props: RecipeModalProps) {
   } = recipe
 
   const { saveExistingRecipe, saveNewRecipe } = useSaveRecipe();
+
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
   const [editedRecipeName, setEditedRecipeName] = useState(recipeName);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -108,7 +109,7 @@ function RecipeModal(props: RecipeModalProps) {
       const recipe: Recipe | null = await saveNewRecipe(newRecipe)
       
       if(recipe !== null) {
-        onSaveChanges(true);
+        onSaveChanges();
       }
     }
 

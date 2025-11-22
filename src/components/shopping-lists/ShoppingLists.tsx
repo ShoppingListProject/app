@@ -17,6 +17,7 @@ function ShoppingLists() {
   const { shoppingLists } = useGetShoppingLists();
 
   const [currentOpenList, setCurrentOpenList] = useState<ShoppingList | null>(null);
+  const [doesCurrentOpenListExist, setDoesCurrentOpenListExist] = useState<boolean | null>(null);
   const [modalKey, setModalKey] = useState(0);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
@@ -39,6 +40,7 @@ function ShoppingLists() {
     const currentOpenList = shoppingLists.find(list => list.shoppingListId === shoppingListId)!;
     setCurrentOpenList(currentOpenList);
 
+    setDoesCurrentOpenListExist(true);
     modalRef.current?.open();
   }
 
@@ -50,9 +52,10 @@ function ShoppingLists() {
 
     modalRef.current?.close();
     refreshModal();
+    setDoesCurrentOpenListExist(null);
   }
 
-  function createEmptyShoppingList() {
+  function openEmptyShoppingList() {
 
     const newEmptyShoppingList: ShoppingList = {
       name: "My New Shopping List",
@@ -62,8 +65,13 @@ function ShoppingLists() {
       createdAt: new Date(),
     }
 
+    setDoesCurrentOpenListExist(false);
     setCurrentOpenList(newEmptyShoppingList);
     modalRef.current?.open();
+  }
+
+  function handleOnSaveChanges() {
+    // TODO Refresh data after saving changes
   }
 
   return (
@@ -72,7 +80,7 @@ function ShoppingLists() {
       <SearchInput placeholder="Weekend Shopping List" />
       <Table headerName="List Name" rows={convertShoppingListsToTableRows(shoppingLists)} onClickItem={handleOnClickShoppingList}/>
       <Pagination/>
-      <CreationButton text="Create Empty Shopping List" onClick={createEmptyShoppingList}/> 
+      <CreationButton text="Create Empty Shopping List" onClick={openEmptyShoppingList}/> 
 
       <Modal
         key={modalKey}
@@ -83,9 +91,11 @@ function ShoppingLists() {
           <ShoppingListModal 
             key={currentOpenList.shoppingListId} 
             shoppingList={currentOpenList}
-            onClose={handleOnClose}
             units={units}
             categories={categories}
+            onClose={handleOnClose}
+            onSaveChanges={handleOnSaveChanges}
+            doesShoppingListExists={doesCurrentOpenListExist!}
           />}
       </Modal>
     </PageContent>

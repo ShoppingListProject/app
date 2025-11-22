@@ -27,6 +27,7 @@ export async function createNewRecipe(newRecipe: RecipeCreate): Promise<Recipe> 
 export async function updateExistingRecipe(recipe: RecipeUpdate): Promise<Recipe> {
   const url = host + path + mocks.userId + "/" + recipe.recipeId;
   const method = "PUT";
+  const data = recipe;
 
-  return fetchWrapper<Recipe>({url, method});
+  return fetchWrapper<Recipe>({url, method, data});
 }

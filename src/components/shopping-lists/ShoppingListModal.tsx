@@ -1,15 +1,18 @@
 import { useState } from "react";
-import type { ShoppingListItem, CategorizedItems, ShoppingList } from "@shopping-list-project/sl-api-models";
+import type { ShoppingListItem, CategorizedItems, ShoppingList, ShoppingListCreate } from "@shopping-list-project/sl-api-models";
 import CategoriesModal from "./shopping-list-modal/CategoriesModal";
 import CategorizedItemsPanel from "./shopping-list-modal/CategorizedItemsPanel";
 import ModalButtons from "../shared/modal/ModalButtons";
 import ModalHeader from "../shared/modal/ModalHeader";
+import useSaveShoppingList from "../../api-hooks/useSaveShoppingList";
 
 interface ShoppingListModalProps {
   shoppingList: ShoppingList,
   units: string[],
   categories: string[],
   onClose: () => void,
+  onSaveChanges: () => void,
+  doesShoppingListExists: boolean,
 }
 
 function ShoppingListModal(props: ShoppingListModalProps) {
@@ -18,13 +21,17 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     shoppingList,
     units, 
     categories,
-    onClose
+    onClose,
+    onSaveChanges,
+    doesShoppingListExists
   } = props;
 
   const {
     itemsPerCategory, 
     name: shoppingListName,
   } = shoppingList;
+
+  const { saveExistingShoppingList, saveNewShoppingList } = useSaveShoppingList();
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
   const [editedListName, setEditedListName] = useState(shoppingListName);
@@ -235,6 +242,32 @@ function ShoppingListModal(props: ShoppingListModalProps) {
     return itemNumberInList;
   }
 
+  function handleOnSaveChanges() {
+
+    async function updateExistingShoppingList() {
+    } 
+
+    async function createNewShoppingList() {
+      
+      const newShoppingList: ShoppingListCreate = {
+        name: editedListName,
+        itemsPerCategory: editedItemsPerCategory
+      };
+
+      const shoppingList: ShoppingList | null = await saveNewShoppingList(newShoppingList);
+       
+      if(shoppingList !== null) {
+        onSaveChanges();
+      }
+    }
+
+    if(doesShoppingListExists) {
+      updateExistingShoppingList()
+    } else {
+      createNewShoppingList()
+    }
+  }
+
   const handlers = {
     onChangeName: handleOnChangeName,
     onChangeQuantity: handleOnChangeQuantity, 
@@ -277,6 +310,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
           isEditMode={isEditMode}
           onCancelChanges={handleOnCancelChanges}
           turnOnEditMode={() => setIsEditMode(true)}
+          onSaveChanges={handleOnSaveChanges}
         />
 
       </div>
