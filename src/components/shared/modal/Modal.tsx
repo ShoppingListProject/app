@@ -24,20 +24,18 @@ function Modal({children, ref, onClose}: ModalProps) {
     useEffect(() => {
       const dialog = dialogRef.current;
 
-      const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
+      const handleOnClose = (event: Event) => {
           event.preventDefault();
           onClose();
-        }
       };
 
       if (dialog) {
-        dialog.addEventListener('keydown', handleKeyDown);
+        dialog.addEventListener('cancel', handleOnClose);
       }
 
       return () => {
         if (dialog) {
-          dialog.removeEventListener('keydown', handleKeyDown);
+          dialog.removeEventListener('cancel', handleOnClose);
         }
       };
   }, [onClose]);
