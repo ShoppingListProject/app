@@ -35,7 +35,7 @@ function ShoppingListModal(props: ShoppingListModalProps) {
 
   const [editedItemsPerCategory, setEditeditemsPerCategory] = useState<CategorizedItems[]>(itemsPerCategory);
   const [editedListName, setEditedListName] = useState(shoppingListName);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(!doesShoppingListExists);
 
   function handleOnChangeName(categoryIdx: number, itemIdx: number, newName: string) {
     setEditeditemsPerCategory( (prevItemsPerCategory) => {

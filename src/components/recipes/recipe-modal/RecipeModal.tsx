@@ -36,7 +36,7 @@ function RecipeModal(props: RecipeModalProps) {
 
   const [editedItems, setEditedItems] = useState<RecipeItem[]>(items);
   const [editedRecipeName, setEditedRecipeName] = useState(recipeName);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(!doesRecipeExist);
 
   function handleOnChangeName(itemIdx: number, newName: string) {
     setEditedItems(prevItems => {
