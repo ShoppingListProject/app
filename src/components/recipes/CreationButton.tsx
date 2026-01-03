@@ -1,8 +1,8 @@
-interface RecipeCreationButtonProps {
+interface CreationButtonProps {
   onClick: () => void;
 }
 
-function RecipeCreationButton({onClick}: RecipeCreationButtonProps) {
+function CreationButton({onClick}: CreationButtonProps) {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="border-b-4 w-full mb-2"></div>
@@ -15,4 +15,4 @@ function RecipeCreationButton({onClick}: RecipeCreationButtonProps) {
   );
 }
 
-export default RecipeCreationButton;
+export default CreationButton;

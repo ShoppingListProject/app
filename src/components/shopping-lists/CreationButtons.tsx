@@ -1,10 +1,10 @@
 import { NavLink } from "react-router";
 
-interface ShoppingListCreationButtonsProps {
+interface CreationButtonsProps {
   onClickCreateNewEmptyShoppingList: () => void;
 }
 
-function ShoppingListCreationButtons({onClickCreateNewEmptyShoppingList}: ShoppingListCreationButtonsProps) {
+function CreationButtons({onClickCreateNewEmptyShoppingList}: CreationButtonsProps) {
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -21,4 +21,4 @@ function ShoppingListCreationButtons({onClickCreateNewEmptyShoppingList}: Shoppi
   );
 }
 
-export default ShoppingListCreationButtons;
+export default CreationButtons;

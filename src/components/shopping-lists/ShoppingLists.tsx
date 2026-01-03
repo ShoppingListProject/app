@@ -10,8 +10,12 @@ import ShoppingListModal from "./ShoppingListModal";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
 import useDeleteShoppingList from "../../api-hooks/useDeleteShoppingList";
-import type { shoppingListState } from "../../models/states";
-import ShoppingListCreationButtons from "./ShoppingListCreationButtons";
+import CreationButtons from "./CreationButtons";
+
+export interface shoppingListState {
+  currentOpenList: ShoppingList | null
+  doesCurrentOpenListExist: boolean | null
+}
 
 function ShoppingLists() {
 
@@ -107,7 +111,7 @@ function ShoppingLists() {
       />
       <Pagination/>
 
-      <ShoppingListCreationButtons onClickCreateNewEmptyShoppingList={openEmptyShoppingList}/>
+      <CreationButtons onClickCreateNewEmptyShoppingList={openEmptyShoppingList}/>
 
       <Modal
         key={modalKey}
