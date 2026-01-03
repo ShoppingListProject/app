@@ -23,8 +23,7 @@ function NavBar() {
       <div className='gap-5 items-center hidden lg:flex w-full justify-center'>
         <NavButton to="/" >Home</NavButton>
         <NavButton to="/shopping-lists" >Shopping Lists</NavButton>
-        <NavButton to="/create-shopping-list" >Create List</NavButton>
-        <NavButton to="/recipes" >Show Recipes</NavButton>
+        <NavButton to="/recipes" >Recipes</NavButton>
         <NavButton to='/profile' >Profile</NavButton>
       </div>
       <div className='hidden items-center sm:flex'>

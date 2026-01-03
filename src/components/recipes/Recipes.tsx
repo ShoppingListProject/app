@@ -7,7 +7,7 @@ import type { Recipe } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import RecipeModal from "./recipe-modal/RecipeModal";
-import CreationButton from "../shared/CreationButton";
+import RecipeCreationButton from "./RecipeCreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 import useDeleteRecipe from "../../api-hooks/useDeleteRecipe";
@@ -106,7 +106,7 @@ function Recipes() {
         onDeleteItem={handleOnDelete}
       />
       <Pagination/>
-      <CreationButton text="Create Empty Recipe" onClick={openEmptyRecipe}/> 
+      <RecipeCreationButton onClick={openEmptyRecipe}/> 
 
       <Modal
         key={modalKey}

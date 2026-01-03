@@ -7,11 +7,11 @@ import type { ShoppingList } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
-import CreationButton from "../shared/CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
 import useDeleteShoppingList from "../../api-hooks/useDeleteShoppingList";
 import type { shoppingListState } from "../../models/states";
+import ShoppingListCreationButtons from "./ShoppingListCreationButtons";
 
 function ShoppingLists() {
 
@@ -106,7 +106,8 @@ function ShoppingLists() {
         onDeleteItem={handleOnDelete}
       />
       <Pagination/>
-      <CreationButton text="Create Empty Shopping List" onClick={openEmptyShoppingList}/> 
+
+      <ShoppingListCreationButtons onClickCreateNewEmptyShoppingList={openEmptyShoppingList}/>
 
       <Modal
         key={modalKey}

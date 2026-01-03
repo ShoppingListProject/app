@@ -27,6 +27,7 @@ function CreateShoppingList() {
       <SearchInput placeholder="Spaghetti"/>
       <CreationTable rows={convertRecipesToTableRows(recipes)}/>
       <Pagination />
+      
       <CreationButtons />
 
     </PageContent>

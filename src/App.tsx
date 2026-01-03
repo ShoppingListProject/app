@@ -2,12 +2,12 @@ import Main from './components/Main';
 import NavBar from './components/nav-bar/NavBar';
 import { BrowserRouter, Route, Routes } from "react-router";
 import ShoppingLists from './components/shopping-lists/ShoppingLists';
-import CreateShoppingList from './components/create-shopping-list/CreateShoppingList';
 import Profile from './components/profile/Porfile';
 import LoginPage from './components/authorization/LoginPage';
 import NotFound from './components/other/NotFound';
 import RegistrationPage from './components/authorization/RegistrationPage';
 import Recipes from './components/recipes/Recipes';
+import CreateShoppingList from './components/create-shopping-list/CreateShoppingList';
 
 function App() {
 
