@@ -10,12 +10,6 @@ export async function getRecipesForUser(): Promise<Recipe[]> {
   return fetchWrapper<Recipe[]>({url})
 }
 
-export async function getPublicRecipes(): Promise<Recipe[]> {
-  const url = host + path + "publicRecipes";
-  
-  return fetchWrapper<Recipe[]>({url})
-}
-
 export async function createNewRecipe(newRecipe: RecipeCreate): Promise<Recipe> {
   const url = host + path + mocks.userId;
   const method = "POST";
