@@ -5,6 +5,7 @@ export interface TableRow {
 }
 
 export interface CreationTableRow {
-  id: string;
-  name: string;
+  recipeId: string;
+  recipeName: string;
+  recipeCounter: number;
 }
