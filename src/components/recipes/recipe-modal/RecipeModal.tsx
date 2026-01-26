@@ -109,7 +109,8 @@ function RecipeModal(props: RecipeModalProps) {
       const updatedRecipeToSave: RecipeUpdate = {
         name: editedRecipeName,
         items: editedItems,
-        recipeId: recipe.recipeId
+        recipeId: recipe.recipeId,
+        isGlobal: false,
       };
 
       const updatedRecipe: Recipe | null = await saveExistingRecipe(updatedRecipeToSave);
@@ -124,6 +125,7 @@ function RecipeModal(props: RecipeModalProps) {
       const newRecipeToSave: RecipeCreate = {
         name: editedRecipeName,
         items: editedItems,
+        isGlobal: false,
       };
 
       const newRecipe: Recipe | null = await saveNewRecipe(newRecipeToSave);
