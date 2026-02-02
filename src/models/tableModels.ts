@@ -1,3 +1,5 @@
+import type { Recipe } from "@shopping-list-project/sl-api-models";
+
 export interface TableRow {
   id: string;
   name: string;
@@ -5,7 +7,6 @@ export interface TableRow {
 }
 
 export interface CreationTableRow {
-  recipeId: string;
-  recipeName: string;
+  recipe: Recipe
   recipeCounter: number;
 }

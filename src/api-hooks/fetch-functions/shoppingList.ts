@@ -1,5 +1,5 @@
 import mocks from "../../mocks/mocks";
-import type { ShoppingList, ShoppingListCreate, ShoppingListUpdate } from "@shopping-list-project/sl-api-models";
+import type { ShoppingList, ShoppingListCreate, ShoppingListCreateFromRecipes, ShoppingListUpdate } from "@shopping-list-project/sl-api-models";
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
 const path = "shoppingLists/";
@@ -34,4 +34,12 @@ export async function deleteShoppingList(shoppingListId: string): Promise<Shoppi
   const method = "DELETE";
 
   return fetchWrapper<ShoppingList>({url, method});
+}
+
+export async function createNewShoppingListFromRecipes(requestBody: ShoppingListCreateFromRecipes) {
+  const url = host + path + "fromRecipes/" + mocks.userId;
+  const method = "POST";
+  const data = requestBody;
+
+  return fetchWrapper<ShoppingList>({url, method, data});
 }

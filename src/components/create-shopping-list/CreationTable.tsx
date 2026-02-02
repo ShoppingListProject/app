@@ -1,11 +1,12 @@
 import {MinusIcon, PlusIcon } from "@heroicons/react/16/solid";
 import React from "react";
 import type { CreationTableRow } from "../../models/tableModels";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 
 interface CreationTableProps {
   rows: CreationTableRow[];
-  addRecipe: (recipeId: string) => void;
-  removeRecipe: (recipeId: string) => void;
+  addRecipe: (recipe: Recipe) => void;
+  removeRecipe: (recipe: Recipe) => void;
 }
 
 function CreationTable({rows, addRecipe, removeRecipe}: CreationTableProps) {
@@ -24,19 +25,20 @@ function CreationTable({rows, addRecipe, removeRecipe}: CreationTableProps) {
       <tbody>
         {rows.map( (row) => {
 
+          const recipe = row.recipe;
           const isRemoveButtonDisabled = row.recipeCounter === 0;
 
-          return <React.Fragment key={row.recipeId}>
+          return <React.Fragment key={recipe.recipeId}>
             <tr>
               <td className="p-2 text-center">
-                  <button className="cursor-pointer p-2" >{row.recipeName}</button>
+                  <button className="cursor-pointer p-2" >{recipe.name}</button>
               </td>
               <td className="p-2 text-center align-middle">
                 <div className="flex justify-center items-center gap-2">
 
                   <button 
                     className="bg-blue-300 p-1 rounded hover:bg-blue-400 block cursor-pointer shadow-lg"
-                    onClick={() => addRecipe(row.recipeId)}
+                    onClick={() => addRecipe(recipe)}
                   >
                       <PlusIcon className="h-5 w-5" />
                   </button>
@@ -45,7 +47,7 @@ function CreationTable({rows, addRecipe, removeRecipe}: CreationTableProps) {
 
                   <button 
                     className={"p-1 rounded block shadow-lg " + (isRemoveButtonDisabled ? disabledRemoveButtonClasses : removeButtonClasses)}
-                    onClick={() => removeRecipe(row.recipeId)}
+                    onClick={() => removeRecipe(recipe)}
                     disabled={isRemoveButtonDisabled}
                   >
                       <MinusIcon className="h-5 w-5" />

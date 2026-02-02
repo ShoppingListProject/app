@@ -3,20 +3,24 @@ import Pagination from "../shared/table/Pagination";
 import SearchInput from "../shared/table/SearchInput";
 import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
-import type { Recipe } from "@shopping-list-project/sl-api-models";
+import type { Recipe, ShoppingListCreateFromRecipes } from "@shopping-list-project/sl-api-models";
 import type { CreationTableRow } from "../../models/tableModels";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 import { useState } from "react";
+import useCreateShoppingListFromRecipes from "../../api-hooks/useCreateShoppingListFromRecipes";
+import type { RecipeIdWithNumber } from "@shopping-list-project/sl-api-models/dist/generated/models/RecipeIdWithNumber";
 
 export interface RecipeWithNumber {
   recipeId: string;
   number: number;
+  isPublic: boolean;
 }
 
 function CreateShoppingList() {
 
   const {recipes} = useGetRecipes();
   const [selectedRecipesWithNumbers, setSelectedRecipesWithNumbers] = useState<RecipeWithNumber[]>([]);
+  const {createShoppingListFromRecipes} = useCreateShoppingListFromRecipes();
   
   function convertRecipesToTableRows(
     recipes: Recipe[], 
@@ -30,14 +34,15 @@ function CreateShoppingList() {
       );
 
       return {
-        recipeId: recipe.recipeId,
-        recipeName: recipe.name,
+        recipe,
         recipeCounter: optionalRecipeCounter ? optionalRecipeCounter.number : 0,
       }
     })
   }
 
-  function addRecipe(recipeId: string) {
+  function addRecipe(recipe: Recipe) {
+
+    const recipeId = recipe.recipeId;
 
     setSelectedRecipesWithNumbers( (oldRecipesWithNumbers) => {
 
@@ -62,13 +67,16 @@ function CreateShoppingList() {
       const newRecipeWithNumber: RecipeWithNumber = {
         recipeId,
         number: 1,
+        isPublic: recipe.isGlobal
       };
 
       return [...oldRecipesWithNumbers, newRecipeWithNumber];
     });
   }
 
-  function removeRecipe(recipeId: string) {
+  function removeRecipe(recipe: Recipe) {
+
+    const recipeId = recipe.recipeId;
 
     setSelectedRecipesWithNumbers( (oldRecipesWithNumbers) => {
 
@@ -102,8 +110,47 @@ function CreateShoppingList() {
       }
     })
   }
-  
 
+  function handleOnCreateShoppingList() {
+
+    if(setSelectedRecipesWithNumbers.length === 0) {
+      return;
+    }
+
+    const selectedUserRecipes: RecipeWithNumber[] = selectedRecipesWithNumbers.filter(recipeWithNumber => 
+      !recipeWithNumber.isPublic
+    ) ?? [];
+
+    const selectedPublicRecipes: RecipeWithNumber[] = selectedRecipesWithNumbers.filter(recipeWithNumber => 
+      recipeWithNumber.isPublic
+    ) ?? [];
+
+    const userRecipeArray: RecipeIdWithNumber[] = selectedUserRecipes.map( recipeWithNumber => {
+      return {
+        recipeId: recipeWithNumber.recipeId,
+        amount: recipeWithNumber.number,
+      }
+    });
+
+    const publicRecipeArray: RecipeIdWithNumber[] = selectedPublicRecipes.map( recipeWithNumber => {
+      return {
+        recipeId: recipeWithNumber.recipeId,
+        amount: recipeWithNumber.number,
+      }
+    });
+
+    const bodyRequest: ShoppingListCreateFromRecipes = {
+      name: "randomName",
+      userRecipeArray,
+      publicRecipeArray,
+    }
+
+    createShoppingListFromRecipes(bodyRequest);
+  }
+
+  function handleOnResetShoppingList() {
+
+  }
 
   return (
     <PageContent title="Create Shopping List">
@@ -116,7 +163,10 @@ function CreateShoppingList() {
       />
       <Pagination />
       
-      <CreationButtons />
+      <CreationButtons 
+        onCreate={handleOnCreateShoppingList}
+        onReset={handleOnResetShoppingList}
+      />
 
     </PageContent>
   )
