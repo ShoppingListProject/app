@@ -11,6 +11,7 @@ import useCreateShoppingListFromRecipes from "../../api-hooks/useCreateShoppingL
 import type { RecipeIdWithNumber } from "@shopping-list-project/sl-api-models/dist/generated/models/RecipeIdWithNumber";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ModalConfirmation from "./ModalConfirmation";
+import { useNavigate } from "react-router";
 
 export interface RecipeWithNumber {
   recipeId: string;
@@ -25,6 +26,8 @@ function CreateShoppingList() {
   const [modalKey, setModalKey] = useState(0);
   const [userRecipeArray, setUserRecipeArray] = useState<RecipeIdWithNumber[]>([]);
   const [publicRecipeArray, setPublicRecipeArray] = useState<RecipeIdWithNumber[]>([])
+
+  const navigate = useNavigate();
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -153,11 +156,13 @@ function CreateShoppingList() {
   }
 
   function handleOnConfirmCreation() {
-    // TODO: move to shopping list page
+    navigate("/shopping-lists");
   }
 
   function handleOnResetShoppingList() {
-    // TODO: reset all counters
+    setSelectedRecipesWithNumbers([]);
+    setUserRecipeArray([]);
+    setPublicRecipeArray([]);
   }
 
   function handleOnCancel() {
@@ -196,6 +201,7 @@ function CreateShoppingList() {
       >
         {isAnyRecipeAdded && <ModalConfirmation 
           onCanel={handleOnCancel} 
+          onConfirmCreation={handleOnConfirmCreation}
           userRecipeArray={userRecipeArray} 
           publicRecipeArray={publicRecipeArray}
         />}

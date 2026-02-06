@@ -5,17 +5,18 @@ import useCreateShoppingListFromRecipes from "../../api-hooks/useCreateShoppingL
 
 interface ModalConfirmationProps {
     onCanel: () => void;
+    onConfirmCreation: () => void;
     userRecipeArray: RecipeIdWithNumber[];
     publicRecipeArray: RecipeIdWithNumber[];
 }
 
-function ModalConfirmation({onCanel, userRecipeArray, publicRecipeArray}: ModalConfirmationProps) {
+function ModalConfirmation({onCanel, onConfirmCreation, userRecipeArray, publicRecipeArray}: ModalConfirmationProps) {
 
 
     const [shoppingListName, setShoppingListName] = useState('');
     const { createShoppingListFromRecipes } = useCreateShoppingListFromRecipes();
 
-    function handleOnCreate() {
+    async function handleOnCreate() {
 
         if(shoppingListName !== "") {
             const bodyRequest: ShoppingListCreateFromRecipes = {
@@ -24,7 +25,8 @@ function ModalConfirmation({onCanel, userRecipeArray, publicRecipeArray}: ModalC
                 publicRecipeArray,
             }
 
-            createShoppingListFromRecipes(bodyRequest);
+            await createShoppingListFromRecipes(bodyRequest);
+            onConfirmCreation();
         }
         
         // TODO
