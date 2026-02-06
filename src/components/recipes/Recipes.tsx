@@ -1,7 +1,6 @@
 import { useRef, useState, type RefObject } from "react";
 import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
-import SearchInput from "../shared/table/SearchInput";
 import Table from "../shared/table/Table";
 import type { Recipe } from "@shopping-list-project/sl-api-models";
 import type { TableRow } from "../../models/tableModels";
@@ -11,6 +10,7 @@ import CreationButton from "./CreationButton";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 import useDeleteRecipe from "../../api-hooks/useDeleteRecipe";
+import Filter from "../shared/table/Filter";
 
 export interface recipeState {
   currentOpenRecipe: Recipe | null
@@ -26,6 +26,7 @@ function Recipes() {
   const [recipeState, setRecipeState] = useState<recipeState>({currentOpenRecipe: null, doesCurrentOpenRecipeExist: null});
   const [modalKey, setModalKey] = useState(0);
   const [isNecessaryToRefreshData, setIsNecessaryToRefreshData] = useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const modalRef: RefObject<ModalRef | null> = useRef(null);
 
@@ -100,10 +101,19 @@ function Recipes() {
     getRecipes();
   }
 
+  function onClickCheckbox() {
+    setIsCheckboxChecked(isCheckboxChecked => !isCheckboxChecked)
+  }
+
   return (
     <PageContent title="Recipes">
 
-      <SearchInput placeholder="Spaghetti" />
+      <Filter 
+        placeholder="Spaghetti"
+        isCheckboxChecked={isCheckboxChecked}
+        onClickCheckbox={onClickCheckbox}
+      />
+
       <Table 
         headerName="Recipe Name" 
         rows={convertRecipesToTableRows(recipes)} 

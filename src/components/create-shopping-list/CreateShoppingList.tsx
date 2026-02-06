@@ -1,17 +1,16 @@
 import PageContent from "../shared/PageContent";
 import Pagination from "../shared/table/Pagination";
-import SearchInput from "../shared/table/SearchInput";
 import CreationButtons from "./CreationButtons";
 import CreationTable from "./CreationTable";
-import type { Recipe, ShoppingListCreateFromRecipes } from "@shopping-list-project/sl-api-models";
+import type { Recipe } from "@shopping-list-project/sl-api-models";
 import type { CreationTableRow } from "../../models/tableModels";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
 import { useRef, useState, type RefObject } from "react";
-import useCreateShoppingListFromRecipes from "../../api-hooks/useCreateShoppingListFromRecipes";
 import type { RecipeIdWithNumber } from "@shopping-list-project/sl-api-models/dist/generated/models/RecipeIdWithNumber";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ModalConfirmation from "./ModalConfirmation";
 import { useNavigate } from "react-router";
+import Filter from "../shared/table/Filter";
 
 export interface RecipeWithNumber {
   recipeId: string;
@@ -25,7 +24,8 @@ function CreateShoppingList() {
   const [selectedRecipesWithNumbers, setSelectedRecipesWithNumbers] = useState<RecipeWithNumber[]>([]);
   const [modalKey, setModalKey] = useState(0);
   const [userRecipeArray, setUserRecipeArray] = useState<RecipeIdWithNumber[]>([]);
-  const [publicRecipeArray, setPublicRecipeArray] = useState<RecipeIdWithNumber[]>([])
+  const [publicRecipeArray, setPublicRecipeArray] = useState<RecipeIdWithNumber[]>([]);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -174,12 +174,22 @@ function CreateShoppingList() {
     refreshModal();
   }
 
+  function onClickCheckbox() {
+    setIsCheckboxChecked(isCheckboxChecked => !isCheckboxChecked)
+  }
+
+
   const isAnyRecipeAdded = selectedRecipesWithNumbers.length > 0;
 
   return (
     <PageContent title="Create Shopping List">
 
-      <SearchInput placeholder="Spaghetti"/>
+      <Filter 
+        placeholder="Spaghetti"
+        isCheckboxChecked={isCheckboxChecked}
+        onClickCheckbox={onClickCheckbox}
+      />
+
       <CreationTable 
         rows={convertRecipesToTableRows(recipes, selectedRecipesWithNumbers)}
         addRecipe={addRecipe}
