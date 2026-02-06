@@ -31,7 +31,7 @@ function CreationTable({rows, addRecipe, removeRecipe}: CreationTableProps) {
           return <React.Fragment key={recipe.recipeId}>
             <tr>
               <td className="p-2 text-center">
-                  <button className="cursor-pointer p-2" >{recipe.name}</button>
+                  <div className="p-2" >{recipe.name}</div>
               </td>
               <td className="p-2 text-center align-middle">
                 <div className="flex justify-center items-center gap-2">
