@@ -6,9 +6,11 @@ import CreationTable from "./CreationTable";
 import type { Recipe, ShoppingListCreateFromRecipes } from "@shopping-list-project/sl-api-models";
 import type { CreationTableRow } from "../../models/tableModels";
 import { useGetRecipes } from "../../api-hooks/useGetRecipes";
-import { useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import useCreateShoppingListFromRecipes from "../../api-hooks/useCreateShoppingListFromRecipes";
 import type { RecipeIdWithNumber } from "@shopping-list-project/sl-api-models/dist/generated/models/RecipeIdWithNumber";
+import Modal, { type ModalRef } from "../shared/modal/Modal";
+import ModalConfirmation from "./ModalConfirmation";
 
 export interface RecipeWithNumber {
   recipeId: string;
@@ -20,7 +22,12 @@ function CreateShoppingList() {
 
   const {recipes} = useGetRecipes();
   const [selectedRecipesWithNumbers, setSelectedRecipesWithNumbers] = useState<RecipeWithNumber[]>([]);
-  const {createShoppingListFromRecipes} = useCreateShoppingListFromRecipes();
+  const [modalKey, setModalKey] = useState(0);
+  const [userRecipeArray, setUserRecipeArray] = useState<RecipeIdWithNumber[]>([]);
+  const [publicRecipeArray, setPublicRecipeArray] = useState<RecipeIdWithNumber[]>([])
+
+  const modalRef: RefObject<ModalRef | null> = useRef(null);
+
   
   function convertRecipesToTableRows(
     recipes: Recipe[], 
@@ -139,18 +146,30 @@ function CreateShoppingList() {
       }
     });
 
-    const bodyRequest: ShoppingListCreateFromRecipes = {
-      name: "randomName",
-      userRecipeArray,
-      publicRecipeArray,
-    }
+    setUserRecipeArray(userRecipeArray);
+    setPublicRecipeArray(publicRecipeArray);
 
-    createShoppingListFromRecipes(bodyRequest);
+    modalRef.current?.open();
+  }
+
+  function handleOnConfirmCreation() {
+    // TODO: move to shopping list page
   }
 
   function handleOnResetShoppingList() {
-
+    // TODO: reset all counters
   }
+
+  function handleOnCancel() {
+
+    function refreshModal() {
+      setModalKey(prevKey => prevKey + 1)
+    }
+
+    refreshModal();
+  }
+
+  const isAnyRecipeAdded = selectedRecipesWithNumbers.length > 0;
 
   return (
     <PageContent title="Create Shopping List">
@@ -166,7 +185,21 @@ function CreateShoppingList() {
       <CreationButtons 
         onCreate={handleOnCreateShoppingList}
         onReset={handleOnResetShoppingList}
+        isCreateButtonDisabled={!isAnyRecipeAdded} 
+        isResetButtonDisabled={!isAnyRecipeAdded}        
       />
+
+      <Modal 
+        key={modalKey}
+        ref={modalRef} 
+        onClose={handleOnCancel}
+      >
+        {isAnyRecipeAdded && <ModalConfirmation 
+          onCanel={handleOnCancel} 
+          userRecipeArray={userRecipeArray} 
+          publicRecipeArray={publicRecipeArray}
+        />}
+      </Modal>
 
     </PageContent>
   )

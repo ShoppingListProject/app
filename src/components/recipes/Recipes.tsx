@@ -75,6 +75,7 @@ function Recipes() {
       recipeId: crypto.randomUUID(),
       updatedAt: new Date(),
       createdAt: new Date(),
+      isGlobal: false
     }
 
     setRecipeState({currentOpenRecipe: newEmptyRecipe, doesCurrentOpenRecipeExist: false})
