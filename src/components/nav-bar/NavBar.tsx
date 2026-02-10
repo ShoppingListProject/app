@@ -16,7 +16,6 @@ function NavBar() {
       <div className='gap-5 items-center flex lg:hidden w-full justify-center'>
         <NavButtonSmall to="/" ><HomeIcon /></NavButtonSmall>
         <NavButtonSmall to="/shopping-lists" ><ClipboardDocumentListIcon /></NavButtonSmall>
-        <NavButtonSmall to="/create-shopping-list" ><PencilSquareIcon /></NavButtonSmall>
         <NavButtonSmall to="/recipes" ><CakeIcon /></NavButtonSmall>
         <NavButtonSmall to='/profile' ><UserIcon /></NavButtonSmall>
       </div>
