@@ -1,4 +1,4 @@
-import { CakeIcon, ClipboardDocumentListIcon, HomeIcon, PencilSquareIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid';
+import { CakeIcon, ClipboardDocumentListIcon, HomeIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid';
 import logoBlack from '../../assets/logo-black-2.png';
 import NavButtonSmall from './buttons/NavButtonSmall';
 import NavButton from './buttons/NavButton';
