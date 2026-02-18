@@ -120,7 +120,7 @@ function Recipes() {
         onClickItem={handleOnClickRecipe} 
         onDeleteItem={handleOnDelete}
       />
-      <Pagination/>
+      <Pagination numberOfPages={1} getItemsForPage={() => {/*TODO: implement this function*/}}/>
       <CreationButton onClick={openEmptyRecipe}/> 
 
       <Modal

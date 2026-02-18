@@ -8,7 +8,8 @@ import type { TableRow } from "../../models/tableModels";
 import Modal, { type ModalRef } from "../shared/modal/Modal";
 import ShoppingListModal from "./ShoppingListModal";
 import { useGetConstants } from "../../api-hooks/useGetConstants";
-import { useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
+import { itemsPerPage, useGetShoppingLists } from "../../api-hooks/useGetShoppingLists";
+import { useGetShoppingListsPages } from "../../api-hooks/useGetShoppingListsPages.tsx";
 import useDeleteShoppingList from "../../api-hooks/useDeleteShoppingList";
 import CreationButtons from "./CreationButtons";
 
@@ -21,6 +22,7 @@ function ShoppingLists() {
 
   const { categories, units} = useGetConstants();
   const { shoppingLists, retrieveShoppingLists } = useGetShoppingLists();
+  const { numberOfPages, getNumberOfPages} = useGetShoppingListsPages();
   const { removeShoppingList } = useDeleteShoppingList();
 
   const [shoppingListState, setShoppingListState] = useState<shoppingListState>({currentOpenList: null, doesCurrentOpenListExist: null})
@@ -96,7 +98,15 @@ function ShoppingLists() {
   }
 
   function refreshData() {
-    retrieveShoppingLists();
+    getNumberOfPages()
+    retrieveShoppingLists(0);
+  }
+
+  function getShoppingListsForPage(pageNumber: number) {
+
+    const offset = (pageNumber - 1) * itemsPerPage;
+
+    retrieveShoppingLists(offset);
   }
 
   return (
@@ -109,7 +119,10 @@ function ShoppingLists() {
         onClickItem={handleOnClickShoppingList}
         onDeleteItem={handleOnDelete}
       />
-      <Pagination/>
+      <Pagination 
+        numberOfPages={numberOfPages} 
+        getItemsForPage={getShoppingListsForPage}         
+      />
 
       <CreationButtons onClickCreateNewEmptyShoppingList={openEmptyShoppingList}/>
 

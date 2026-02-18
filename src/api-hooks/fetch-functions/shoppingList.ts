@@ -1,17 +1,25 @@
 import mocks from "../../mocks/mocks";
-import type { ShoppingList, ShoppingListCreate, ShoppingListCreateFromRecipes, ShoppingListUpdate } from "@shopping-list-project/sl-api-models";
+import type { NumberOfPages, ShoppingList, ShoppingListCreate, ShoppingListCreateFromRecipes, ShoppingListUpdate } from "@shopping-list-project/sl-api-models";
 import { fetchWrapper, host } from "./utils/fetchWrapper";
 
 const path = "shoppingLists/";
 
-export async function getShoppingLists(): Promise<ShoppingList[]> {
+export async function getShoppingLists(
+  offset: number,
+  limit: number,
+  querySearch?: string
+): Promise<ShoppingList[]> {
+
+  let queryParams = `?offset=${offset}&limit=${limit}`;
+
+  if(querySearch !== undefined) 
+    queryParams+=`&querySearch=${querySearch}`;
   
-  const url = host + path + mocks.userId;
+  const url = host + path + mocks.userId + queryParams;
   return fetchWrapper<ShoppingList[]>({url})
 }
 
 export async function createNewShoppingList(newShoppingList: ShoppingListCreate): Promise<ShoppingList> {
-
   const url = host + path + mocks.userId;
   const method = "POST";
   const data = newShoppingList;
@@ -42,4 +50,18 @@ export async function createNewShoppingListFromRecipes(requestBody: ShoppingList
   const data = requestBody;
 
   return fetchWrapper<ShoppingList>({url, method, data});
+}
+
+export async function getPages(
+  itemsPerPage: number,
+  querySearch?: string
+) {
+
+  let queryParams = `?itemsPerPage=${itemsPerPage}`;
+
+  if(querySearch !== undefined) 
+    queryParams+=`&querySearch=${querySearch}`;
+  
+  const url = host + path + "pages/" + mocks.userId + queryParams;
+  return fetchWrapper<NumberOfPages>({url})
 }

@@ -195,7 +195,7 @@ function CreateShoppingList() {
         addRecipe={addRecipe}
         removeRecipe={removeRecipe}
       />
-      <Pagination />
+            <Pagination numberOfPages={1} getItemsForPage={() => {/*TODO: implement this function*/}}/>
       
       <CreationButtons 
         onCreate={handleOnCreateShoppingList}
